@@ -19,23 +19,39 @@ $(document).ready(function() {
 	$board.append(row);
 	$('.edit-btn').on("click", displayForm);
 
-
-	// Place tower
-
 	var minion_wave = [];
 	var spawned_wave = [];
 	var towers = [];
+	var tower_range = 150;
 	for (var i = 1; i <= 5; i++) {
 		minion_wave.push({id: i, image: "/imgs/car1.jpg", speed: 20, hp: 100});
 	}
+	// Hardcoded towers
 	//  Need to change hardcoded row and col~
-	for (var i = 1; i <= 2; i++) {
-		towers.push({id: i, col: i+2, row: 4, image: "/imgs/tower.jpg", range: 150, dmg: 10});
-		var $tower = $(`#4${i+2}`);
-		$tower.append(`<img src="/imgs/tower.jpg" class="tower" id="t${i}">`);
-		$tower.append('<div class="towerRange"></div>');
-	}
+	// for (var i = 1; i <= 2; i++) {
+	// 	towers.push({id: i, col: i+2, row: 4, image: "/imgs/tower.jpg", range: 150, dmg: 10});
+	// 	var $tower = $(`#4${i+2}`);
+	// 	$tower.append(`<img src="/imgs/tower.jpg" class="tower" id="t${i}">`);
+	// 	$tower.append('<div class="towerRange"></div>');
+	// }
+	// Place tower by clicks
+	$('.column').on("click", placeTower);
 
+	function placeTower(event){
+
+		var tower = {
+			id : towers.length + 1,
+			col: ($(this).attr("id")[1]),
+			row: ($(this).attr("id")[0]),
+			image: "/imgs/tower.jpg",
+			range: tower_range,
+			dmg: 10,
+		};
+		console.log(tower.row + tower.col);
+		towers.push(tower);
+		$(this).append(`<img src="/imgs/tower.jpg" class="tower" id="t${tower.id}">`);
+		$(this).append('<div class="towerRange"></div>');
+	}
 
 	var interval = 100;
 	// var minionIntervalID = setInterval(minion_move, interval);
