@@ -25,8 +25,12 @@ $(document).ready(function() {
 
 	// cW : column width
 	// .offset() calculates from the center
-	var minionIntervalID = setInterval(minion_move, 100);
+	var interval = 100;
+	var minionIntervalID = setInterval(minion_move, interval);
 	var cW = 150;
+	var minionSpeed = 20;
+	var bulletTime = 1000;
+
 
 
 	function minion_move() {
@@ -38,9 +42,10 @@ $(document).ready(function() {
 			console.log(column.offset().left);
 			window.clearInterval(minionIntervalID);
 		}
+		
 		minion.animate({
-			"margin-left": "+=20px"
-		}, 100);
+			"margin-left": `+=${minionSpeed}px`
+		}, interval);
 	}
 
 	// Place tower
@@ -60,14 +65,15 @@ $(document).ready(function() {
 		var minionY = minion.offset().top;
 		var bulletX = bullet.offset().left;
 		var bulletY = bullet.offset().top;
-		var xDistance = minionX - bulletX;
+		var xDistance = minionX - bulletX + minionSpeed*bulletTime/interval;
 		var yDistance = minionY - bulletY;
 		bullet.animate({
 			"margin-left": `+=${xDistance}`,
 			"margin-top": `+=${yDistance}`,
-		}, 1000, "swing", function removeBullet(){
+		}, bulletTime, "swing", function removeBullet(){
 			console.log("removed");
 			bullet.remove();
+			minion.remove(); // lower health later
 		});
 	}
 
