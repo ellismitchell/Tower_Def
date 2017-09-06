@@ -2,7 +2,7 @@
 
 body{
 	background-color: #e8d7d7;
-	font-family: 'Londrina Shadow', cursive;
+	/*font-family: 'Londrina Shadow', cursive;*/
 	font-size: 2rem;
 }
 
@@ -36,6 +36,15 @@ main{
 	z-index: 1;
 	position: fixed;
 	/*top: 0;*/
+}
+.hp{
+	color : blue;
+	font-family: sans-serif;
+	z-index: 5;
+	position: absolute;
+	font-size: 1rem;
+	top: -20px;
+	
 }
 .tower{
 	width: 80px;

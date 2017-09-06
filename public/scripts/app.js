@@ -17,7 +17,6 @@ $(document).ready(function() {
 		row +=`</div>`;	
 	}
 	$board.append(row);
-	console.log("clicked");
 	$('.edit-btn').on("click", displayForm);
 
 
@@ -53,11 +52,10 @@ $(document).ready(function() {
 		}
 		var minion = minion_wave.pop();
 		$('#31').append(`<img src="/imgs/car1.jpg" class="minion" id="m${minion.id}">`);
+		$('#31').append(`<p class="hp" id="hp${minion.id}">${minion.hp}</p>`);
 		spawned_wave.push(minion);
 
 		// var minion_selector = `#m${minion.id}`;
-		// console.log(minion_selector);
-		// console.log($(minion_selector));
 		// minion_move($(minion_selector));
 		
 	}
@@ -70,13 +68,17 @@ $(document).ready(function() {
 	function moveMinions() {
 		spawned_wave.forEach(function(minion){
 			var minion_selector = $(`#m${minion.id}`);
+			var hp_selector = $(`#hp${minion.id}`);
 				var column = $('#36');
 			if(minion_selector.offset().left >= column.offset().left+cW/2){
 				minion_selector.remove();
+				hp_selector.remove();
 				spawned_wave.shift();
-
 		}
 			minion_selector.animate({
+				"margin-left": `+=${minionSpeed}px`
+			}, interval);
+			hp_selector.animate({
 				"margin-left": `+=${minionSpeed}px`
 			}, interval);
 		});
@@ -95,10 +97,9 @@ $(document).ready(function() {
 			var towerX = $tower.offset().left;
 			var towerY = $tower.offset().top;
 			var distance = Math.sqrt((towerX-minionX)*(towerX-minionX)+(towerY-minionY)*(towerY-minionY));
-			console.log(distance);
 			if (distance < 150){
 			// change to tower range
-				shoot_bullet(minion_selector);
+				shoot_bullet(minion);
 			}
 		});
 
@@ -129,14 +130,19 @@ $(document).ready(function() {
 	
 	// shoot_bullet();
 
+	// minion is the minion obj
 	function shoot_bullet(minion){
 		// var minion = $('#m1');
 			var $tower = $('#43');
 		$tower.append(`<img src="/imgs/car1.jpg" class="bullet" id="b1">`);
 	
+		var minion_selector = $(`#m${minion.id}`);
+		var hp_selector = $(`#hp${minion.id}`);
+		var tower_damage = 50;
+
 		var bullet = $('#b1');
-		var minionX  = minion.offset().left;
-		var minionY = minion.offset().top;
+		var minionX  = minion_selector.offset().left;
+		var minionY = minion_selector.offset().top;
 		var bulletX = bullet.offset().left;
 		var bulletY = bullet.offset().top;
 		var xDistance = minionX - bulletX + minionSpeed*bulletTime/interval;
@@ -145,9 +151,14 @@ $(document).ready(function() {
 			"margin-left": `+=${xDistance}`,
 			"margin-top": `+=${yDistance}`,
 		}, bulletTime, function removeBullet(){
-			console.log("removed");
 			bullet.remove();
-			// minion.remove(); // lower health later
+			minion.hp = minion.hp - tower_damage;
+			hp_selector.text(minion.hp);
+			if(minion.hp <= 0){
+				hp_selector.remove();
+				spawned_wave.shift();
+				minion_selector.remove();
+			}
 		});
 	}
 
