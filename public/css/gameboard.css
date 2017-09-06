@@ -2,7 +2,7 @@
 
 body{
 	background-color: #e8d7d7;
-	font-family: 'Londrina Shadow', cursive;
+	/*font-family: 'Londrina Shadow', cursive;*/
 	font-size: 2rem;
 }
 
@@ -37,12 +37,22 @@ main{
 	position: fixed;
 	/*top: 0;*/
 }
+.hp{
+	color : blue;
+	font-family: sans-serif;
+	z-index: 5;
+	position: absolute;
+	font-size: 1rem;
+	top: -20px;
+	
+}
 .tower{
 	width: 80px;
 	height: 80px;
 	position: absolute;
 	top: 10px;
 	left: 10px;
+	z-index: 100;
 
 }
 .bullet {
@@ -64,7 +74,7 @@ main{
 	border-radius: 150px;
 	background-color: rgba(0,0,0,0.3);
 	position: absolute;
-	z-index: 1;
+	z-index: -1;
 	
 	top: -100px;
 	left: -100px;
