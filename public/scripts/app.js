@@ -21,10 +21,6 @@ $(document).ready(function() {
 
 
 	// Place tower
-	var $tower = $('#43');
-	$tower.append(`<img src="/imgs/tower.jpg" class="tower" id="t1">`);
-	$tower.append('<div class="towerRange"></div>');
-
 
 	var minion_wave = [];
 	var spawned_wave = [];
@@ -32,9 +28,14 @@ $(document).ready(function() {
 	for (var i = 1; i <= 5; i++) {
 		minion_wave.push({id: i, image: "/imgs/car1.jpg", speed: 20, hp: 100});
 	}
-	for (var i = 1; i <= 5; i++) {
-		towers.push({id: i, image: "/imgs/tower.jpg", range: 150, dmg: 50});
+	//  Need to change hardcoded row and col~
+	for (var i = 1; i <= 2; i++) {
+		towers.push({id: i, col: i+2, row: 4, image: "/imgs/tower.jpg", range: 150, dmg: 10});
+		var $tower = $(`#4${i+2}`);
+		$tower.append(`<img src="/imgs/tower.jpg" class="tower" id="t${i}">`);
+		$tower.append('<div class="towerRange"></div>');
 	}
+
 
 	var interval = 100;
 	// var minionIntervalID = setInterval(minion_move, interval);
@@ -87,21 +88,23 @@ $(document).ready(function() {
 
 
 	function towerResponse() {
-		// For each tower, check if minions are in range
+		// For each tower, check if minions wave are in range
 		// if in range, shoot bullet
-		
-		spawned_wave.forEach(function(minion){
-			let minion_selector = $(`#m${minion.id}`);
-			var minionX  = minion_selector.offset().left;
-			var minionY = minion_selector.offset().top;
-			var towerX = $tower.offset().left;
-			var towerY = $tower.offset().top;
-			var distance = Math.sqrt((towerX-minionX)*(towerX-minionX)+(towerY-minionY)*(towerY-minionY));
-			if (distance < 150){
-			// change to tower range
-				shoot_bullet(minion);
-			}
-		});
+		towers.forEach(function(tower){
+			spawned_wave.forEach(function(minion){
+				let minion_selector = $(`#m${minion.id}`);
+				var minionX  = minion_selector.offset().left;
+				var minionY = minion_selector.offset().top;
+				$tower = $(`#${tower.row}${tower.col}`);
+				var towerX = $tower.offset().left;
+				var towerY = $tower.offset().top;
+				var distance = Math.sqrt((towerX-minionX)*(towerX-minionX)+(towerY-minionY)*(towerY-minionY));
+				if (distance < 150){
+				// change to tower range
+					shoot_bullet(minion, tower);
+				}
+			});
+		})
 
 	}
 
@@ -130,17 +133,17 @@ $(document).ready(function() {
 	
 	// shoot_bullet();
 
-	// minion is the minion obj
-	function shoot_bullet(minion){
+	// minion is the minion obj, tower obj
+	function shoot_bullet(minion, tower){
 		// var minion = $('#m1');
-			var $tower = $('#43');
-		$tower.append(`<img src="/imgs/car1.jpg" class="bullet" id="b1">`);
+		var $tower = $(`#${tower.row}${tower.col}`);
+		$tower.append(`<img src="/imgs/car1.jpg" class="bullet" id="b${tower.id}">`);
 	
 		var minion_selector = $(`#m${minion.id}`);
 		var hp_selector = $(`#hp${minion.id}`);
-		var tower_damage = 50;
+		var tower_damage = tower.dmg;
 
-		var bullet = $('#b1');
+		var bullet = $(`#b${tower.id}`);
 		var minionX  = minion_selector.offset().left;
 		var minionY = minion_selector.offset().top;
 		var bulletX = bullet.offset().left;
