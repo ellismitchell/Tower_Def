@@ -1,0 +1,25 @@
+/*profile.css*/
+
+body{
+	background-color: #e8d7d7;
+	font-family: 'Londrina Shadow', cursive;
+	text-align: center;
+	font-size: 2rem;
+}
+
+.container{
+	margin-top: 20px;
+}
+
+.profile_name{
+	margin: 10px;
+}
+
+.hidden{
+	display: none;
+}
+
+.btn, input{
+	font-size: 1rem;
+	font-family: sans-serif;
+}

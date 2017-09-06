@@ -1,0 +1,29 @@
+/*gameboard.css*/
+
+body{
+	background-color: #e8d7d7;
+	font-family: 'Londrina Shadow', cursive;
+	font-size: 2rem;
+}
+
+header{
+	padding: 20px 45px 20px 45px;
+}
+
+header>div{
+	display: inline-block;
+	float:right;
+	padding: 10px;
+	margin: 0 0 20px 0;
+}
+
+main{
+	clear: both;
+}
+.col{
+	border: dashed black 1px;
+	height: 80px;
+}
+.btn{
+	font-family: sans-serif;
+}
