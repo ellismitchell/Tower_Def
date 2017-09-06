@@ -42,9 +42,15 @@ $(document).ready(function() {
 	var cW = 150;
 	var minionSpeed = 20;
 	var bulletTime = 300;
-	var minion_wave_intervalID = setInterval(spawnMinion, 2000);
-	var move_minion_intervalID = setInterval(moveMinions, interval);
-	var tower_intervalID = setInterval(towerResponse, 100);
+	var minion_wave_intervalID = "";
+	var move_minion_intervalID = "";
+	var tower_intervalID = "";
+	$('.start_wave').on("click", function() {
+		$('.start_wave').hide();
+		minion_wave_intervalID = setInterval(spawnMinion, 2000);
+		move_minion_intervalID = setInterval(moveMinions, interval);
+		tower_intervalID = setInterval(towerResponse, 100);
+	});
 
 	function spawnMinion() {
 		if (minion_wave.length == 0) {
