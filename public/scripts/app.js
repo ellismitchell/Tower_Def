@@ -20,21 +20,55 @@ $(document).ready(function() {
 	console.log("clicked");
 	$('.edit-btn').on("click", displayForm);
 
-	// Draw the guy and move across
-	$('#31').append(`<img src="/imgs/car1.jpg" class="minion" id="m1">`)
+	var minion_wave = [];
+	var spawned_wave = [];
+	for (var i = 1; i <= 10; i++) {
+		minion_wave.push({id: i, image: "/imgs/car1.jpg", speed: 20, hp: 100});
+	}
 
-	// cW : column width
-	// .offset() calculates from the center
 	var interval = 100;
-	var minionIntervalID = setInterval(minion_move, interval);
+	// var minionIntervalID = setInterval(minion_move, interval);
 	var cW = 150;
 	var minionSpeed = 20;
 	var bulletTime = 1000;
+	var minion_wave_intervalID = setInterval(spawnMinion, 2000);
+	var move_minion_intervalID = setInterval(moveMinions, interval);
+
+	function spawnMinion() {
+		if (minion_wave.length == 0) {
+			clearInterval(minion_wave_intervalID);
+			return;
+		}
+		var minion = minion_wave.pop();
+		$('#31').append(`<img src="/imgs/car1.jpg" class="minion" id="m${minion.id}">`);
+		spawned_wave.push(minion);
+
+		// var minion_selector = `#m${minion.id}`;
+		// console.log(minion_selector);
+		// console.log($(minion_selector));
+		// minion_move($(minion_selector));
+		
+	}
+	// Draw the guy and move across
+	// $('#31').append(`<img src="/imgs/car1.jpg" class="minion" id="m1">`)
+
+	// cW : column width
+	// .offset() calculates from the center
+	
+	function moveMinions() {
+		spawned_wave.forEach(function(minion){
+			var minion_selector = $(`#m${minion.id}`);
+			minion_selector.animate({
+				"margin-left": `+=${minionSpeed}px`
+			}, interval);
+		});
+}
 
 
-
-	function minion_move() {
-		var minion = $('#m1');
+	function minion_move(minion) {
+		// var minion = $('#m1');
+		console.log(minion);
+		console.log(minion.offset());
 		var column = $('#36');
 		// checking the minion x > column's x+width 
 		if(minion.offset().left >= column.offset().left+cW/2){
@@ -73,7 +107,7 @@ $(document).ready(function() {
 		}, bulletTime, "swing", function removeBullet(){
 			console.log("removed");
 			bullet.remove();
-			minion.remove(); // lower health later
+			// minion.remove(); // lower health later
 		});
 	}
 
