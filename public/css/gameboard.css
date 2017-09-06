@@ -1,0 +1,20 @@
+/*gameboard.css*/
+
+header{
+	padding: 20px 45px 20px 45px;
+}
+
+header>div{
+	display: inline-block;
+	float:right;
+	padding: 10px;
+	margin: 0 0 20px 0;
+}
+
+main{
+	clear: both;
+}
+.col{
+	border: solid black 2px;
+	height: 80px;
+}
