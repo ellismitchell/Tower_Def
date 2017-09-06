@@ -5,10 +5,18 @@ $(document).ready(function() {
 
 	// Create a gameboard dynamically with array
 	var $board = $('.board');
-	var board_size = 5;
+	var board_size = 6;
+	var row = ""
 	for(var i = 1; i <= board_size; i ++){
-		$board.append(templateRow(i));
+		row+=`<div class="row row_${i}">`;
+
+		for(var j= 1; j<=board_size; j++){
+			row += templateRow(i,j);
+		}
+
+		row +=`</div>`;	
 	}
+	$board.append(row);
 	console.log("clicked");
 	$('.edit-btn').on("click", displayForm);
 
@@ -24,16 +32,9 @@ function updateProfile(event) {
 }
 
 // Create the game board
-function templateRow(i){
+function templateRow(x,y){
 	return`
-		<div class="row row_${i}">
-			<div class="col"></div>
-			<div class="col"></div>
-			<div class="col"></div>
-
-			<div class="col"></div>
-			<div class="col"></div>
-			<div class="col"></div>
+		<div class="col col-2" id="${x}${y}">
 		</div>
 	`;
 }
