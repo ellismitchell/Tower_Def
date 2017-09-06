@@ -1,0 +1,25 @@
+/*styles.css*/
+
+
+body{
+	color: black;
+	background-color: #e8d7d7;
+	/*background-color: white;*/
+	font-family: 'Londrina Shadow', cursive;
+	font-size: 4rem;
+}
+
+main{
+	margin: 5%;
+	text-align: center;
+	
+}
+
+p{
+	color: black;
+	/*text-shadow: 3px 3px 20px black;*/
+}
+
+.btn{
+	font-family: sans-serif;
+}
