@@ -6,19 +6,20 @@ $(document).ready(function() {
 	// Create a gameboard dynamically with array
 	var $board = $('.board');
 	var board_size = 6;
-	var row = ""
+	var row = "";
+	// Hardcoded the gameboard grids
 	for(var i = 1; i <= board_size; i ++){
 		row+=`<div class="row row_${i}">`;
 
 		for(var j= 1; j<=board_size; j++){
 			row += templateRow(i,j);
 		}
-
 		row +=`</div>`;	
 	}
 	$board.append(row);
 	$('.edit-btn').on("click", displayForm);
 
+	var minion_path = []
 	var minion_wave = [];
 	var spawned_wave = [];
 	var towers = [];
@@ -34,9 +35,10 @@ $(document).ready(function() {
 	// 	$tower.append(`<img src="/imgs/tower.jpg" class="tower" id="t${i}">`);
 	// 	$tower.append('<div class="towerRange"></div>');
 	// }
-	// Place tower by clicks
+	
+	// Place tower at mouse click
+	// still need to check if the click is within path
 	$('.column').on("click", placeTower);
-
 	function placeTower(event){
 
 		var tower = {
@@ -68,6 +70,8 @@ $(document).ready(function() {
 		tower_intervalID = setInterval(towerResponse, 100);
 	});
 
+	// create minion at #31 div at the moment
+	// Will adjust later when we want different spawning location
 	function spawnMinion() {
 		if (minion_wave.length == 0) {
 			clearInterval(minion_wave_intervalID);
@@ -77,17 +81,13 @@ $(document).ready(function() {
 		$('#31').append(`<img src="/imgs/car1.jpg" class="minion" id="m${minion.id}">`);
 		$('#31').append(`<p class="hp" id="hp${minion.id}">${minion.hp}</p>`);
 		spawned_wave.push(minion);
-
 		// var minion_selector = `#m${minion.id}`;
 		// minion_move($(minion_selector));
-		
 	}
-	// Draw the guy and move across
-	// $('#31').append(`<img src="/imgs/car1.jpg" class="minion" id="m1">`)
-
-	// cW : column width
-	// .offset() calculates from the center
 	
+	// check location of minions across the board
+	// remove if near the end. If at the end, we can
+	// update player health and maybe change endgame state
 	function moveMinions() {
 		spawned_wave.forEach(function(minion){
 			var minion_selector = $(`#m${minion.id}`);
