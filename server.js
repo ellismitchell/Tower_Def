@@ -6,7 +6,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 let controllers = require('./controllers');
 
 app.get('/', function homepage (req, res) {
-  res.sendFile(__dirname + '/views/index.html');
+  res.sendFile(__dirname + '/views/main_page.html');
+});
+
+app.get('/gameboard.html', function (req, res) {
+  res.sendFile(__dirname + '/views/gameboard.html');
+});
+
+app.get('/profile.html', function (req, res) {
+  res.sendFile(__dirname + '/views/profile.html');
 });
 
 app.get('/users/:id', controllers.users.show);
@@ -17,4 +25,5 @@ app.post('/users/:id/scores', controllers.usersScores.create);
 app.get('/users/:id/scores', controllers.usersScores.index);
 
 app.listen(3000, function() {
+	console.log("Server started at 3000");
 });
