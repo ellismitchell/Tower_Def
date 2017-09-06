@@ -22,7 +22,7 @@ $(document).ready(function() {
 
 	var minion_wave = [];
 	var spawned_wave = [];
-	for (var i = 1; i <= 10; i++) {
+	for (var i = 1; i <= 5; i++) {
 		minion_wave.push({id: i, image: "/imgs/car1.jpg", speed: 20, hp: 100});
 	}
 
@@ -58,6 +58,12 @@ $(document).ready(function() {
 	function moveMinions() {
 		spawned_wave.forEach(function(minion){
 			var minion_selector = $(`#m${minion.id}`);
+				var column = $('#36');
+			if(minion_selector.offset().left >= column.offset().left+cW/2){
+				minion_selector.remove();
+				spawned_wave.shift();
+
+		}
 			minion_selector.animate({
 				"margin-left": `+=${minionSpeed}px`
 			}, interval);
@@ -65,22 +71,22 @@ $(document).ready(function() {
 }
 
 
-	function minion_move(minion) {
-		// var minion = $('#m1');
-		console.log(minion);
-		console.log(minion.offset());
-		var column = $('#36');
-		// checking the minion x > column's x+width 
-		if(minion.offset().left >= column.offset().left+cW/2){
-			console.log(minion.offset().left);
-			console.log(column.offset().left);
-			window.clearInterval(minionIntervalID);
-		}
+	// function minion_move(minion) {
+	// 	// var minion = $('#m1');
+	// 	console.log(minion);
+	// 	console.log(minion.offset());
+	// 	var column = $('#36');
+	// 	// checking the minion x > column's x+width 
+		// if(minion.offset().left >= column.offset().left+cW/2){
+		// 	console.log(minion.offset().left);
+		// 	console.log(column.offset().left);
+		// 	window.clearInterval(minionIntervalID);
+		// }
 		
-		minion.animate({
-			"margin-left": `+=${minionSpeed}px`
-		}, interval);
-	}
+	// 	minion.animate({
+	// 		"margin-left": `+=${minionSpeed}px`
+	// 	}, interval);
+	// }
 
 	// Place tower
 	var $tower = $('#43');
