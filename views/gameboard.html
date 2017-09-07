@@ -22,9 +22,17 @@
 </head>
 <body>
 	<header>
+
 		<a href="/" class="main_page btn btn-dark">Main Page</a>
-		<a href="/profile.html" class="profile_page btn btn-dark">My Profile</a>
-		<button class="start_wave btn btn-dark">Start Wave</button>
+		<button class="start_wave btn btn-dark">Start Wave </button>
+		<div class="show_profile"></div>
+		<form class="profile_form" method="" action="">
+			<button type="submit" class=" btn btn-dark">Submit Profile</button>
+			<br><input type="url" name="profile_link" placeholder="Image Link" required>
+
+			<br><input type="text" name="profile_name" placeholder="Name" required>
+		</form>
+		
 		<div> Health: <span class="player_health"></span></div>
 		<div> Minions Slain: <span class="minions_killed"> 0 </span></div>
 	</header>

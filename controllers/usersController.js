@@ -7,9 +7,22 @@ function show(req, res) {
 }
 
 function create(req, res) {
-	db.User.create(req.body, function(err, user){
+	console.log(req.body);
+	console.log("In server?");
+	var new_user = new db.User({
+		name: req.body.profile_name,
+		profileImage: req.body.profile_link,
+	})
+	console.log(new_user);
+	new_user.save(function(err, user){
+		if(err) return handleError(err);
 		res.json(user);
 	});
+
+	// db.User.create(req.body, function(err, user){
+	// 	console.log(req.body);
+	// 	res.redirect('/:user_id/profile.html');
+	// });
 }
 
 function destroy(req, res) {

@@ -13,6 +13,15 @@ app.get('/gameboard.html', function (req, res) {
   res.sendFile(__dirname + '/views/gameboard.html');
 });
 
+// #############################
+app.get('/:name/gameboard.html', function(req, res){
+	res.render()
+})
+// #############################
+
+
+
+
 app.get('/profile.html', function (req, res) {
   res.sendFile(__dirname + '/views/profile.html');
 });

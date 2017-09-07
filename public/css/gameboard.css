@@ -4,17 +4,32 @@ body{
 	background-color: #e8d7d7;
 	/*font-family: 'Londrina Shadow', cursive;*/
 	font-size: 2rem;
+	margin: 50px;
 }
 
 header{
-	padding: 20px 45px 20px 45px;
+	float: right;
+	position: fixed;
+	top: 0;
+	left: 75%;
+	width: 300px;
+	height: 100%;
+	padding: 0;
+	margin-top: 50px;
 }
 
 header>div{
-	display: inline-block;
-	float:right;
+	display: block;
 	padding: 10px;
-	margin: 0 0 20px 0;
+	margin: auto
+}
+
+header>.btn,button{
+	width:80%;
+	margin-bottom: 10px;
+}
+
+form{
 }
 
 main{
@@ -28,6 +43,20 @@ main{
 }
 .btn{
 	font-family: sans-serif;
+}
+
+input{
+	width: 200px;
+}
+
+
+.board{
+
+}
+
+.card{
+	width: 80%;
+	height: 250px;
 }
 
 .minion{
