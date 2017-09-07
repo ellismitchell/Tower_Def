@@ -24,8 +24,9 @@ $(document).ready(function() {
 	var spawned_wave = [];
 	var towers = [];
 	var tower_range = 150;
-	for (var i = 1; i <= 5; i++) {
-		minion_wave.push({id: i, image: "/imgs/car1.jpg", speed: 20, hp: 100});
+	var gameEnd = false;
+	for (var i = 1; i <= 15; i++) {
+		minion_wave.push({id: i, image: "/imgs/car1.jpg", speed: 20, hp: 500});
 	}
 	// Hardcoded towers
 	//  Need to change hardcoded row and col~
@@ -40,6 +41,9 @@ $(document).ready(function() {
 	// still need to check if the click is within path
 	$('.column').on("click", placeTower);
 	function placeTower(event){
+		// Add tower if theres none already in place
+		if(gameEnd) return;
+		if($(this).has('.tower').length > 0 ) return;
 
 		var tower = {
 			id : towers.length + 1,
@@ -49,7 +53,6 @@ $(document).ready(function() {
 			range: tower_range,
 			dmg: 10,
 		};
-		console.log(tower.row + tower.col);
 		towers.push(tower);
 		$(this).append(`<img src="/imgs/tower.jpg" class="tower" id="t${tower.id}">`);
 		$(this).append('<div class="towerRange"></div>');
@@ -58,11 +61,16 @@ $(document).ready(function() {
 	var interval = 100;
 	// var minionIntervalID = setInterval(minion_move, interval);
 	var cW = 150;
+	var player_hp = 5;
 	var minionSpeed = 20;
 	var bulletTime = 300;
 	var minion_wave_intervalID = "";
 	var move_minion_intervalID = "";
 	var tower_intervalID = "";
+	var $player_hp = $('.player_health');
+	$player_hp.text(player_hp);
+
+	// Start minion wave with btn click
 	$('.start_wave').on("click", function() {
 		$('.start_wave').hide();
 		minion_wave_intervalID = setInterval(spawnMinion, 2000);
@@ -75,9 +83,10 @@ $(document).ready(function() {
 	function spawnMinion() {
 		if (minion_wave.length == 0) {
 			clearInterval(minion_wave_intervalID);
-			return;
-		}
+			return;}
 		var minion = minion_wave.pop();
+		// NEED TO CHANGE HARDCODED #31 TOO
+		// ######################
 		$('#31').append(`<img src="/imgs/car1.jpg" class="minion" id="m${minion.id}">`);
 		$('#31').append(`<p class="hp" id="hp${minion.id}">${minion.hp}</p>`);
 		spawned_wave.push(minion);
@@ -92,11 +101,12 @@ $(document).ready(function() {
 		spawned_wave.forEach(function(minion){
 			var minion_selector = $(`#m${minion.id}`);
 			var hp_selector = $(`#hp${minion.id}`);
-				var column = $('#36');
+				var column = $('#36');  // #############
 			if(minion_selector.offset().left >= column.offset().left+cW/2){
 				minion_selector.remove();
 				hp_selector.remove();
 				spawned_wave.shift();
+				updateGameState();
 		}
 			minion_selector.animate({
 				"margin-left": `+=${minionSpeed}px`
@@ -107,6 +117,17 @@ $(document).ready(function() {
 		});
 	}
 
+	function updateGameState() {
+		player_hp--;
+		$player_hp.text(player_hp);
+		if(player_hp === 0) {
+			clearInterval( minion_wave_intervalID);
+			clearInterval( move_minion_intervalID);
+			clearInterval( tower_intervalID);
+			alert("Game Over!");
+			gameEnd = true;
+		}
+	}
 
 
 	function towerResponse() {
@@ -126,8 +147,7 @@ $(document).ready(function() {
 					shoot_bullet(minion, tower);
 				}
 			});
-		})
-
+		});
 	}
 
 
@@ -186,19 +206,29 @@ $(document).ready(function() {
 			}
 		});
 	}
-
-	// function removeBullet(bullet) {
-
-	// }
-
-
-
-
 });
 
+$('.profile_form').on("submit", profileBtnOnSubmit);
 
+function profileBtnOnSubmit(event){
+	event.preventDefault();
+	var body = $(this).serialize();
+	$.ajax({
+		method: "POST",
+		url: "/users",
+		data: body,
+		success: renderProfile,
+		error: displayErr,
+	});
+}
 
+function renderProfile(data){
 
+}
+
+function displayErr(err){
+	console.log(err);
+}
 
 function displayForm(event){
 	$('.toggle').toggle();
