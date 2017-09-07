@@ -139,8 +139,8 @@ $(document).ready(function() {
 				var minionX  = minion_selector.offset().left;
 				var minionY = minion_selector.offset().top;
 				$tower = $(`#${tower.row}${tower.col}`);
-				var towerX = $tower.offset().left;
-				var towerY = $tower.offset().top;
+				var towerX = $tower.offset().left+25;
+				var towerY = $tower.offset().top+25;
 				var xDistance = minionX-towerX+minionSpeed*bulletTime/interval;
 				var yDistance = minionY-towerY;
 				var distance = Math.sqrt(xDistance*xDistance+yDistance*yDistance);
