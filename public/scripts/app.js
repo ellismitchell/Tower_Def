@@ -136,11 +136,11 @@ $(document).ready(function() {
 		towers.forEach(function(tower){
 			spawned_wave.forEach(function(minion){
 				let minion_selector = $(`#m${minion.id}`);
-				var minionX  = minion_selector.offset().left;
-				var minionY = minion_selector.offset().top;
+				var minionX  = minion_selector.offset().left+25;
+				var minionY = minion_selector.offset().top+25;
 				$tower = $(`#${tower.row}${tower.col}`);
-				var towerX = $tower.offset().left+25;
-				var towerY = $tower.offset().top+25;
+				var towerX = $tower.offset().left+40;
+				var towerY = $tower.offset().top+40;
 				var xDistance = minionX-towerX+minionSpeed*bulletTime/interval;
 				var yDistance = minionY-towerY;
 				var distance = Math.sqrt(xDistance*xDistance+yDistance*yDistance);
