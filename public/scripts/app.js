@@ -216,7 +216,6 @@ $(document).ready(function() {
 			"top": `+=${minion_displacement[0].distance}px`,
 		}, Number(`${minion_displacement[0].time}`), 'linear');
 
-
 		// Move right 3 boxes
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
@@ -225,7 +224,6 @@ $(document).ready(function() {
 		hp_selector.animate({
 			"left": `+=${minion_displacement[1].distance}px`,
 		}, Number(`${minion_displacement[1].time}`), 'linear');
-
 
 		// Move up 3 boxes
 		minion_selector.animate({
@@ -236,7 +234,6 @@ $(document).ready(function() {
 			"top": `-=${minion_displacement[2].distance}px`,
 		}, Number(`${minion_displacement[2].time}`), 'linear');
 
-
 		// Move right 3 boxes
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
@@ -245,7 +242,6 @@ $(document).ready(function() {
 		hp_selector.animate({
 			"left": `+=${minion_displacement[3].distance}px`,
 		}, Number(`${minion_displacement[3].time}`), 'linear');
-
 
 		// Move down 5 boxes
 		minion_selector.animate({
@@ -256,7 +252,6 @@ $(document).ready(function() {
 			"top": `+=${minion_displacement[4].distance}px`,
 		}, Number(`${minion_displacement[4].time}`), 'linear');
 
-
 		// Move left 7 boxes
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
@@ -265,7 +260,6 @@ $(document).ready(function() {
 		hp_selector.animate({
 			"left": `-=${minion_displacement[5].distance}px`,
 		}, Number(`${minion_displacement[5].time}`), 'linear');
-
 
 		// Move down 2 boxes
 		minion_selector.animate({
@@ -276,7 +270,6 @@ $(document).ready(function() {
 			"top": `+=${minion_displacement[6].distance}px`,
 		}, Number(`${minion_displacement[6].time}`), 'linear');
 
-
 		// Move right 8 boxes
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
@@ -285,82 +278,7 @@ $(document).ready(function() {
 		hp_selector.animate({
 			"left": `+=${minion_displacement[7].distance}px`,
 		}, Number(`${minion_displacement[7].time}`), 'linear', updateGameState);
-
 	}
-
-	// spawned_wave.forEach(function(minion){
-	// 	moveMinions(minion);
-	// });
-	
-	// check location of minions across the board
-	// remove if near the end. If at the end, we can
-	// update player health and maybe change endgame state
-	// function moveMinions(minion) {
-	// 	// spawned_wave.forEach(function(minion){
-	// 		var minion_selector = $(`#m${minion.id}`);
-	// 		var hp_selector = $(`#hp${minion.id}`);
-	// 		var path = paths[minion.pathIndex];
-
-
-	// 		if (path.direction === "right"){
-	// 			if(minion_selector.offset().left >= path.endpoint.offset().left-mW/2){
-	// 				minion.pathIndex++;
-	// 				return;
-	// 			}
-	// 			minion_selector.animate({
-	// 				"left": `+=${minionSpeed}px`
-	// 			}, interval);
-	// 			hp_selector.animate({
-	// 				"margin-left": `+=${minionSpeed}px`
-	// 			}, interval, moveMinions(minion));
-	// 		}
-
-	// 		// direction left
-	// 		if (path.direction === "left"){
-	// 			if(minion_selector.offset().left <= path.endpoint.offset().left+mW/2){
-	// 				minion.pathIndex++;
-	// 				return;
-	// 			}
-	// 			minion_selector.animate({
-	// 				"left": `-=${minionSpeed}px`
-	// 			}, interval);
-	// 			hp_selector.animate({
-	// 				"margin-left": `-=${minionSpeed}px`
-	// 			}, interval, moveMinions(minion));
-	// 		}
-
-	// 		// direction down
-	// 		if (path.direction === "down"){
-	// 			if(minion_selector.offset().top >= path.endpoint.offset().top-mW/2){
-	// 				minion.pathIndex++;
-	// 				return;
-	// 			}
-	// 			minion_selector.animate({
-	// 				// "margin-top": `+=${minionSpeed}px`
-	// 				"top" : `+=${minionSpeed}px`
-	// 				// "transform":`translateY(${minionSpeed}px)`
-	// 			}, interval);
-	// 			hp_selector.animate({
-	// 				"margin-top": `+=${minionSpeed}px`
-	// 			}, interval, moveMinions(minion));
-	// 		}
-
-	// 		if (path.direction === "up"){
-	// 			if(minion_selector.offset().top <= path.endpoint.offset().top+mW/2){
-	// 				minion.pathIndex++;
-	// 				return;
-	// 			}
-	// 			minion_selector.animate({
-	// 				"top": `-=${minionSpeed}px`
-	// 			}, interval);
-	// 			hp_selector.animate({
-	// 				"margin-top": `-=${minionSpeed}px`
-	// 			}, interval,moveMinions(minion));
-	// 		}
-
-	// 	// });
-	// 	// End of forEach
-	// }
 
 	function updateGameState() {
 		player_hp--;
@@ -376,7 +294,6 @@ $(document).ready(function() {
 
 		}
 	}
-
 
 	function towerResponse() {
 		// For each tower, check if minions wave are in range
@@ -486,6 +403,7 @@ $(document).ready(function() {
 				spawned_wave =spawned_wave.filter(function(element) {
 					return element.id != minion.id;
 				});
+				
 				minion_selector.remove();
 				console.log(minion_selector.length);
 				if (minion.alive){
