@@ -117,15 +117,15 @@ $(document).ready(function() {
 		// {distance : 800, time : 14000}
 
 		// Another set for play test
-		{distance : 300, time : 2000},
-		{distance : 300, time : 2000},
-		{distance : 300, time : 2000},
-		{distance : 300, time : 2000},
+		{distance : 300, time : 2000, direction: "down"},
+		{distance : 300, time : 2000, direction: "right"},
+		{distance : 300, time : 2000, direction: "up"},
+		{distance : 300, time : 2000, direction: "right"},
 		// Going down from 18 to 68
-		{distance : 500, time : 4000},
-		{distance : 700, time : 6000},
-		{distance : 200, time : 1000},
-		{distance : 800, time : 7000}
+		{distance : 500, time : 4000, direction: "down"},
+		{distance : 700, time : 6000, direction: "left"},
+		{distance : 200, time : 1000, direction: "down"},
+		{distance : 800, time : 7000, direction: "right"}
 	];
 
 	// create minion at #31 div at the moment
@@ -163,6 +163,7 @@ $(document).ready(function() {
 		hp_selector.animate({
 			"margin-top": `+=${minion_displacement[0].distance}px`,
 		}, Number(`${minion_displacement[0].time}`));
+		minion.pathIndex++;
 
 		// Move right 3 boxes
 		minion_selector.animate({
@@ -172,6 +173,7 @@ $(document).ready(function() {
 		hp_selector.animate({
 			"left": `+=${minion_displacement[1].distance}px`,
 		}, Number(`${minion_displacement[1].time}`));
+		minion.pathIndex++;
 
 		// Move up 3 boxes
 		minion_selector.animate({
@@ -181,6 +183,7 @@ $(document).ready(function() {
 		hp_selector.animate({
 			"top": `-=${minion_displacement[2].distance}px`,
 		}, Number(`${minion_displacement[2].time}`));
+		minion.pathIndex++;
 
 		// Move right 3 boxes
 		minion_selector.animate({
@@ -190,6 +193,7 @@ $(document).ready(function() {
 		hp_selector.animate({
 			"left": `+=${minion_displacement[3].distance}px`,
 		}, Number(`${minion_displacement[3].time}`));
+		minion.pathIndex++;
 
 		// Move down 5 boxes
 		minion_selector.animate({
@@ -199,6 +203,7 @@ $(document).ready(function() {
 		hp_selector.animate({
 			"top": `+=${minion_displacement[4].distance}px`,
 		}, Number(`${minion_displacement[4].time}`));
+		minion.pathIndex++;
 
 		// Move left 7 boxes
 		minion_selector.animate({
@@ -208,6 +213,7 @@ $(document).ready(function() {
 		hp_selector.animate({
 			"left": `-=${minion_displacement[5].distance}px`,
 		}, Number(`${minion_displacement[5].time}`));
+		minion.pathIndex++;
 
 		// Move down 2 boxes
 		minion_selector.animate({
@@ -217,6 +223,7 @@ $(document).ready(function() {
 		hp_selector.animate({
 			"top": `+=${minion_displacement[6].distance}px`,
 		}, Number(`${minion_displacement[6].time}`));
+		minion.pathIndex++;
 
 		// Move right 8 boxes
 		minion_selector.animate({
