@@ -215,9 +215,23 @@ $(document).ready(function() {
 				$tower = $(`#${tower.row}${tower.col}`);
 				var towerX = $tower.offset().left+40; //+40 is half the tower size
 				var towerY = $tower.offset().top+40;
-
-				var xDistance = minionX-towerX+minionSpeed*bulletTime/interval;
-				var yDistance = minionY-towerY;
+				var minionDirection = paths[minion.pathIndex].direction;
+				if (minionDirection === "right"){
+					var xDistance = minionX - towerX + minionSpeed*bulletTime/interval;
+					var yDistance = minionY - towerY;
+				}
+				else if (minionDirection === "left"){
+					var xDistance = minionX - towerX - minionSpeed*bulletTime/interval;
+					var yDistance = minionY - towerY;
+				}
+				else if (minionDirection === "up"){
+					var xDistance = minionX - towerX ;
+					var yDistance = minionY - towerY- minionSpeed*bulletTime/interval;
+				}
+				else if (minionDirection === "down"){
+					var xDistance = minionX - towerX ;
+					var yDistance = minionY - towerY + minionSpeed*bulletTime/interval;
+				}
 				var distance = Math.sqrt(xDistance*xDistance+yDistance*yDistance);
 				if (distance < tower.range){
 				// change to tower range
@@ -267,8 +281,23 @@ $(document).ready(function() {
 		var minionY = minion_selector.offset().top+15;
 		var bulletX = bullet.offset().left;
 		var bulletY = bullet.offset().top;
-		var xDistance = minionX - bulletX + minionSpeed*bulletTime/interval;
-		var yDistance = minionY - bulletY;
+		var minionDirection = paths[minion.pathIndex].direction;
+		if (minionDirection === "right"){
+			var xDistance = minionX - bulletX + minionSpeed*bulletTime/interval;
+			var yDistance = minionY - bulletY;
+		}
+		else if (minionDirection === "left"){
+			var xDistance = minionX - bulletX - minionSpeed*bulletTime/interval;
+			var yDistance = minionY - bulletY;
+		}
+		else if (minionDirection === "up"){
+			var xDistance = minionX - bulletX ;
+			var yDistance = minionY - bulletY- minionSpeed*bulletTime/interval;
+		}
+		else if (minionDirection === "down"){
+			var xDistance = minionX - bulletX ;
+			var yDistance = minionY - bulletY + minionSpeed*bulletTime/interval;
+		}
 		bullet.animate({
 			"margin-left": `+=${xDistance}`,
 			"margin-top": `+=${yDistance}`,
