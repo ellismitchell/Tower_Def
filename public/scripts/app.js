@@ -143,7 +143,6 @@ $(document).ready(function() {
 		spawned_wave.push(minion);
 		// var minion_selector = `#m${minion.id}`;
 		// minion_move($(minion_selector));
-		console.log(minion);
 		move_minion(minion);
 	};
 
@@ -159,73 +158,73 @@ $(document).ready(function() {
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"margin-top" : `+=${minion_displacement[0].distance}px`,
-			}, Number(`${minion_displacement[0].time}`));
+			}, Number(`${minion_displacement[0].time}`), 'linear');
 		hp_selector.animate({
 			"margin-top": `+=${minion_displacement[0].distance}px`,
-		}, Number(`${minion_displacement[0].time}`));
+		}, Number(`${minion_displacement[0].time}`), 'linear');
 
 		// Move right 3 boxes
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"left" : `+=${minion_displacement[1].distance}px`,
-			}, Number(`${minion_displacement[1].time}`));
+			}, Number(`${minion_displacement[1].time}`), 'linear');
 		hp_selector.animate({
 			"left": `+=${minion_displacement[1].distance}px`,
-		}, Number(`${minion_displacement[1].time}`));
+		}, Number(`${minion_displacement[1].time}`), 'linear');
 
 		// Move up 3 boxes
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"top" : `-=${minion_displacement[2].distance}px`,
-			}, Number(`${minion_displacement[2].time}`));
+			}, Number(`${minion_displacement[2].time}`), 'linear');
 		hp_selector.animate({
 			"top": `-=${minion_displacement[2].distance}px`,
-		}, Number(`${minion_displacement[2].time}`));
+		}, Number(`${minion_displacement[2].time}`), 'linear');
 
 		// Move right 3 boxes
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"left" : `+=${minion_displacement[3].distance}px`,
-			}, Number(`${minion_displacement[3].time}`));
+			}, Number(`${minion_displacement[3].time}`), 'linear');
 		hp_selector.animate({
 			"left": `+=${minion_displacement[3].distance}px`,
-		}, Number(`${minion_displacement[3].time}`));
+		}, Number(`${minion_displacement[3].time}`), 'linear');
 
 		// Move down 5 boxes
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"top" : `+=${minion_displacement[4].distance}px`,
-			}, Number(`${minion_displacement[4].time}`));
+			}, Number(`${minion_displacement[4].time}`), 'linear');
 		hp_selector.animate({
 			"top": `+=${minion_displacement[4].distance}px`,
-		}, Number(`${minion_displacement[4].time}`));
+		}, Number(`${minion_displacement[4].time}`), 'linear');
 
 		// Move left 7 boxes
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"left" : `-=${minion_displacement[5].distance}px`,
-			}, Number(`${minion_displacement[5].time}`));
+			}, Number(`${minion_displacement[5].time}`), 'linear');
 		hp_selector.animate({
 			"left": `-=${minion_displacement[5].distance}px`,
-		}, Number(`${minion_displacement[5].time}`));
+		}, Number(`${minion_displacement[5].time}`), 'linear');
 
 		// Move down 2 boxes
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"top" : `+=${minion_displacement[6].distance}px`,
-			}, Number(`${minion_displacement[6].time}`));
+			}, Number(`${minion_displacement[6].time}`), 'linear');
 		hp_selector.animate({
 			"top": `+=${minion_displacement[6].distance}px`,
-		}, Number(`${minion_displacement[6].time}`));
+		}, Number(`${minion_displacement[6].time}`), 'linear');
 
 		// Move right 8 boxes
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"left" : `+=${minion_displacement[7].distance}px`,
-			}, Number(`${minion_displacement[7].time}`));
+			}, Number(`${minion_displacement[7].time}`), 'linear');
 		hp_selector.animate({
 			"left": `+=${minion_displacement[7].distance}px`,
-		}, Number(`${minion_displacement[7].time}`));
+		}, Number(`${minion_displacement[7].time}`), 'linear');
 
 	}
 
