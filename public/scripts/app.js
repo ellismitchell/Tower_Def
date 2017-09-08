@@ -5,7 +5,6 @@ $(document).ready(function() {
 
 	// dynamically set minions, towers, tower range css
 
-
 	// Create a gameboard dynamically with array
 	var $board = $('.board');
 	var board_size = 8;
@@ -20,6 +19,8 @@ $(document).ready(function() {
 		row +=`</div>`;	
 	}
 	$board.append(row);
+	// hardcoding color for terrain, for better visual..
+	$('#12,#22,#32,#42,#43,#44,#45,#35,#25,#15,#16,#17,#18,#28,#38,#48,#58,#68,#67,#66,#65,#64,#63,#62,#61,#71,#81,#82,#83,#84,#85,#86,#87,#88').css("background-color", "gray");
 	$('.edit-btn').on("click", displayForm);
 
 	var paths = [
@@ -42,7 +43,8 @@ $(document).ready(function() {
 	var towers = [];
 	var tower_range = 150;
 	var gameEnd = false;
-	for (var i = 1; i <= 5; i++) {
+	var minion_counts = 20;
+	for (var i = 1; i <= minion_counts; i++) {
 		minion_wave.push({id: i, image: "/imgs/car1.jpg", speed: 20, hp: 500, pathIndex: 0});
 	}
 	// Hardcoded towers
@@ -93,9 +95,38 @@ $(document).ready(function() {
 	$('.start_wave').on("click", function() {
 		$('.start_wave').hide();
 		minion_wave_intervalID = setInterval(spawnMinion, 2000);
-		move_minion_intervalID = setInterval(moveMinions, interval);
+		// move_minion_intervalID = setInterval(moveMinions, interval);
+		// move_minion_intervalID = setInterval(move_minion, interval);
 		tower_intervalID = setInterval(towerResponse, 100);
+
 	});
+
+
+	// distance = speed x time
+	// in our case, each box is 100px, or take 1sec to travel
+	// distance to time ratio is 1: 15
+	var minion_displacement =[
+		// {distance : 300, time : 4500},
+		// {distance : 300, time : 4500},
+		// {distance : 300, time : 4500},
+		// {distance : 300, time : 4500},
+		// // Going down from 18 to 68
+		// {distance : 500, time : 7500},
+		// {distance : 700, time : 10500},
+		// {distance : 200, time : 3000},
+		// {distance : 800, time : 14000}
+
+		// Another set for play test
+		{distance : 300, time : 2000},
+		{distance : 300, time : 2000},
+		{distance : 300, time : 2000},
+		{distance : 300, time : 2000},
+		// Going down from 18 to 68
+		{distance : 500, time : 4000},
+		{distance : 700, time : 6000},
+		{distance : 200, time : 1000},
+		{distance : 800, time : 7000}
+	];
 
 	// create minion at #31 div at the moment
 	// Will adjust later when we want different spawning location
@@ -104,6 +135,7 @@ $(document).ready(function() {
 			clearInterval(minion_wave_intervalID);
 			return;}
 		var minion = minion_wave.pop();
+
 		// NEED TO CHANGE HARDCODED #31 TOO
 		// ######################
 		$('#12').append(`<img src="/imgs/car1.jpg" class="minion" id="m${minion.id}">`);
@@ -111,83 +143,174 @@ $(document).ready(function() {
 		spawned_wave.push(minion);
 		// var minion_selector = `#m${minion.id}`;
 		// minion_move($(minion_selector));
+		console.log(minion);
+		move_minion(minion);
+	};
+
+	// hardcoded path animate all the way to the end
+	function move_minion(minion) {
+		var minion_selector = $(`#m${minion.id}`);
+		var hp_selector = $(`#hp${minion.id}`);
+
+		// minion speed was 20
+		// interval was 200
+
+		// Move down 2 boxes
+		minion_selector.animate({
+			// "margin-top": `+=${minionSpeed}px`
+			"margin-top" : `+=${minion_displacement[0].distance}px`,
+			}, Number(`${minion_displacement[0].time}`));
+		hp_selector.animate({
+			"margin-top": `+=${minion_displacement[0].distance}px`,
+		}, Number(`${minion_displacement[0].time}`));
+
+		// Move right 3 boxes
+		minion_selector.animate({
+			// "margin-top": `+=${minionSpeed}px`
+			"left" : `+=${minion_displacement[1].distance}px`,
+			}, Number(`${minion_displacement[1].time}`));
+		hp_selector.animate({
+			"left": `+=${minion_displacement[1].distance}px`,
+		}, Number(`${minion_displacement[1].time}`));
+
+		// Move up 3 boxes
+		minion_selector.animate({
+			// "margin-top": `+=${minionSpeed}px`
+			"top" : `-=${minion_displacement[2].distance}px`,
+			}, Number(`${minion_displacement[2].time}`));
+		hp_selector.animate({
+			"top": `-=${minion_displacement[2].distance}px`,
+		}, Number(`${minion_displacement[2].time}`));
+
+		// Move right 3 boxes
+		minion_selector.animate({
+			// "margin-top": `+=${minionSpeed}px`
+			"left" : `+=${minion_displacement[3].distance}px`,
+			}, Number(`${minion_displacement[3].time}`));
+		hp_selector.animate({
+			"left": `+=${minion_displacement[3].distance}px`,
+		}, Number(`${minion_displacement[3].time}`));
+
+		// Move down 5 boxes
+		minion_selector.animate({
+			// "margin-top": `+=${minionSpeed}px`
+			"top" : `+=${minion_displacement[4].distance}px`,
+			}, Number(`${minion_displacement[4].time}`));
+		hp_selector.animate({
+			"top": `+=${minion_displacement[4].distance}px`,
+		}, Number(`${minion_displacement[4].time}`));
+
+		// Move left 7 boxes
+		minion_selector.animate({
+			// "margin-top": `+=${minionSpeed}px`
+			"left" : `-=${minion_displacement[5].distance}px`,
+			}, Number(`${minion_displacement[5].time}`));
+		hp_selector.animate({
+			"left": `-=${minion_displacement[5].distance}px`,
+		}, Number(`${minion_displacement[5].time}`));
+
+		// Move down 2 boxes
+		minion_selector.animate({
+			// "margin-top": `+=${minionSpeed}px`
+			"top" : `+=${minion_displacement[6].distance}px`,
+			}, Number(`${minion_displacement[6].time}`));
+		hp_selector.animate({
+			"top": `+=${minion_displacement[6].distance}px`,
+		}, Number(`${minion_displacement[6].time}`));
+
+		// Move right 8 boxes
+		minion_selector.animate({
+			// "margin-top": `+=${minionSpeed}px`
+			"left" : `+=${minion_displacement[7].distance}px`,
+			}, Number(`${minion_displacement[7].time}`));
+		hp_selector.animate({
+			"left": `+=${minion_displacement[7].distance}px`,
+		}, Number(`${minion_displacement[7].time}`));
+
 	}
+
+	// spawned_wave.forEach(function(minion){
+	// 	moveMinions(minion);
+	// });
 	
 	// check location of minions across the board
 	// remove if near the end. If at the end, we can
 	// update player health and maybe change endgame state
-	function moveMinions() {
-		spawned_wave.forEach(function(minion){
+	function moveMinions(minion) {
+		// spawned_wave.forEach(function(minion){
 			var minion_selector = $(`#m${minion.id}`);
 			var hp_selector = $(`#hp${minion.id}`);
 			var path = paths[minion.pathIndex];
 
 
 			if (path.direction === "right"){
-
-				minion_selector.animate({
-					"left": `+=${minionSpeed}px`
-				}, interval);
-				hp_selector.animate({
-					"margin-left": `+=${minionSpeed}px`
-				}, interval);
-
 				if(minion_selector.offset().left >= path.endpoint.offset().left-mW/2){
 					// minion_selector.remove();
 					// hp_selector.remove();
 					// spawned_wave.shift();
 					// updateGameState();
 					minion.pathIndex++;
+					return;
 				}
+				minion_selector.animate({
+					"left": `+=${minionSpeed}px`
+				}, interval);
+				hp_selector.animate({
+					"margin-left": `+=${minionSpeed}px`
+				}, interval, moveMinions(minion));
+
 			}
 
 			// direction left
 			if (path.direction === "left"){
-
+				if(minion_selector.offset().left <= path.endpoint.offset().left+mW/2){
+					minion.pathIndex++;
+					return;
+				}
 				minion_selector.animate({
 					"left": `-=${minionSpeed}px`
 				}, interval);
 				hp_selector.animate({
 					"margin-left": `-=${minionSpeed}px`
-				}, interval);
+				}, interval, moveMinions(minion));
 
-				if(minion_selector.offset().left <= path.endpoint.offset().left+mW/2){
-					minion.pathIndex++;
-				}
 			}
 
 			// direction down
 			if (path.direction === "down"){
+				if(minion_selector.offset().top >= path.endpoint.offset().top-mW/2){
+					minion.pathIndex++;
+					return;
+				}
 
 				minion_selector.animate({
 					// "margin-top": `+=${minionSpeed}px`
 					"top" : `+=${minionSpeed}px`
 					// "transform":`translateY(${minionSpeed}px)`
-				}, interval, "swing");
+				}, interval);
 				hp_selector.animate({
 					"margin-top": `+=${minionSpeed}px`
-				}, interval, "swing");
+				}, interval, moveMinions(minion));
 
-				if(minion_selector.offset().top >= path.endpoint.offset().top-mW/2){
-					minion.pathIndex++;
-				}
 			}
 
 			if (path.direction === "up"){
+				if(minion_selector.offset().top <= path.endpoint.offset().top+mW/2){
+					minion.pathIndex++;
+					return;
+				}
 
 				minion_selector.animate({
 					"top": `-=${minionSpeed}px`
 				}, interval);
 				hp_selector.animate({
 					"margin-top": `-=${minionSpeed}px`
-				}, interval);
+				}, interval,moveMinions(minion));
 
-				if(minion_selector.offset().top <= path.endpoint.offset().top+mW/2){
-					minion.pathIndex++;
-				}
 			}
 
-		});
+		// });
+		// End of forEach
 	}
 
 	function updateGameState() {
@@ -334,6 +457,7 @@ function updateProfile(event) {
 function templateRow(x,y){
 	return`
 		<div class="column" id="${x}${y}">
+			${x}${y}
 		</div>
 	`;
 }
