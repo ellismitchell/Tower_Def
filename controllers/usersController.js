@@ -47,9 +47,16 @@ function destroy(req, res) {
 }
 
 function update(req, res) {
-	db.User.findByIdAndUpdate(req.params.id, req.body, {new: true}, function(err, user){
+	db.User.findOne({name: req.params.name}, function(err, user){
+		user.name = req.body.name;
+		user.profileImage = req.body.link;
+		user.save();
 		res.json(user);
-	});
+		console.log(user);
+	})
+	// db.User.findByIdAndUpdate(req.params.id, req.body, {new: true}, function(err, user){
+	// 	res.json(user);
+	// });
 }
 
 module.exports = {

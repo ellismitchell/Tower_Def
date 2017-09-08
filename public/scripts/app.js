@@ -437,14 +437,23 @@ $(document).ready(function() {
 
 function profileBtnOnSubmit(event){
 	event.preventDefault();
+	$('.toggle').toggle();
 	var d = $(this).serialize();
-
+	let name = $('.card-title').text();
+	let newName = $('[name=profile_name]').val();
+	let newLink = $('[name=profile_link]').val();
 	console.log(d);
 		$.ajax({
-			method: "POST",
-			url: "/users",
-			data: d,
-			success: renderProfile,
+			method: "PUT",
+			url: "/users/"+ name,
+			data: {
+				name: newName,
+				link: newLink
+			},
+			
+		}).then(function(user){
+			renderProfile(user);
+			$('.toggle').toggle();
 		});
 }
 
@@ -464,6 +473,7 @@ function renderProfile(user){
 		</div>
 		`
 		);
+
 }
 
 function displayErr(err){
