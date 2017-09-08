@@ -398,9 +398,10 @@ $(document).ready(function() {
 			bullet.remove();
 			minion.hp = minion.hp - tower_damage;
 			hp_selector.text(minion.hp);
+
 			if(minion.hp <= 0){
 				hp_selector.remove();
-				// spawned_wave.shift();
+				/// remove minion that has 0 hp
 				spawned_wave =spawned_wave.filter(function(element) {
 					return element.id != minion.id;
 				});
