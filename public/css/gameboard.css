@@ -63,8 +63,12 @@ input{
 	width: 50px;
 	height: 50px;
 	z-index: 100;
-	position: fixed;
+	position: absolute;
+	margin-left: 0px;
+	top: 0;
+	left: 0;
 	margin-left: 25px;
+	margin-top: 25px;
 	/*top: 0;*/
 }
 .hp{
@@ -85,6 +89,14 @@ input{
 	z-index: 100;
 
 }
+.testObj{
+	width: 100px;
+	height: 100px;
+	border-radius: 50px;
+	background-color: red;
+	z-index: 200;
+}
+
 .bullet {
 	width: 20px;
 	height: 20px;
@@ -104,7 +116,7 @@ input{
 	border-radius: 150px;
 	background-color: rgba(0,0,0,0.1);
 	position: absolute;
-	z-index: -100;
+	z-index: 100;
 	
 	top: -100px;
 	left: -100px;
