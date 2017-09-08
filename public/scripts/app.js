@@ -33,6 +33,9 @@ $(document).ready(function() {
 		{direction: 'right', endpoint: $('#88')}
 	];
 
+	$('.profile_form').on("submit", profileBtnOnSubmit);
+
+
 	var minion_path = []
 	var minion_wave = [];
 	var spawned_wave = [];
@@ -79,6 +82,7 @@ $(document).ready(function() {
 	var minionSpeed = 20;
 	var bulletTime = 400;
 	var mW = 50;
+
 	var minion_wave_intervalID = "";
 	var move_minion_intervalID = "";
 	var tower_intervalID = "";
@@ -195,6 +199,7 @@ $(document).ready(function() {
 			clearInterval( tower_intervalID);
 			alert("Game Over!");
 			gameEnd = true;
+
 		}
 	}
 
@@ -210,6 +215,7 @@ $(document).ready(function() {
 				$tower = $(`#${tower.row}${tower.col}`);
 				var towerX = $tower.offset().left+40; //+40 is half the tower size
 				var towerY = $tower.offset().top+40;
+
 				var xDistance = minionX-towerX+minionSpeed*bulletTime/interval;
 				var yDistance = minionY-towerY;
 				var distance = Math.sqrt(xDistance*xDistance+yDistance*yDistance);
@@ -282,22 +288,34 @@ $(document).ready(function() {
 	}
 });
 
-$('.profile_form').on("submit", profileBtnOnSubmit);
-
 function profileBtnOnSubmit(event){
 	event.preventDefault();
-	var body = $(this).serialize();
-	$.ajax({
-		method: "POST",
-		url: "/users",
-		data: body,
-		success: renderProfile,
-		error: displayErr,
-	});
+	var d = $(this).serialize();
+
+	console.log(d);
+		$.ajax({
+			method: "POST",
+			url: "/users",
+			data: d,
+			success: renderProfile,
+		});
 }
 
-function renderProfile(data){
-
+// Take in input name and input images and render on the gamepage
+function renderProfile(user){
+	console.log(user);
+	var form = $('.profile_form');
+	form.hide();
+	$('.show_profile').html(
+		 `	
+		<div class="card" >
+			  <img class="card-img-top" src=${user.profileImage} alt="Card image cap">
+			  <div class="card-body">
+			    <h4 class="card-title">${user.name}</h4>
+			  </div>	
+		</div>
+		`
+		);
 }
 
 function displayErr(err){
