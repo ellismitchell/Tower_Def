@@ -97,7 +97,7 @@ $(document).ready(function() {
 		minion_wave_intervalID = setInterval(spawnMinion, 2000);
 		// move_minion_intervalID = setInterval(moveMinions, interval);
 		// move_minion_intervalID = setInterval(move_minion, interval);
-		tower_intervalID = setInterval(towerResponse, 100);
+		tower_intervalID = setInterval(towerResponse, 50);
 
 	});
 
@@ -157,10 +157,10 @@ $(document).ready(function() {
 		// Move down 2 boxes
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
-			"margin-top" : `+=${minion_displacement[0].distance}px`,
-			}, Number(`${minion_displacement[0].time}`), 'linear');
+			"top" : `+=${minion_displacement[0].distance}px`,
+			}, Number(`${minion_displacement[0].time}`), 'linear', function(){minion.pathIndex++;});
 		hp_selector.animate({
-			"margin-top": `+=${minion_displacement[0].distance}px`,
+			"top": `+=${minion_displacement[0].distance}px`,
 		}, Number(`${minion_displacement[0].time}`), 'linear');
 
 
@@ -168,7 +168,7 @@ $(document).ready(function() {
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"left" : `+=${minion_displacement[1].distance}px`,
-			}, Number(`${minion_displacement[1].time}`), 'linear');
+			}, Number(`${minion_displacement[1].time}`), 'linear', function(){minion.pathIndex++;});
 		hp_selector.animate({
 			"left": `+=${minion_displacement[1].distance}px`,
 		}, Number(`${minion_displacement[1].time}`), 'linear');
@@ -178,7 +178,7 @@ $(document).ready(function() {
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"top" : `-=${minion_displacement[2].distance}px`,
-			}, Number(`${minion_displacement[2].time}`), 'linear');
+			}, Number(`${minion_displacement[2].time}`), 'linear', function(){minion.pathIndex++;});
 		hp_selector.animate({
 			"top": `-=${minion_displacement[2].distance}px`,
 		}, Number(`${minion_displacement[2].time}`), 'linear');
@@ -188,7 +188,7 @@ $(document).ready(function() {
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"left" : `+=${minion_displacement[3].distance}px`,
-			}, Number(`${minion_displacement[3].time}`), 'linear');
+			}, Number(`${minion_displacement[3].time}`), 'linear', function(){minion.pathIndex++;});
 		hp_selector.animate({
 			"left": `+=${minion_displacement[3].distance}px`,
 		}, Number(`${minion_displacement[3].time}`), 'linear');
@@ -198,7 +198,7 @@ $(document).ready(function() {
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"top" : `+=${minion_displacement[4].distance}px`,
-			}, Number(`${minion_displacement[4].time}`), 'linear');
+			}, Number(`${minion_displacement[4].time}`), 'linear', function(){minion.pathIndex++;});
 		hp_selector.animate({
 			"top": `+=${minion_displacement[4].distance}px`,
 		}, Number(`${minion_displacement[4].time}`), 'linear');
@@ -208,7 +208,7 @@ $(document).ready(function() {
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"left" : `-=${minion_displacement[5].distance}px`,
-			}, Number(`${minion_displacement[5].time}`), 'linear');
+			}, Number(`${minion_displacement[5].time}`), 'linear', function(){minion.pathIndex++;});
 		hp_selector.animate({
 			"left": `-=${minion_displacement[5].distance}px`,
 		}, Number(`${minion_displacement[5].time}`), 'linear');
@@ -218,7 +218,7 @@ $(document).ready(function() {
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"top" : `+=${minion_displacement[6].distance}px`,
-			}, Number(`${minion_displacement[6].time}`), 'linear');
+			}, Number(`${minion_displacement[6].time}`), 'linear', function(){minion.pathIndex++;});
 		hp_selector.animate({
 			"top": `+=${minion_displacement[6].distance}px`,
 		}, Number(`${minion_displacement[6].time}`), 'linear');
@@ -228,7 +228,7 @@ $(document).ready(function() {
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"left" : `+=${minion_displacement[7].distance}px`,
-			}, Number(`${minion_displacement[7].time}`), 'linear');
+			}, Number(`${minion_displacement[7].time}`), 'linear', function(){minion.pathIndex++;});
 		hp_selector.animate({
 			"left": `+=${minion_displacement[7].distance}px`,
 		}, Number(`${minion_displacement[7].time}`), 'linear');
