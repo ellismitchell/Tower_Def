@@ -157,10 +157,10 @@ $(document).ready(function() {
 		// Move down 2 boxes
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
-			"margin-top" : `+=${minion_displacement[0].distance}px`,
+			"top" : `+=${minion_displacement[0].distance}px`,
 			}, Number(`${minion_displacement[0].time}`), 'linear');
 		hp_selector.animate({
-			"margin-top": `+=${minion_displacement[0].distance}px`,
+			"top": `+=${minion_displacement[0].distance}px`,
 		}, Number(`${minion_displacement[0].time}`), 'linear');
 
 
@@ -251,10 +251,6 @@ $(document).ready(function() {
 
 			if (path.direction === "right"){
 				if(minion_selector.offset().left >= path.endpoint.offset().left-mW/2){
-					// minion_selector.remove();
-					// hp_selector.remove();
-					// spawned_wave.shift();
-					// updateGameState();
 					minion.pathIndex++;
 					return;
 				}
@@ -264,7 +260,6 @@ $(document).ready(function() {
 				hp_selector.animate({
 					"margin-left": `+=${minionSpeed}px`
 				}, interval, moveMinions(minion));
-
 			}
 
 			// direction left
@@ -279,7 +274,6 @@ $(document).ready(function() {
 				hp_selector.animate({
 					"margin-left": `-=${minionSpeed}px`
 				}, interval, moveMinions(minion));
-
 			}
 
 			// direction down
@@ -288,7 +282,6 @@ $(document).ready(function() {
 					minion.pathIndex++;
 					return;
 				}
-
 				minion_selector.animate({
 					// "margin-top": `+=${minionSpeed}px`
 					"top" : `+=${minionSpeed}px`
@@ -297,7 +290,6 @@ $(document).ready(function() {
 				hp_selector.animate({
 					"margin-top": `+=${minionSpeed}px`
 				}, interval, moveMinions(minion));
-
 			}
 
 			if (path.direction === "up"){
@@ -305,14 +297,12 @@ $(document).ready(function() {
 					minion.pathIndex++;
 					return;
 				}
-
 				minion_selector.animate({
 					"top": `-=${minionSpeed}px`
 				}, interval);
 				hp_selector.animate({
 					"margin-top": `-=${minionSpeed}px`
 				}, interval,moveMinions(minion));
-
 			}
 
 		// });
