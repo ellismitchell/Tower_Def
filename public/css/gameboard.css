@@ -121,3 +121,11 @@ input{
 	top: -100px;
 	left: -100px;
 }
+
+.path {
+	background-color: gray;
+}
+
+.hidden {
+	display: none;
+}
