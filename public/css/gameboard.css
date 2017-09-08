@@ -116,8 +116,16 @@ input{
 	border-radius: 150px;
 	background-color: rgba(0,0,0,0.1);
 	position: absolute;
-	z-index: 100;
+	z-index: 0;
 	
 	top: -100px;
 	left: -100px;
+}
+
+.path {
+	background-color: gray;
+}
+
+.hidden {
+	display: none;
 }

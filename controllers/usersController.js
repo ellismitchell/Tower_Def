@@ -6,6 +6,16 @@ function show(req, res) {
 	});
 }
 
+function find(req,res){
+	console.log('finding');
+	db.User.find({name: req.params.name},function(err,user){
+		if (err)
+			console.log(err);
+		console.log(user);
+		res.json(user);
+	});
+}
+
 function create(req, res) {
 	console.log(req.body);
 	console.log("In server?");
@@ -40,5 +50,6 @@ module.exports = {
 	show: show,
 	create: create,
 	destroy: destroy,
-	update: update
+	update: update,
+	find: find
 }
