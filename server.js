@@ -34,6 +34,6 @@ app.delete('/users/:id', controllers.users.destroy);
 app.post('/users/:id/scores', controllers.usersScores.create);
 app.get('/users/:id/scores', controllers.usersScores.index);
 
-app.listen(3000, function() {
+app.listen(process.env.PORT || 3000, function() {
 	console.log("Server started at 3000");
 });
