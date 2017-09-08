@@ -43,7 +43,7 @@ $(document).ready(function() {
 	var towers = [];
 	var tower_range = 150;
 	var gameEnd = false;
-	var minion_counts = 20;
+	var minion_counts = 5;
 	for (var i = 1; i <= minion_counts; i++) {
 		minion_wave.push({id: i, image: "/imgs/car1.jpg", speed: 20, hp: 500, pathIndex: 0});
 	}
@@ -77,11 +77,11 @@ $(document).ready(function() {
 		$(this).append('<div class="towerRange"></div>');
 	}
 
-	var interval = 200;
+	var interval = 100;
 	// var minionIntervalID = setInterval(minion_move, interval);
 	var cW = 100;
 	var player_hp = 5;
-	var minionSpeed = 20;
+	var minionSpeed = 10;
 	var bulletTime = 400;
 	var mW = 50;
 
@@ -117,15 +117,15 @@ $(document).ready(function() {
 		// {distance : 800, time : 14000}
 
 		// Another set for play test
-		{distance : 300, time : 2000, direction: "down"},
-		{distance : 300, time : 2000, direction: "right"},
-		{distance : 300, time : 2000, direction: "up"},
-		{distance : 300, time : 2000, direction: "right"},
+		{distance : 300, time : 3000, direction: "down"},
+		{distance : 300, time : 3000, direction: "right"},
+		{distance : 300, time : 3000, direction: "up"},
+		{distance : 300, time : 3000, direction: "right"},
 		// Going down from 18 to 68
-		{distance : 500, time : 4000, direction: "down"},
-		{distance : 700, time : 6000, direction: "left"},
-		{distance : 200, time : 1000, direction: "down"},
-		{distance : 800, time : 7000, direction: "right"}
+		{distance : 500, time : 5000, direction: "down"},
+		{distance : 700, time : 7000, direction: "left"},
+		{distance : 200, time : 2000, direction: "down"},
+		{distance : 800, time : 8000, direction: "right"}
 	];
 
 	// create minion at #31 div at the moment
@@ -344,7 +344,7 @@ $(document).ready(function() {
 				$tower = $(`#${tower.row}${tower.col}`);
 				var towerX = $tower.offset().left+40; //+40 is half the tower size
 				var towerY = $tower.offset().top+40;
-				var minionDirection = paths[minion.pathIndex].direction;
+				var minionDirection = minion_displacement[minion.pathIndex].direction;
 				if (minionDirection === "right"){
 					var xDistance = minionX - towerX + minionSpeed*bulletTime/interval;
 					var yDistance = minionY - towerY;
@@ -410,7 +410,7 @@ $(document).ready(function() {
 		var minionY = minion_selector.offset().top+15;
 		var bulletX = bullet.offset().left;
 		var bulletY = bullet.offset().top;
-		var minionDirection = paths[minion.pathIndex].direction;
+		var minionDirection = minion_displacement[minion.pathIndex].direction;
 		if (minionDirection === "right"){
 			var xDistance = minionX - bulletX + minionSpeed*bulletTime/interval;
 			var yDistance = minionY - bulletY;
