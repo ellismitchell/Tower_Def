@@ -20,7 +20,7 @@ $(document).ready(function() {
 	}
 	$board.append(row);
 	// hardcoding color for terrain, for better visual..
-	$('#12,#22,#32,#42,#43,#44,#45,#35,#25,#15,#16,#17,#18,#28,#38,#48,#58,#68,#67,#66,#65,#64,#63,#62,#61,#71,#81,#82,#83,#84,#85,#86,#87,#88').css("background-color", "gray");
+	$('#12,#22,#32,#42,#43,#44,#45,#35,#25,#15,#16,#17,#18,#28,#38,#48,#58,#68,#67,#66,#65,#64,#63,#62,#61,#71,#81,#82,#83,#84,#85,#86,#87,#88').addClass("path");
 	$('.edit-btn').on("click", displayForm);
 
 	var paths = [
@@ -62,7 +62,7 @@ $(document).ready(function() {
 	function placeTower(event){
 		// Add tower if theres none already in place
 		if(gameEnd) return;
-		if($(this).has('.tower').length > 0 ) return;
+		if($(this).has('.tower').length > 0 || $(this).hasClass("path")) return;
 
 		var tower = {
 			id : towers.length + 1,
@@ -229,7 +229,7 @@ $(document).ready(function() {
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"left" : `+=${minion_displacement[7].distance}px`,
-			}, Number(`${minion_displacement[7].time}`), 'linear', function(){minion.pathIndex++;});
+			}, Number(`${minion_displacement[7].time}`), 'linear');
 		hp_selector.animate({
 			"left": `+=${minion_displacement[7].distance}px`,
 		}, Number(`${minion_displacement[7].time}`), 'linear');
