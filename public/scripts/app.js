@@ -43,7 +43,7 @@ $(document).ready(function() {
 	var towers = [];
 	var tower_range = 150;
 	var gameEnd = false;
-	var minion_counts = 20;
+	var minion_counts = 5;
 	for (var i = 1; i <= minion_counts; i++) {
 		minion_wave.push({id: i, image: "/imgs/car1.jpg", speed: 20, hp: 500, pathIndex: 0});
 	}
@@ -77,11 +77,11 @@ $(document).ready(function() {
 		$(this).append('<div class="towerRange"></div>');
 	}
 
-	var interval = 200;
+	var interval = 100;
 	// var minionIntervalID = setInterval(minion_move, interval);
 	var cW = 100;
 	var player_hp = 5;
-	var minionSpeed = 20;
+	var minionSpeed = 10;
 	var bulletTime = 400;
 	var mW = 50;
 
@@ -117,15 +117,15 @@ $(document).ready(function() {
 		// {distance : 800, time : 14000}
 
 		// Another set for play test
-		{distance : 300, time : 2000},
-		{distance : 300, time : 2000},
-		{distance : 300, time : 2000},
-		{distance : 300, time : 2000},
+		{distance : 300, time : 3000, direction: "down"},
+		{distance : 300, time : 3000, direction: "right"},
+		{distance : 300, time : 3000, direction: "up"},
+		{distance : 300, time : 3000, direction: "right"},
 		// Going down from 18 to 68
-		{distance : 500, time : 4000},
-		{distance : 700, time : 6000},
-		{distance : 200, time : 1000},
-		{distance : 800, time : 7000}
+		{distance : 500, time : 5000, direction: "down"},
+		{distance : 700, time : 7000, direction: "left"},
+		{distance : 200, time : 2000, direction: "down"},
+		{distance : 800, time : 8000, direction: "right"}
 	];
 
 	// create minion at #31 div at the moment
@@ -163,6 +163,7 @@ $(document).ready(function() {
 			"margin-top": `+=${minion_displacement[0].distance}px`,
 		}, Number(`${minion_displacement[0].time}`), 'linear');
 
+
 		// Move right 3 boxes
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
@@ -171,6 +172,7 @@ $(document).ready(function() {
 		hp_selector.animate({
 			"left": `+=${minion_displacement[1].distance}px`,
 		}, Number(`${minion_displacement[1].time}`), 'linear');
+
 
 		// Move up 3 boxes
 		minion_selector.animate({
@@ -181,6 +183,7 @@ $(document).ready(function() {
 			"top": `-=${minion_displacement[2].distance}px`,
 		}, Number(`${minion_displacement[2].time}`), 'linear');
 
+
 		// Move right 3 boxes
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
@@ -189,6 +192,7 @@ $(document).ready(function() {
 		hp_selector.animate({
 			"left": `+=${minion_displacement[3].distance}px`,
 		}, Number(`${minion_displacement[3].time}`), 'linear');
+
 
 		// Move down 5 boxes
 		minion_selector.animate({
@@ -199,6 +203,7 @@ $(document).ready(function() {
 			"top": `+=${minion_displacement[4].distance}px`,
 		}, Number(`${minion_displacement[4].time}`), 'linear');
 
+
 		// Move left 7 boxes
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
@@ -208,6 +213,7 @@ $(document).ready(function() {
 			"left": `-=${minion_displacement[5].distance}px`,
 		}, Number(`${minion_displacement[5].time}`), 'linear');
 
+
 		// Move down 2 boxes
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
@@ -216,6 +222,7 @@ $(document).ready(function() {
 		hp_selector.animate({
 			"top": `+=${minion_displacement[6].distance}px`,
 		}, Number(`${minion_displacement[6].time}`), 'linear');
+
 
 		// Move right 8 boxes
 		minion_selector.animate({
@@ -337,9 +344,23 @@ $(document).ready(function() {
 				$tower = $(`#${tower.row}${tower.col}`);
 				var towerX = $tower.offset().left+40; //+40 is half the tower size
 				var towerY = $tower.offset().top+40;
-
-				var xDistance = minionX-towerX+minionSpeed*bulletTime/interval;
-				var yDistance = minionY-towerY;
+				var minionDirection = minion_displacement[minion.pathIndex].direction;
+				if (minionDirection === "right"){
+					var xDistance = minionX - towerX + minionSpeed*bulletTime/interval;
+					var yDistance = minionY - towerY;
+				}
+				else if (minionDirection === "left"){
+					var xDistance = minionX - towerX - minionSpeed*bulletTime/interval;
+					var yDistance = minionY - towerY;
+				}
+				else if (minionDirection === "up"){
+					var xDistance = minionX - towerX ;
+					var yDistance = minionY - towerY- minionSpeed*bulletTime/interval;
+				}
+				else if (minionDirection === "down"){
+					var xDistance = minionX - towerX ;
+					var yDistance = minionY - towerY + minionSpeed*bulletTime/interval;
+				}
 				var distance = Math.sqrt(xDistance*xDistance+yDistance*yDistance);
 				if (distance < tower.range){
 				// change to tower range
@@ -389,8 +410,23 @@ $(document).ready(function() {
 		var minionY = minion_selector.offset().top+15;
 		var bulletX = bullet.offset().left;
 		var bulletY = bullet.offset().top;
-		var xDistance = minionX - bulletX + minionSpeed*bulletTime/interval;
-		var yDistance = minionY - bulletY;
+		var minionDirection = minion_displacement[minion.pathIndex].direction;
+		if (minionDirection === "right"){
+			var xDistance = minionX - bulletX + minionSpeed*bulletTime/interval;
+			var yDistance = minionY - bulletY;
+		}
+		else if (minionDirection === "left"){
+			var xDistance = minionX - bulletX - minionSpeed*bulletTime/interval;
+			var yDistance = minionY - bulletY;
+		}
+		else if (minionDirection === "up"){
+			var xDistance = minionX - bulletX ;
+			var yDistance = minionY - bulletY- minionSpeed*bulletTime/interval;
+		}
+		else if (minionDirection === "down"){
+			var xDistance = minionX - bulletX ;
+			var yDistance = minionY - bulletY + minionSpeed*bulletTime/interval;
+		}
 		bullet.animate({
 			"margin-left": `+=${xDistance}`,
 			"margin-top": `+=${yDistance}`,
