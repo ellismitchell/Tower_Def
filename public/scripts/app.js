@@ -2,7 +2,44 @@
 console.log("app js is loaded");
 
 $(document).ready(function() {
+	$('#myModal').modal();
+	$('.user-submit').click(function(){
+		let name = $('[name=username]').val();
+		console.log(name);
+		$.ajax({
+			method: "GET",
+			url: `/users/find/${name}`,
+			success: handleUser
+		});
+	});
+	function handleUser(data){
+		console.log(data.length);
+		console.log(name);
+		var same_name = $('[name=username]').val();
+		if (data.length === 0) {
+			console.log("WE ARE IN");
+			// $('input').toggle();
+			$('.modal-title').text('Enter your image link');
+			$('.modal-body').html('<input type="url" name="image-link" >');
+			$('.modal-footer').html(` <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="image-submit btn btn-primary">Save changes</button>`);
+			$('.image-submit').click(function(){
+				var img_link = $('[name=image-link]').val();
 
+				$.ajax({
+					method: 'POST',
+					url: '/users',
+					data: {profile_name: same_name, profile_link: img_link},
+					success: renderProfile
+				});
+			});
+		}
+		else {
+			$('#myModal').modal('toggle');
+		}
+	}
+
+	
 	// dynamically set minions, towers, tower range css
 
 	// Create a gameboard dynamically with array
@@ -43,7 +80,7 @@ $(document).ready(function() {
 	var towers = [];
 	var tower_range = 150;
 	var gameEnd = false;
-	var minion_counts = 5;
+	var minion_counts = 50;
 	var gold = 300;
 	$('.player_gold').text(gold);
 	for (var i = 1; i <= minion_counts; i++) {
@@ -99,7 +136,7 @@ $(document).ready(function() {
 	// Start minion wave with btn click
 	$('.start_wave').on("click", function() {
 		$('.start_wave').hide();
-		minion_wave_intervalID = setInterval(spawnMinion, 2000);
+		minion_wave_intervalID = setInterval(spawnMinion, 500);
 		// move_minion_intervalID = setInterval(moveMinions, interval);
 		// move_minion_intervalID = setInterval(move_minion, interval);
 		tower_intervalID = setInterval(towerResponse, 50);
@@ -122,15 +159,25 @@ $(document).ready(function() {
 		// {distance : 800, time : 14000}
 
 		// Another set for play test
-		{distance : 300, time : 3000, direction: "down"},
-		{distance : 300, time : 3000, direction: "right"},
-		{distance : 300, time : 3000, direction: "up"},
-		{distance : 300, time : 3000, direction: "right"},
+		// {distance : 300, time : 3000, direction: "down"},
+		// {distance : 300, time : 3000, direction: "right"},
+		// {distance : 300, time : 3000, direction: "up"},
+		// {distance : 300, time : 3000, direction: "right"},
+		// // Going down from 18 to 68
+		// {distance : 500, time : 5000, direction: "down"},
+		// {distance : 700, time : 7000, direction: "left"},
+		// {distance : 200, time : 2000, direction: "down"},
+		// {distance : 800, time : 8000, direction: "right"}
+
+		{distance : 300, time : 300, direction: "down"},
+		{distance : 300, time : 300, direction: "right"},
+		{distance : 300, time : 300, direction: "up"},
+		{distance : 300, time : 300, direction: "right"},
 		// Going down from 18 to 68
-		{distance : 500, time : 5000, direction: "down"},
-		{distance : 700, time : 7000, direction: "left"},
-		{distance : 200, time : 2000, direction: "down"},
-		{distance : 800, time : 8000, direction: "right"}
+		{distance : 500, time : 500, direction: "down"},
+		{distance : 700, time : 700, direction: "left"},
+		{distance : 200, time : 200, direction: "down"},
+		{distance : 800, time : 800, direction: "right"}
 	];
 
 	// create minion at #31 div at the moment
@@ -237,7 +284,7 @@ $(document).ready(function() {
 			}, Number(`${minion_displacement[7].time}`), 'linear');
 		hp_selector.animate({
 			"left": `+=${minion_displacement[7].distance}px`,
-		}, Number(`${minion_displacement[7].time}`), 'linear');
+		}, Number(`${minion_displacement[7].time}`), 'linear', updateGameState);
 
 	}
 
@@ -317,12 +364,14 @@ $(document).ready(function() {
 
 	function updateGameState() {
 		player_hp--;
+		$('.player_health').text(player_hp);
 		$player_hp.text(player_hp);
 		if(player_hp === 0) {
 			clearInterval( minion_wave_intervalID);
 			clearInterval( move_minion_intervalID);
 			clearInterval( tower_intervalID);
 			alert("Game Over!");
+			jQuery.fx.off = true;
 			gameEnd = true;
 
 		}
@@ -467,8 +516,9 @@ function profileBtnOnSubmit(event){
 // Take in input name and input images and render on the gamepage
 function renderProfile(user){
 	console.log(user);
-	var form = $('.profile_form');
-	form.hide();
+	// var form = $('.profile_form');
+	// form.hide();
+	$('#myModal').modal('hide');
 	$('.show_profile').html(
 		 `	
 		<div class="card" >

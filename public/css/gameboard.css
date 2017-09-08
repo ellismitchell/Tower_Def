@@ -125,3 +125,7 @@ input{
 .path {
 	background-color: gray;
 }
+
+.hidden {
+	display: none;
+}
