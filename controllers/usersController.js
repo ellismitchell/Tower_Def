@@ -6,6 +6,12 @@ function show(req, res) {
 	});
 }
 
+function showAll(req, res) {
+	db.User.find({}, function(err, users){
+		res.json(users);
+	});
+}
+
 function find(req,res){
 	console.log('finding');
 	db.User.find({name: req.params.name},function(err,user){
@@ -51,5 +57,6 @@ module.exports = {
 	create: create,
 	destroy: destroy,
 	update: update,
-	find: find
+	find: find,
+	showAll: showAll,
 }

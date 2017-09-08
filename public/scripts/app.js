@@ -14,7 +14,6 @@ $(document).ready(function() {
 	});
 	function handleUser(data){
 		console.log(data.length);
-		console.log(name);
 		var same_name = $('[name=username]').val();
 		if (data.length === 0) {
 			console.log("WE ARE IN");
@@ -35,7 +34,8 @@ $(document).ready(function() {
 			});
 		}
 		else {
-			$('#myModal').modal('toggle');
+			console.log(data);
+			renderProfile(data[0]);
 		}
 	}
 
@@ -291,8 +291,25 @@ $(document).ready(function() {
 			alert("Game Over!");
 			jQuery.fx.off = true;
 			gameEnd = true;
-
+			submitScore();
 		}
+	}
+
+	function submitScore(){
+		
+		var name = $('.card-title').text();
+		console.log("name is " + name);
+		var time = new Date();
+		$.ajax({
+			method: "POST",
+			url: "/users/scores/" + name,
+			data: {
+				score : minions_killed,
+				date : time,
+			}
+		}).then(function(data){
+			console.log(data);
+		});
 	}
 
 	function towerResponse() {
