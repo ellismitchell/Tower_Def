@@ -44,6 +44,8 @@ $(document).ready(function() {
 	var tower_range = 150;
 	var gameEnd = false;
 	var minion_counts = 5;
+	var gold = 300;
+	$('.player_gold').text(gold);
 	for (var i = 1; i <= minion_counts; i++) {
 		minion_wave.push({id: i, image: "/imgs/car1.jpg", speed: 20, hp: 100, pathIndex: 0, alive: true});
 	}
@@ -62,7 +64,7 @@ $(document).ready(function() {
 	function placeTower(event){
 		// Add tower if theres none already in place
 		if(gameEnd) return;
-		if($(this).has('.tower').length > 0 || $(this).hasClass("path")) return;
+		if($(this).has('.tower').length > 0 || $(this).hasClass("path") || gold < 75) return;
 
 		var tower = {
 			id : towers.length + 1,
@@ -74,6 +76,8 @@ $(document).ready(function() {
 		};
 		towers.push(tower);
 		$(this).append(`<img src="/imgs/tower.jpg" class="tower" id="t${tower.id}">`);
+		gold -= 75;
+		$('.player_gold').text(gold);
 		// $(this).append('<div class="towerRange"></div>');
 	}
 
@@ -438,6 +442,8 @@ $(document).ready(function() {
 				if (minion.alive){
 					minions_killed++;
 					$('.minions_killed').text(minions_killed);
+					gold += 25;
+					$('.player_gold').text(gold);
 					minion.alive = false;
 				}
 			}
