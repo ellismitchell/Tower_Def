@@ -3,9 +3,12 @@ console.log("app js is loaded");
 
 $(document).ready(function() {
 
+	// dynamically set minions, towers, tower range css
+
+
 	// Create a gameboard dynamically with array
 	var $board = $('.board');
-	var board_size = 6;
+	var board_size = 8;
 	var row = "";
 	// Hardcoded the gameboard grids
 	for(var i = 1; i <= board_size; i ++){
@@ -19,6 +22,17 @@ $(document).ready(function() {
 	$board.append(row);
 	$('.edit-btn').on("click", displayForm);
 
+	var paths = [
+		{direction: 'down', endpoint: $('#32')},
+		{direction: 'right', endpoint: $('#35')},
+		{direction: 'up', endpoint: $('#15')},
+		{direction: 'right', endpoint: $('#17')},
+		{direction: 'down', endpoint: $('#67')},
+		{direction: 'left', endpoint: $('#61')},
+		{direction: 'down', endpoint: $('#81')},
+		{direction: 'right', endpoint: $('#88')}
+	];
+
 	$('.profile_form').on("submit", profileBtnOnSubmit);
 
 
@@ -28,8 +42,8 @@ $(document).ready(function() {
 	var towers = [];
 	var tower_range = 150;
 	var gameEnd = false;
-	for (var i = 1; i <= 15; i++) {
-		minion_wave.push({id: i, image: "/imgs/car1.jpg", speed: 20, hp: 500});
+	for (var i = 1; i <= 5; i++) {
+		minion_wave.push({id: i, image: "/imgs/car1.jpg", speed: 20, hp: 500, pathIndex: 0});
 	}
 	// Hardcoded towers
 	//  Need to change hardcoded row and col~
@@ -61,12 +75,14 @@ $(document).ready(function() {
 		$(this).append('<div class="towerRange"></div>');
 	}
 
-	var interval = 100;
+	var interval = 200;
 	// var minionIntervalID = setInterval(minion_move, interval);
-	var cW = 150;
+	var cW = 100;
 	var player_hp = 5;
-	var minionSpeed = 30;
-	var bulletTime = 200;
+	var minionSpeed = 20;
+	var bulletTime = 400;
+	var mW = 50;
+
 	var minion_wave_intervalID = "";
 	var move_minion_intervalID = "";
 	var tower_intervalID = "";
@@ -90,8 +106,8 @@ $(document).ready(function() {
 		var minion = minion_wave.pop();
 		// NEED TO CHANGE HARDCODED #31 TOO
 		// ######################
-		$('#31').append(`<img src="/imgs/car1.jpg" class="minion" id="m${minion.id}">`);
-		$('#31').append(`<p class="hp" id="hp${minion.id}">${minion.hp}</p>`);
+		$('#12').append(`<img src="/imgs/car1.jpg" class="minion" id="m${minion.id}">`);
+		$('#12').append(`<p class="hp" id="hp${minion.id}">${minion.hp}</p>`);
 		spawned_wave.push(minion);
 		// var minion_selector = `#m${minion.id}`;
 		// minion_move($(minion_selector));
@@ -104,19 +120,73 @@ $(document).ready(function() {
 		spawned_wave.forEach(function(minion){
 			var minion_selector = $(`#m${minion.id}`);
 			var hp_selector = $(`#hp${minion.id}`);
-				var column = $('#36');  // #############
-			if(minion_selector.offset().left >= column.offset().left+cW/2){
-				minion_selector.remove();
-				hp_selector.remove();
-				spawned_wave.shift();
-				updateGameState();
-		}
-			minion_selector.animate({
-				"margin-left": `+=${minionSpeed}px`
-			}, interval);
-			hp_selector.animate({
-				"margin-left": `+=${minionSpeed}px`
-			}, interval);
+			var path = paths[minion.pathIndex];
+
+
+			if (path.direction === "right"){
+
+				minion_selector.animate({
+					"left": `+=${minionSpeed}px`
+				}, interval);
+				hp_selector.animate({
+					"margin-left": `+=${minionSpeed}px`
+				}, interval);
+
+				if(minion_selector.offset().left >= path.endpoint.offset().left-mW/2){
+					// minion_selector.remove();
+					// hp_selector.remove();
+					// spawned_wave.shift();
+					// updateGameState();
+					minion.pathIndex++;
+				}
+			}
+
+			// direction left
+			if (path.direction === "left"){
+
+				minion_selector.animate({
+					"left": `-=${minionSpeed}px`
+				}, interval);
+				hp_selector.animate({
+					"margin-left": `-=${minionSpeed}px`
+				}, interval);
+
+				if(minion_selector.offset().left <= path.endpoint.offset().left+mW/2){
+					minion.pathIndex++;
+				}
+			}
+
+			// direction down
+			if (path.direction === "down"){
+
+				minion_selector.animate({
+					// "margin-top": `+=${minionSpeed}px`
+					"top" : `+=${minionSpeed}px`
+					// "transform":`translateY(${minionSpeed}px)`
+				}, interval, "swing");
+				hp_selector.animate({
+					"margin-top": `+=${minionSpeed}px`
+				}, interval, "swing");
+
+				if(minion_selector.offset().top >= path.endpoint.offset().top-mW/2){
+					minion.pathIndex++;
+				}
+			}
+
+			if (path.direction === "up"){
+
+				minion_selector.animate({
+					"top": `-=${minionSpeed}px`
+				}, interval);
+				hp_selector.animate({
+					"margin-top": `-=${minionSpeed}px`
+				}, interval);
+
+				if(minion_selector.offset().top <= path.endpoint.offset().top+mW/2){
+					minion.pathIndex++;
+				}
+			}
+
 		});
 	}
 
@@ -140,12 +210,12 @@ $(document).ready(function() {
 		towers.forEach(function(tower){
 			spawned_wave.forEach(function(minion){
 				let minion_selector = $(`#m${minion.id}`);
-				var minionX  = minion_selector.offset().left;
-				var minionY = minion_selector.offset().top;
+				var minionX  = minion_selector.offset().left+25;//+25 is half the minion size
+				var minionY = minion_selector.offset().top+25;
 				$tower = $(`#${tower.row}${tower.col}`);
-				var towerX = $tower.offset().left;
-				var towerY = $tower.offset().top;
-				// var xDistance = minionX-towerX+minionSpeed*bulletTime/interval;
+				var towerX = $tower.offset().left+40; //+40 is half the tower size
+				var towerY = $tower.offset().top+40;
+
 				var xDistance = minionX-towerX+minionSpeed*bulletTime/interval;
 				var yDistance = minionY-towerY;
 				var distance = Math.sqrt(xDistance*xDistance+yDistance*yDistance);
