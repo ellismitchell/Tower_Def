@@ -136,7 +136,7 @@ $(document).ready(function() {
 	// Start minion wave with btn click
 	$('.start_wave').on("click", function() {
 		$('.start_wave').hide();
-		minion_wave_intervalID = setInterval(spawnMinion, 500);
+		minion_wave_intervalID = setInterval(spawnMinion, 2000);
 		// move_minion_intervalID = setInterval(moveMinions, interval);
 		// move_minion_intervalID = setInterval(move_minion, interval);
 		tower_intervalID = setInterval(towerResponse, 50);

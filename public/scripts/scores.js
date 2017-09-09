@@ -17,7 +17,7 @@ $(document).ready(function() {
 		}).then(function(users){
 			console.log(users);
 			$table.append(`
-				<thead>
+				<thead class="thead-inverse">
 					<tr>
 						<th> </th>
 						<th>Player</th>
@@ -48,7 +48,7 @@ $(document).ready(function() {
 				$tbody.html(templateScores(user));
 			}else if (user === null){
 				$table.empty();
-				$table.append(`<div class="err_msg"> There are no matched results </div><br>`);
+				$table.append(`<div class="err_msg"><p>There are no matched results =(</p> </div>`);
 			}
 			//append a go back button
 			$table.append(`

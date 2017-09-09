@@ -26,12 +26,24 @@
 </head>
 <body>
 		<div class="wrapper">
-			<header>
+			<header class="clearfix">
 				<h1>HALL OF FAME</h1>
-					<form method="" action="" class=" search-user">
-						<input type="search" name="user" placeholder="Player Name" required>
-						<button type="submit" class=" btn btn-dark">Search</button>
-					</form>
+					
+					<div class="container">
+						<form method="" action="" class="row search-user">
+							
+								
+									<input type="search" name="user" placeholder="Player Name" required>
+								
+								
+									<div class="nav">
+									<button type="submit" class=" btn btn-dark">Search</button>
+									<a href="/gameboard.html" type="button" class=" btn btn-dark">Play Again!</a>
+									</div>
+								
+							
+						</form>
+					</div>
 			</header>
 			<main>
 				<!-- <form method="" action="" class="profile_form">
@@ -58,7 +70,7 @@
 				</form> -->
 
 
-				<table class="table">
+				<table class="table table-striped clearfix">
 
 				</table>
 				<!-- End of score_table -->
