@@ -30,7 +30,7 @@ app.get('/users/showall', controllers.users.showAll);
 app.get('/users/:id', controllers.users.show);
 app.get('/users/find/:name', controllers.users.find);
 app.post('/users', controllers.users.create);
-app.put('/users/:id', controllers.users.update);
+app.put('/users/:name', controllers.users.update);
 app.delete('/users/:id', controllers.users.destroy);
 
 // not using yet
