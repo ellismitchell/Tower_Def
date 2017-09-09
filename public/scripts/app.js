@@ -104,16 +104,18 @@ $(document).ready(function() {
 			id : "",
 			col: "",
 			row: "",
-			image: "",
-			range: "",
-			dmg: "",
+			image: "/imgs/green_tower.png",
+			range: 150,
+			dmg: 20,
+			cost: 75,
 	};
 	$('.tower_one').on("click",function(){
 		console.log("tower_one");
 		tower = {
 					image: "/imgs/green_tower.png",
-					range: 200,
+					range: 150,
 					dmg: 20,
+					cost: 75,
 		};
 	});
 	$('.tower_two').on("click", function(){
@@ -122,6 +124,7 @@ $(document).ready(function() {
 					image: "/imgs/red_tower.png",
 					range: 250,
 					dmg: 10,
+					cost: 100,
 		};
 	});
 	$('.tower_three').on("click",function(){
@@ -130,6 +133,7 @@ $(document).ready(function() {
 					image: "/imgs/rocket_tower.png",
 					range: 150,
 					dmg: 30,
+					cost: 125,
 		};
 	});
 
@@ -137,15 +141,20 @@ $(document).ready(function() {
 	function placeTower(event){
 		// Add tower if theres none already in place
 		if(gameEnd) return;
-		if($(this).has('.tower').length > 0 || $(this).hasClass("path") || gold < 75) return;
+		if($(this).has('.tower').length > 0 || $(this).hasClass("path") || gold < tower.cost) return;
 
-		tower.id = towers.length + 1;
-		tower.col = ($(this).attr("id")[1]);
-		tower.row = ($(this).attr("id")[0]);
-		console.log(tower);
-		towers.push(tower);
-		$(this).append(`<img src="${tower.image}" class="tower" id="t${tower.id}">`);
-		gold -= 75;
+		var new_tower = {
+			id : towers.length + 1,
+			col : ($(this).attr("id")[1]),
+			row : ($(this).attr("id")[0]),
+			image: tower.image,
+			range: tower.range,
+			dmg: tower.dmg,
+			cost: tower.cost,
+		};
+		towers.push(new_tower);
+		$(this).append(`<img src="${new_tower.image}" class="tower" id="t${new_tower.id}">`);
+		gold -= new_tower.cost;
 		$('.player_gold').text(gold);
 		// $(this).append('<div class="towerRange"></div>');
 	}
@@ -361,8 +370,8 @@ $(document).ready(function() {
 				var minionX  = minion_selector.offset().left+25;//+25 is half the minion size
 				var minionY = minion_selector.offset().top+25;
 				$tower = $(`#${tower.row}${tower.col}`);
-				var towerX = $tower.offset().left+40; //+40 is half the tower size
-				var towerY = $tower.offset().top+40;
+				var towerX = $tower.offset().left+50; //+40 is half the tower size
+				var towerY = $tower.offset().top+50;
 				var minionDirection = minion_displacement[minion.pathIndex].direction;
 				if (minionDirection === "right"){
 					var xDistance = minionX - towerX + minion.speed*bulletTime/interval;
@@ -470,7 +479,7 @@ $(document).ready(function() {
 				if (minion.alive){
 					minions_killed++;
 					$('.minions_killed').text(minions_killed);
-					gold += 25;
+					gold += minion.gold;
 					$('.player_gold').text(gold);
 					minion.alive = false;
 				}

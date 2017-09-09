@@ -6,7 +6,8 @@ let MinionSchema = new Schema({
 	hp: Number,
 	speed: Number,
 	pathIndex: Number,
-	alive: Boolean
+	alive: Boolean,
+	gold: Number,
 });
 
 module.exports = mongoose.model('Minion', MinionSchema);
