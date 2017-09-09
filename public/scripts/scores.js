@@ -77,7 +77,7 @@ function templateScores(user){
 
 	return `
 	    <tr>
-	      <th scope="row"><img src="${user.profileImage}"></th>
+	      <th scope="row"><img src="${user.profileImage}" alt="Profile Pic"></th>
 	      <td>${user.name}</td>
 	      <td>${highScore}</td>
 	      <td>${date}</td>
