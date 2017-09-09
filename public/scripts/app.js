@@ -109,7 +109,14 @@ $(document).ready(function() {
 			dmg: 20,
 			cost: 75,
 	};
+	var $tower_one = $('.tower_one');
+	var $tower_two = $('.tower_two');
+	var $tower_three = $('.tower_three');
+	$tower_one.css("background-color", "rgba(255,255,0,0.5)");
 	$('.tower_one').on("click",function(){
+		$tower_one.css("background-color", "rgba(255,255,0,0.5)");
+		$tower_two.css("background-color", "transparent");
+		$tower_three.css("background-color", "transparent");
 		console.log("tower_one");
 		tower = {
 					image: "/imgs/green_tower.png",
@@ -119,6 +126,9 @@ $(document).ready(function() {
 		};
 	});
 	$('.tower_two').on("click", function(){
+		$tower_one.css("background-color", "transparent");
+		$tower_two.css("background-color", "rgba(255,255,0,0.5)");
+		$tower_three.css("background-color", "transparent");
 		console.log("tower_two");
 		tower = {
 					image: "/imgs/red_tower.png",
@@ -128,6 +138,9 @@ $(document).ready(function() {
 		};
 	});
 	$('.tower_three').on("click",function(){
+		$tower_one.css("background-color", "transparent");
+		$tower_two.css("background-color", "transparent");
+		$tower_three.css("background-color", "rgba(255,255,0,0.5)");
 		console.log("tower_three");
 		tower = {
 					image: "/imgs/rocket_tower.png",
