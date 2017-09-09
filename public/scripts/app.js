@@ -86,12 +86,6 @@ $(document).ready(function() {
 	// for (var i = 1; i <= minion_counts; i++) {
 	// 	minion_wave.push({id: i, image: "/imgs/car1.jpg", speed: 20, hp: 100, pathIndex: 0, alive: true});
 	// }
-	$.ajax({
-		method: "GET",
-		url: "waves/"+waveCounter
-	}).then(function(wave){
-		minion_wave = wave.minions;
-	});
 
 
 
@@ -145,6 +139,14 @@ $(document).ready(function() {
 	// Start minion wave with btn click
 	$('.start_wave').on("click", function() {
 		$('.start_wave').hide();
+		$.ajax({
+			method: "GET",
+			url: "waves/"+waveCounter
+		}).then(function(wave){
+			minion_wave = wave.minions;
+			waveCounter++;
+		});
+
 		minion_wave_intervalID = setInterval(spawnMinion, 2000);
 		// move_minion_intervalID = setInterval(moveMinions, interval);
 		// move_minion_intervalID = setInterval(move_minion, interval);
@@ -168,25 +170,25 @@ $(document).ready(function() {
 		// {distance : 800, time : 14000}
 
 		// Another set for play test
-		// {distance : 300, time : 3000, direction: "down"},
-		// {distance : 300, time : 3000, direction: "right"},
-		// {distance : 300, time : 3000, direction: "up"},
-		// {distance : 300, time : 3000, direction: "right"},
-		// // Going down from 18 to 68
-		// {distance : 500, time : 5000, direction: "down"},
-		// {distance : 700, time : 7000, direction: "left"},
-		// {distance : 200, time : 2000, direction: "down"},
-		// {distance : 800, time : 8000, direction: "right"}
-
-		{distance : 300, time : 300, direction: "down"},
-		{distance : 300, time : 300, direction: "right"},
-		{distance : 300, time : 300, direction: "up"},
-		{distance : 300, time : 300, direction: "right"},
+		{distance : 300, time : 3000, direction: "down"},
+		{distance : 300, time : 3000, direction: "right"},
+		{distance : 300, time : 3000, direction: "up"},
+		{distance : 300, time : 3000, direction: "right"},
 		// Going down from 18 to 68
-		{distance : 500, time : 500, direction: "down"},
-		{distance : 700, time : 700, direction: "left"},
-		{distance : 200, time : 200, direction: "down"},
-		{distance : 800, time : 800, direction: "right"}
+		{distance : 500, time : 5000, direction: "down"},
+		{distance : 700, time : 7000, direction: "left"},
+		{distance : 200, time : 2000, direction: "down"},
+		{distance : 800, time : 8000, direction: "right"}
+
+		// {distance : 300, time : 300, direction: "down"},
+		// {distance : 300, time : 300, direction: "right"},
+		// {distance : 300, time : 300, direction: "up"},
+		// {distance : 300, time : 300, direction: "right"},
+		// // Going down from 18 to 68
+		// {distance : 500, time : 500, direction: "down"},
+		// {distance : 700, time : 700, direction: "left"},
+		// {distance : 200, time : 200, direction: "down"},
+		// {distance : 800, time : 800, direction: "right"}
 	];
 
 	// create minion at #31 div at the moment
@@ -220,73 +222,73 @@ $(document).ready(function() {
 			// "margin-top": `+=${minionSpeed}px`
 			"top" : `+=${minion_displacement[0].distance}px`,
 
-			}, Number(`${minion_displacement[0].time}`), 'linear', function(){minion.pathIndex++;});
+			}, Number(`${minion_displacement[0].time/minion.speed*10}`), 'linear', function(){minion.pathIndex++;});
 		hp_selector.animate({
 			"top": `+=${minion_displacement[0].distance}px`,
-		}, Number(`${minion_displacement[0].time}`), 'linear');
+		}, Number(`${minion_displacement[0].time/minion.speed*10}`), 'linear');
 
 		// Move right 3 boxes
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"left" : `+=${minion_displacement[1].distance}px`,
-			}, Number(`${minion_displacement[1].time}`), 'linear', function(){minion.pathIndex++;});
+			}, Number(`${minion_displacement[1].time/minion.speed*10}`), 'linear', function(){minion.pathIndex++;});
 		hp_selector.animate({
 			"left": `+=${minion_displacement[1].distance}px`,
-		}, Number(`${minion_displacement[1].time}`), 'linear');
+		}, Number(`${minion_displacement[1].time/minion.speed*10}`), 'linear');
 
 		// Move up 3 boxes
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"top" : `-=${minion_displacement[2].distance}px`,
-			}, Number(`${minion_displacement[2].time}`), 'linear', function(){minion.pathIndex++;});
+			}, Number(`${minion_displacement[2].time/minion.speed*10}`), 'linear', function(){minion.pathIndex++;});
 		hp_selector.animate({
 			"top": `-=${minion_displacement[2].distance}px`,
-		}, Number(`${minion_displacement[2].time}`), 'linear');
+		}, Number(`${minion_displacement[2].time/minion.speed*10}`), 'linear');
 
 		// Move right 3 boxes
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"left" : `+=${minion_displacement[3].distance}px`,
-			}, Number(`${minion_displacement[3].time}`), 'linear', function(){minion.pathIndex++;});
+			}, Number(`${minion_displacement[3].time/minion.speed*10}`), 'linear', function(){minion.pathIndex++;});
 		hp_selector.animate({
 			"left": `+=${minion_displacement[3].distance}px`,
-		}, Number(`${minion_displacement[3].time}`), 'linear');
+		}, Number(`${minion_displacement[3].time/minion.speed*10}`), 'linear');
 
 		// Move down 5 boxes
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"top" : `+=${minion_displacement[4].distance}px`,
-			}, Number(`${minion_displacement[4].time}`), 'linear', function(){minion.pathIndex++;});
+			}, Number(`${minion_displacement[4].time/minion.speed*10}`), 'linear', function(){minion.pathIndex++;});
 		hp_selector.animate({
 			"top": `+=${minion_displacement[4].distance}px`,
-		}, Number(`${minion_displacement[4].time}`), 'linear');
+		}, Number(`${minion_displacement[4].time/minion.speed*10}`), 'linear');
 
 		// Move left 7 boxes
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"left" : `-=${minion_displacement[5].distance}px`,
-			}, Number(`${minion_displacement[5].time}`), 'linear', function(){minion.pathIndex++;});
+			}, Number(`${minion_displacement[5].time/minion.speed*10}`), 'linear', function(){minion.pathIndex++;});
 		hp_selector.animate({
 			"left": `-=${minion_displacement[5].distance}px`,
-		}, Number(`${minion_displacement[5].time}`), 'linear');
+		}, Number(`${minion_displacement[5].time/minion.speed*10}`), 'linear');
 
 		// Move down 2 boxes
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"top" : `+=${minion_displacement[6].distance}px`,
-			}, Number(`${minion_displacement[6].time}`), 'linear', function(){minion.pathIndex++;});
+			}, Number(`${minion_displacement[6].time/minion.speed*10}`), 'linear', function(){minion.pathIndex++;});
 		hp_selector.animate({
 			"top": `+=${minion_displacement[6].distance}px`,
-		}, Number(`${minion_displacement[6].time}`), 'linear');
+		}, Number(`${minion_displacement[6].time/minion.speed*10}`), 'linear');
 
 		// Move right 8 boxes
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"left" : `+=${minion_displacement[7].distance}px`,
-			}, Number(`${minion_displacement[7].time}`), 'linear');
+			}, Number(`${minion_displacement[7].time/minion.speed*10}`), 'linear');
 		hp_selector.animate({
 			"left": `+=${minion_displacement[7].distance}px`,
-		}, Number(`${minion_displacement[7].time}`), 'linear', updateGameState);
+		}, Number(`${minion_displacement[7].time/minion.speed*10}`), 'linear', updateGameState);
 	}
 
 	function updateGameState() {
@@ -334,20 +336,20 @@ $(document).ready(function() {
 				var towerY = $tower.offset().top+40;
 				var minionDirection = minion_displacement[minion.pathIndex].direction;
 				if (minionDirection === "right"){
-					var xDistance = minionX - towerX + minionSpeed*bulletTime/interval;
+					var xDistance = minionX - towerX + minion.speed*bulletTime/interval;
 					var yDistance = minionY - towerY;
 				}
 				else if (minionDirection === "left"){
-					var xDistance = minionX - towerX - minionSpeed*bulletTime/interval;
+					var xDistance = minionX - towerX - minion.speed*bulletTime/interval;
 					var yDistance = minionY - towerY;
 				}
 				else if (minionDirection === "up"){
 					var xDistance = minionX - towerX ;
-					var yDistance = minionY - towerY- minionSpeed*bulletTime/interval;
+					var yDistance = minionY - towerY- minion.speed*bulletTime/interval;
 				}
 				else if (minionDirection === "down"){
 					var xDistance = minionX - towerX ;
-					var yDistance = minionY - towerY + minionSpeed*bulletTime/interval;
+					var yDistance = minionY - towerY + minion.speed*bulletTime/interval;
 				}
 				var distance = Math.sqrt(xDistance*xDistance+yDistance*yDistance);
 				if (distance < tower.range){
@@ -372,7 +374,7 @@ $(document).ready(function() {
 		// }
 		
 	// 	minion.animate({
-	// 		"margin-left": `+=${minionSpeed}px`
+	// 		"margin-left": `+=${minion.speed}px`
 	// 	}, interval);
 	// }
 
@@ -400,20 +402,20 @@ $(document).ready(function() {
 		var bulletY = bullet.offset().top;
 		var minionDirection = minion_displacement[minion.pathIndex].direction;
 		if (minionDirection === "right"){
-			var xDistance = minionX - bulletX + minionSpeed*bulletTime/interval;
+			var xDistance = minionX - bulletX + minion.speed*bulletTime/interval;
 			var yDistance = minionY - bulletY;
 		}
 		else if (minionDirection === "left"){
-			var xDistance = minionX - bulletX - minionSpeed*bulletTime/interval;
+			var xDistance = minionX - bulletX - minion.speed*bulletTime/interval;
 			var yDistance = minionY - bulletY;
 		}
 		else if (minionDirection === "up"){
 			var xDistance = minionX - bulletX ;
-			var yDistance = minionY - bulletY- minionSpeed*bulletTime/interval;
+			var yDistance = minionY - bulletY- minion.speed*bulletTime/interval;
 		}
 		else if (minionDirection === "down"){
 			var xDistance = minionX - bulletX ;
-			var yDistance = minionY - bulletY + minionSpeed*bulletTime/interval;
+			var yDistance = minionY - bulletY + minion.speed*bulletTime/interval;
 		}
 		bullet.animate({
 			"margin-left": `+=${xDistance}`,
@@ -429,6 +431,10 @@ $(document).ready(function() {
 				spawned_wave =spawned_wave.filter(function(element) {
 					return element._id != minion._id;
 				});
+
+				if (minion_wave.length === 0 && spawned_wave.length === 0) {
+					$('.start_wave').show();
+				}
 				
 				minion_selector.remove();
 				console.log(minion_selector.length);
