@@ -13,7 +13,6 @@ $(document).ready(function() {
 		});
 	});
 	function handleUser(data){
-		// console.log(data.length);
 		var same_name = $('[name=username]').val();
 		if (data === null) {
 			console.log("WE ARE IN");
@@ -82,10 +81,14 @@ $(document).ready(function() {
 	var gameEnd = false;
 	var minion_counts = 50;
 	var gold = 300;
+	var waveCounter = 1;
 	$('.player_gold').text(gold);
-	for (var i = 1; i <= minion_counts; i++) {
-		minion_wave.push({id: i, image: "/imgs/car1.jpg", speed: 20, hp: 100, pathIndex: 0, alive: true});
-	}
+	// for (var i = 1; i <= minion_counts; i++) {
+	// 	minion_wave.push({id: i, image: "/imgs/car1.jpg", speed: 20, hp: 100, pathIndex: 0, alive: true});
+	// }
+
+
+
 	// Hardcoded towers
 	//  Need to change hardcoded row and col~
 	// for (var i = 1; i <= 2; i++) {
@@ -136,6 +139,14 @@ $(document).ready(function() {
 	// Start minion wave with btn click
 	$('.start_wave').on("click", function() {
 		$('.start_wave').hide();
+		$.ajax({
+			method: "GET",
+			url: "waves/"+waveCounter
+		}).then(function(wave){
+			minion_wave = wave.minions;
+			waveCounter++;
+		});
+
 		minion_wave_intervalID = setInterval(spawnMinion, 2000);
 		// move_minion_intervalID = setInterval(moveMinions, interval);
 		// move_minion_intervalID = setInterval(move_minion, interval);
@@ -159,25 +170,25 @@ $(document).ready(function() {
 		// {distance : 800, time : 14000}
 
 		// Another set for play test
-		// {distance : 300, time : 3000, direction: "down"},
-		// {distance : 300, time : 3000, direction: "right"},
-		// {distance : 300, time : 3000, direction: "up"},
-		// {distance : 300, time : 3000, direction: "right"},
-		// // Going down from 18 to 68
-		// {distance : 500, time : 5000, direction: "down"},
-		// {distance : 700, time : 7000, direction: "left"},
-		// {distance : 200, time : 2000, direction: "down"},
-		// {distance : 800, time : 8000, direction: "right"}
-
-		{distance : 300, time : 300, direction: "down"},
-		{distance : 300, time : 300, direction: "right"},
-		{distance : 300, time : 300, direction: "up"},
-		{distance : 300, time : 300, direction: "right"},
+		{distance : 300, time : 3000, direction: "down"},
+		{distance : 300, time : 3000, direction: "right"},
+		{distance : 300, time : 3000, direction: "up"},
+		{distance : 300, time : 3000, direction: "right"},
 		// Going down from 18 to 68
-		{distance : 500, time : 500, direction: "down"},
-		{distance : 700, time : 700, direction: "left"},
-		{distance : 200, time : 200, direction: "down"},
-		{distance : 800, time : 800, direction: "right"}
+		{distance : 500, time : 5000, direction: "down"},
+		{distance : 700, time : 7000, direction: "left"},
+		{distance : 200, time : 2000, direction: "down"},
+		{distance : 800, time : 8000, direction: "right"}
+
+		// {distance : 300, time : 300, direction: "down"},
+		// {distance : 300, time : 300, direction: "right"},
+		// {distance : 300, time : 300, direction: "up"},
+		// {distance : 300, time : 300, direction: "right"},
+		// // Going down from 18 to 68
+		// {distance : 500, time : 500, direction: "down"},
+		// {distance : 700, time : 700, direction: "left"},
+		// {distance : 200, time : 200, direction: "down"},
+		// {distance : 800, time : 800, direction: "right"}
 	];
 
 	// create minion at #31 div at the moment
@@ -190,18 +201,18 @@ $(document).ready(function() {
 
 		// NEED TO CHANGE HARDCODED #31 TOO
 		// ######################
-		$('#12').append(`<img src="/imgs/car1.jpg" class="minion" id="m${minion.id}">`);
-		$('#12').append(`<p class="hp" id="hp${minion.id}">${minion.hp}</p>`);
+		$('#12').append(`<img src="/imgs/car1.jpg" class="minion" id="m${minion._id}">`);
+		$('#12').append(`<p class="hp" id="hp${minion._id}">${minion.hp}</p>`);
 		spawned_wave.push(minion);
-		// var minion_selector = `#m${minion.id}`;
+		// var minion_selector = `#m${minion._id}`;
 		// minion_move($(minion_selector));
 		move_minion(minion);
 	};
 
 	// hardcoded path animate all the way to the end
 	function move_minion(minion) {
-		var minion_selector = $(`#m${minion.id}`);
-		var hp_selector = $(`#hp${minion.id}`);
+		var minion_selector = $(`#m${minion._id}`);
+		var hp_selector = $(`#hp${minion._id}`);
 
 		// minion speed was 20
 		// interval was 200
@@ -211,73 +222,73 @@ $(document).ready(function() {
 			// "margin-top": `+=${minionSpeed}px`
 			"top" : `+=${minion_displacement[0].distance}px`,
 
-			}, Number(`${minion_displacement[0].time}`), 'linear', function(){minion.pathIndex++;});
+			}, Number(`${minion_displacement[0].time/minion.speed*10}`), 'linear', function(){minion.pathIndex++;});
 		hp_selector.animate({
 			"top": `+=${minion_displacement[0].distance}px`,
-		}, Number(`${minion_displacement[0].time}`), 'linear');
+		}, Number(`${minion_displacement[0].time/minion.speed*10}`), 'linear');
 
 		// Move right 3 boxes
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"left" : `+=${minion_displacement[1].distance}px`,
-			}, Number(`${minion_displacement[1].time}`), 'linear', function(){minion.pathIndex++;});
+			}, Number(`${minion_displacement[1].time/minion.speed*10}`), 'linear', function(){minion.pathIndex++;});
 		hp_selector.animate({
 			"left": `+=${minion_displacement[1].distance}px`,
-		}, Number(`${minion_displacement[1].time}`), 'linear');
+		}, Number(`${minion_displacement[1].time/minion.speed*10}`), 'linear');
 
 		// Move up 3 boxes
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"top" : `-=${minion_displacement[2].distance}px`,
-			}, Number(`${minion_displacement[2].time}`), 'linear', function(){minion.pathIndex++;});
+			}, Number(`${minion_displacement[2].time/minion.speed*10}`), 'linear', function(){minion.pathIndex++;});
 		hp_selector.animate({
 			"top": `-=${minion_displacement[2].distance}px`,
-		}, Number(`${minion_displacement[2].time}`), 'linear');
+		}, Number(`${minion_displacement[2].time/minion.speed*10}`), 'linear');
 
 		// Move right 3 boxes
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"left" : `+=${minion_displacement[3].distance}px`,
-			}, Number(`${minion_displacement[3].time}`), 'linear', function(){minion.pathIndex++;});
+			}, Number(`${minion_displacement[3].time/minion.speed*10}`), 'linear', function(){minion.pathIndex++;});
 		hp_selector.animate({
 			"left": `+=${minion_displacement[3].distance}px`,
-		}, Number(`${minion_displacement[3].time}`), 'linear');
+		}, Number(`${minion_displacement[3].time/minion.speed*10}`), 'linear');
 
 		// Move down 5 boxes
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"top" : `+=${minion_displacement[4].distance}px`,
-			}, Number(`${minion_displacement[4].time}`), 'linear', function(){minion.pathIndex++;});
+			}, Number(`${minion_displacement[4].time/minion.speed*10}`), 'linear', function(){minion.pathIndex++;});
 		hp_selector.animate({
 			"top": `+=${minion_displacement[4].distance}px`,
-		}, Number(`${minion_displacement[4].time}`), 'linear');
+		}, Number(`${minion_displacement[4].time/minion.speed*10}`), 'linear');
 
 		// Move left 7 boxes
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"left" : `-=${minion_displacement[5].distance}px`,
-			}, Number(`${minion_displacement[5].time}`), 'linear', function(){minion.pathIndex++;});
+			}, Number(`${minion_displacement[5].time/minion.speed*10}`), 'linear', function(){minion.pathIndex++;});
 		hp_selector.animate({
 			"left": `-=${minion_displacement[5].distance}px`,
-		}, Number(`${minion_displacement[5].time}`), 'linear');
+		}, Number(`${minion_displacement[5].time/minion.speed*10}`), 'linear');
 
 		// Move down 2 boxes
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"top" : `+=${minion_displacement[6].distance}px`,
-			}, Number(`${minion_displacement[6].time}`), 'linear', function(){minion.pathIndex++;});
+			}, Number(`${minion_displacement[6].time/minion.speed*10}`), 'linear', function(){minion.pathIndex++;});
 		hp_selector.animate({
 			"top": `+=${minion_displacement[6].distance}px`,
-		}, Number(`${minion_displacement[6].time}`), 'linear');
+		}, Number(`${minion_displacement[6].time/minion.speed*10}`), 'linear');
 
 		// Move right 8 boxes
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"left" : `+=${minion_displacement[7].distance}px`,
-			}, Number(`${minion_displacement[7].time}`), 'linear');
+			}, Number(`${minion_displacement[7].time/minion.speed*10}`), 'linear');
 		hp_selector.animate({
 			"left": `+=${minion_displacement[7].distance}px`,
-		}, Number(`${minion_displacement[7].time}`), 'linear', updateGameState);
+		}, Number(`${minion_displacement[7].time/minion.speed*10}`), 'linear', updateGameState);
 	}
 
 	function updateGameState() {
@@ -317,7 +328,7 @@ $(document).ready(function() {
 		// if in range, shoot bullet
 		towers.forEach(function(tower){
 			spawned_wave.forEach(function(minion){
-				let minion_selector = $(`#m${minion.id}`);
+				let minion_selector = $(`#m${minion._id}`);
 				var minionX  = minion_selector.offset().left+25;//+25 is half the minion size
 				var minionY = minion_selector.offset().top+25;
 				$tower = $(`#${tower.row}${tower.col}`);
@@ -325,20 +336,20 @@ $(document).ready(function() {
 				var towerY = $tower.offset().top+40;
 				var minionDirection = minion_displacement[minion.pathIndex].direction;
 				if (minionDirection === "right"){
-					var xDistance = minionX - towerX + minionSpeed*bulletTime/interval;
+					var xDistance = minionX - towerX + minion.speed*bulletTime/interval;
 					var yDistance = minionY - towerY;
 				}
 				else if (minionDirection === "left"){
-					var xDistance = minionX - towerX - minionSpeed*bulletTime/interval;
+					var xDistance = minionX - towerX - minion.speed*bulletTime/interval;
 					var yDistance = minionY - towerY;
 				}
 				else if (minionDirection === "up"){
 					var xDistance = minionX - towerX ;
-					var yDistance = minionY - towerY- minionSpeed*bulletTime/interval;
+					var yDistance = minionY - towerY- minion.speed*bulletTime/interval;
 				}
 				else if (minionDirection === "down"){
 					var xDistance = minionX - towerX ;
-					var yDistance = minionY - towerY + minionSpeed*bulletTime/interval;
+					var yDistance = minionY - towerY + minion.speed*bulletTime/interval;
 				}
 				var distance = Math.sqrt(xDistance*xDistance+yDistance*yDistance);
 				if (distance < tower.range){
@@ -363,7 +374,7 @@ $(document).ready(function() {
 		// }
 		
 	// 	minion.animate({
-	// 		"margin-left": `+=${minionSpeed}px`
+	// 		"margin-left": `+=${minion.speed}px`
 	// 	}, interval);
 	// }
 
@@ -380,8 +391,8 @@ $(document).ready(function() {
 		var $tower = $(`#${tower.row}${tower.col}`);
 		$tower.append(`<img src="/imgs/car1.jpg" class="bullet" id="b${tower.id}">`);
 	
-		var minion_selector = $(`#m${minion.id}`);
-		var hp_selector = $(`#hp${minion.id}`);
+		var minion_selector = $(`#m${minion._id}`);
+		var hp_selector = $(`#hp${minion._id}`);
 		var tower_damage = tower.dmg;
 
 		var bullet = $(`#b${tower.id}`);
@@ -391,20 +402,20 @@ $(document).ready(function() {
 		var bulletY = bullet.offset().top;
 		var minionDirection = minion_displacement[minion.pathIndex].direction;
 		if (minionDirection === "right"){
-			var xDistance = minionX - bulletX + minionSpeed*bulletTime/interval;
+			var xDistance = minionX - bulletX + minion.speed*bulletTime/interval;
 			var yDistance = minionY - bulletY;
 		}
 		else if (minionDirection === "left"){
-			var xDistance = minionX - bulletX - minionSpeed*bulletTime/interval;
+			var xDistance = minionX - bulletX - minion.speed*bulletTime/interval;
 			var yDistance = minionY - bulletY;
 		}
 		else if (minionDirection === "up"){
 			var xDistance = minionX - bulletX ;
-			var yDistance = minionY - bulletY- minionSpeed*bulletTime/interval;
+			var yDistance = minionY - bulletY- minion.speed*bulletTime/interval;
 		}
 		else if (minionDirection === "down"){
 			var xDistance = minionX - bulletX ;
-			var yDistance = minionY - bulletY + minionSpeed*bulletTime/interval;
+			var yDistance = minionY - bulletY + minion.speed*bulletTime/interval;
 		}
 		bullet.animate({
 			"margin-left": `+=${xDistance}`,
@@ -418,8 +429,12 @@ $(document).ready(function() {
 				hp_selector.remove();
 				/// remove minion that has 0 hp
 				spawned_wave =spawned_wave.filter(function(element) {
-					return element.id != minion.id;
+					return element._id != minion._id;
 				});
+
+				if (minion_wave.length === 0 && spawned_wave.length === 0) {
+					$('.start_wave').show();
+				}
 				
 				minion_selector.remove();
 				console.log(minion_selector.length);

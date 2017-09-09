@@ -38,6 +38,8 @@ app.delete('/users/:id', controllers.users.destroy);
 app.post('/users/scores/:name', controllers.usersScores.create);
 app.get('/users/:id/scores', controllers.usersScores.index);
 
+app.get('/waves/:index', controllers.waves.find);
+
 app.listen(process.env.PORT || 3000, function() {
 	console.log("Server started at 3000");
 });
