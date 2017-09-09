@@ -13,9 +13,8 @@ $(document).ready(function() {
 		});
 	});
 	function handleUser(data){
-		console.log(data.length);
 		var same_name = $('[name=username]').val();
-		if (data.length === 0) {
+		if (data === null) {
 			console.log("WE ARE IN");
 			// $('input').toggle();
 			$('.modal-title').text('Enter your image link');
@@ -35,7 +34,7 @@ $(document).ready(function() {
 		}
 		else {
 			console.log(data);
-			renderProfile(data[0]);
+			renderProfile(data);
 		}
 	}
 
