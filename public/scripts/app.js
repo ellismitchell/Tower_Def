@@ -339,7 +339,17 @@ $(document).ready(function() {
 			}, Number(`${minion_displacement[7].time/minion.speed*10}`), 'linear');
 		hp_selector.animate({
 			"left": `+=${minion_displacement[7].distance}px`,
-		}, Number(`${minion_displacement[7].time/minion.speed*10}`), 'linear', updateGameState);
+		}, Number(`${minion_displacement[7].time/minion.speed*10}`), 'linear', function(){
+			minion_selector.remove();
+			hp_selector.remove();
+			spawned_wave =spawned_wave.filter(function(element) {
+				return element._id != minion._id;
+			});
+			if (minion_wave.length === 0 && spawned_wave.length === 0) {
+				$('.start_wave').show();
+			}
+			updateGameState();
+		});
 	}
 
 	function updateGameState() {
