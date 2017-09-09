@@ -2,11 +2,11 @@ let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 let MinionSchema = new Schema({
-	name: String,
-	health: Number,
+	image: String,
+	hp: Number,
 	speed: Number,
-	x: Number,
-	y: Number
+	pathIndex: Number,
+	alive: Boolean
 });
 
 module.exports = mongoose.model('Minion', MinionSchema);

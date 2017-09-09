@@ -81,10 +81,20 @@ $(document).ready(function() {
 	var gameEnd = false;
 	var minion_counts = 50;
 	var gold = 300;
+	var waveCounter = 1;
 	$('.player_gold').text(gold);
-	for (var i = 1; i <= minion_counts; i++) {
-		minion_wave.push({id: i, image: "/imgs/car1.jpg", speed: 20, hp: 100, pathIndex: 0, alive: true});
-	}
+	// for (var i = 1; i <= minion_counts; i++) {
+	// 	minion_wave.push({id: i, image: "/imgs/car1.jpg", speed: 20, hp: 100, pathIndex: 0, alive: true});
+	// }
+	$.ajax({
+		method: "GET",
+		url: "waves/"+waveCounter
+	}).then(function(wave){
+		minion_wave = wave.minions;
+	});
+
+
+
 	// Hardcoded towers
 	//  Need to change hardcoded row and col~
 	// for (var i = 1; i <= 2; i++) {
@@ -189,18 +199,18 @@ $(document).ready(function() {
 
 		// NEED TO CHANGE HARDCODED #31 TOO
 		// ######################
-		$('#12').append(`<img src="/imgs/car1.jpg" class="minion" id="m${minion.id}">`);
-		$('#12').append(`<p class="hp" id="hp${minion.id}">${minion.hp}</p>`);
+		$('#12').append(`<img src="/imgs/car1.jpg" class="minion" id="m${minion._id}">`);
+		$('#12').append(`<p class="hp" id="hp${minion._id}">${minion.hp}</p>`);
 		spawned_wave.push(minion);
-		// var minion_selector = `#m${minion.id}`;
+		// var minion_selector = `#m${minion._id}`;
 		// minion_move($(minion_selector));
 		move_minion(minion);
 	};
 
 	// hardcoded path animate all the way to the end
 	function move_minion(minion) {
-		var minion_selector = $(`#m${minion.id}`);
-		var hp_selector = $(`#hp${minion.id}`);
+		var minion_selector = $(`#m${minion._id}`);
+		var hp_selector = $(`#hp${minion._id}`);
 
 		// minion speed was 20
 		// interval was 200
@@ -316,7 +326,7 @@ $(document).ready(function() {
 		// if in range, shoot bullet
 		towers.forEach(function(tower){
 			spawned_wave.forEach(function(minion){
-				let minion_selector = $(`#m${minion.id}`);
+				let minion_selector = $(`#m${minion._id}`);
 				var minionX  = minion_selector.offset().left+25;//+25 is half the minion size
 				var minionY = minion_selector.offset().top+25;
 				$tower = $(`#${tower.row}${tower.col}`);
@@ -379,8 +389,8 @@ $(document).ready(function() {
 		var $tower = $(`#${tower.row}${tower.col}`);
 		$tower.append(`<img src="/imgs/car1.jpg" class="bullet" id="b${tower.id}">`);
 	
-		var minion_selector = $(`#m${minion.id}`);
-		var hp_selector = $(`#hp${minion.id}`);
+		var minion_selector = $(`#m${minion._id}`);
+		var hp_selector = $(`#hp${minion._id}`);
 		var tower_damage = tower.dmg;
 
 		var bullet = $(`#b${tower.id}`);
@@ -417,7 +427,7 @@ $(document).ready(function() {
 				hp_selector.remove();
 				/// remove minion that has 0 hp
 				spawned_wave =spawned_wave.filter(function(element) {
-					return element.id != minion.id;
+					return element._id != minion._id;
 				});
 				
 				minion_selector.remove();
