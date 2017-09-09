@@ -6,6 +6,18 @@ function index(req, res) {
 	});
 }
 
+// function showAll(req, res) {
+// 	// -1 MEANS DESCENDING
+// 	// db.Score.findOne({name: NEWDUDE}, null, {sort: {score: -1}}, function(err, users) {
+// 	//  res.json(users);});
+// 	db.User.find({}, function(err, users){
+// 		users[1].scores.sort(function(a,b){
+// 			return b.score - a.score;
+// 		})
+// 		res.json(users[1]);
+// 	});
+// }
+
 function create(req, res) {
 	console.log( req.body.score + req.body.date + " score and time");
 	db.User.findOne({name: req.params.name}, function(err,user){

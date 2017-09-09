@@ -7,6 +7,9 @@ function show(req, res) {
 }
 
 function showAll(req, res) {
+	// -1 MEANS DESCENDING
+	// db.Score.findOne({name: NEWDUDE}, null, {sort: {score: -1}}, function(err, users) {
+	//  res.json(users);});
 	db.User.find({}, function(err, users){
 		res.json(users);
 	});
@@ -14,7 +17,7 @@ function showAll(req, res) {
 
 function find(req,res){
 	console.log('finding');
-	db.User.find({name: req.params.name},function(err,user){
+	db.User.findOne({name: req.params.name},function(err,user){
 		if (err)
 			console.log(err);
 		console.log(user);

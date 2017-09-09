@@ -1,0 +1,99 @@
+/*profile.css*/
+
+.wrapper{
+	margin: 0 50px 0 50px;
+
+}
+
+img{
+	width: 100px;
+	height: 100px;
+}
+
+
+th{
+	font-size: 2rem;
+	text-align: center;
+
+}
+tr{
+	font-size: 1.5rem;
+
+}
+
+.table td{
+	vertical-align: middle;
+		font-family: sans-serif;
+}
+
+table{
+	text-align: justify-all;
+}
+
+body{
+	background-color: #e8d7d7;
+	/*font-family: 'Londrina Shadow', cursive;*/
+	font-family: 'Indie Flower', cursive;
+	text-align: center;
+
+}
+
+h1{
+	font-size: 7rem;
+	margin-bottom: 20px;
+	/*font-weight: bold;*/
+	color:black;
+	text-shadow: 5px 5px 60px yellow;
+}
+
+h2{
+	font-size: 2rem;
+	font-weight: bold;
+	color: black;
+	text-shadow: 5px 5px 20px yellow;
+}
+
+
+header{
+	width: auto;
+	height: auto;
+	border-bottom: 2px solid black;
+	padding-bottom: 0px;
+	margin: 30px 0px 15px 0px;
+
+}
+
+form>input{
+	top:3px;
+	position: relative;
+	width: 52%;
+	height: 34px;
+	padding: 10px;
+
+}
+.group {
+
+}
+
+.btn{
+	position: relative;
+	top:0px;
+	height:34px;
+}
+
+.container{
+	margin-top: 20px;
+}
+
+.profile_name{
+	margin: 10px;
+}
+
+.hidden{
+	display: none;
+}
+
+.btn, input{
+	font-size: 1rem;
+	font-family: sans-serif;
+}

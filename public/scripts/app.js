@@ -159,25 +159,25 @@ $(document).ready(function() {
 		// {distance : 800, time : 14000}
 
 		// Another set for play test
-		// {distance : 300, time : 3000, direction: "down"},
-		// {distance : 300, time : 3000, direction: "right"},
-		// {distance : 300, time : 3000, direction: "up"},
-		// {distance : 300, time : 3000, direction: "right"},
-		// // Going down from 18 to 68
-		// {distance : 500, time : 5000, direction: "down"},
-		// {distance : 700, time : 7000, direction: "left"},
-		// {distance : 200, time : 2000, direction: "down"},
-		// {distance : 800, time : 8000, direction: "right"}
-
-		{distance : 300, time : 300, direction: "down"},
-		{distance : 300, time : 300, direction: "right"},
-		{distance : 300, time : 300, direction: "up"},
-		{distance : 300, time : 300, direction: "right"},
+		{distance : 300, time : 3000, direction: "down"},
+		{distance : 300, time : 3000, direction: "right"},
+		{distance : 300, time : 3000, direction: "up"},
+		{distance : 300, time : 3000, direction: "right"},
 		// Going down from 18 to 68
-		{distance : 500, time : 500, direction: "down"},
-		{distance : 700, time : 700, direction: "left"},
-		{distance : 200, time : 200, direction: "down"},
-		{distance : 800, time : 800, direction: "right"}
+		{distance : 500, time : 5000, direction: "down"},
+		{distance : 700, time : 7000, direction: "left"},
+		{distance : 200, time : 2000, direction: "down"},
+		{distance : 800, time : 8000, direction: "right"}
+
+		// {distance : 300, time : 300, direction: "down"},
+		// {distance : 300, time : 300, direction: "right"},
+		// {distance : 300, time : 300, direction: "up"},
+		// {distance : 300, time : 300, direction: "right"},
+		// // Going down from 18 to 68
+		// {distance : 500, time : 500, direction: "down"},
+		// {distance : 700, time : 700, direction: "left"},
+		// {distance : 200, time : 200, direction: "down"},
+		// {distance : 800, time : 800, direction: "right"}
 	];
 
 	// create minion at #31 div at the moment
@@ -465,6 +465,7 @@ function renderProfile(user){
 		`
 		);
 }
+
 
 function displayErr(err){
 	console.log(err);
