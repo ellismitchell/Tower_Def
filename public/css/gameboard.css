@@ -12,7 +12,7 @@ header{
 	position: fixed;
 	top: 0;
 	left: 75%;
-	width: 300px;
+	width: 350px;
 	height: 100%;
 	padding: 0;
 	margin-top: 50px;
@@ -49,6 +49,19 @@ input{
 	width: 200px;
 }
 
+.tower_panel{
+	height: auto;
+}
+div>.tower_one, .tower_two, .tower_three{
+	display: inline-block;
+}
+
+img{
+	position: relative;
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+}
 
 .board{
 

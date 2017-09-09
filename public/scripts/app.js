@@ -100,22 +100,51 @@ $(document).ready(function() {
 	
 	// Place tower at mouse click
 	// still need to check if the click is within path
+	var tower = {
+			id : "",
+			col: "",
+			row: "",
+			image: "",
+			range: "",
+			dmg: "",
+	};
+	$('.tower_one').on("click",function(){
+		console.log("tower_one");
+		tower = {
+					image: "/imgs/green_tower.png",
+					range: 200,
+					dmg: 20,
+		};
+	});
+	$('.tower_two').on("click", function(){
+		console.log("tower_two");
+		tower = {
+					image: "/imgs/red_tower.png",
+					range: 250,
+					dmg: 10,
+		};
+	});
+	$('.tower_three').on("click",function(){
+		console.log("tower_three");
+		tower = {
+					image: "/imgs/rocket_tower.png",
+					range: 150,
+					dmg: 30,
+		};
+	});
+
 	$('.column').on("click", placeTower);
 	function placeTower(event){
 		// Add tower if theres none already in place
 		if(gameEnd) return;
 		if($(this).has('.tower').length > 0 || $(this).hasClass("path") || gold < 75) return;
 
-		var tower = {
-			id : towers.length + 1,
-			col: ($(this).attr("id")[1]),
-			row: ($(this).attr("id")[0]),
-			image: "/imgs/tower.jpg",
-			range: tower_range,
-			dmg: 10,
-		};
+		tower.id = towers.length + 1;
+		tower.col = ($(this).attr("id")[1]);
+		tower.row = ($(this).attr("id")[0]);
+		console.log(tower);
 		towers.push(tower);
-		$(this).append(`<img src="/imgs/tower.jpg" class="tower" id="t${tower.id}">`);
+		$(this).append(`<img src="${tower.image}" class="tower" id="t${tower.id}">`);
 		gold -= 75;
 		$('.player_gold').text(gold);
 		// $(this).append('<div class="towerRange"></div>');
@@ -201,7 +230,7 @@ $(document).ready(function() {
 
 		// NEED TO CHANGE HARDCODED #31 TOO
 		// ######################
-		$('#12').append(`<img src="/imgs/car1.jpg" class="minion" id="m${minion._id}">`);
+		$('#12').append(`<img src="${minion.image}" class="minion" id="m${minion._id}">`);
 		$('#12').append(`<p class="hp" id="hp${minion._id}">${minion.hp}</p>`);
 		spawned_wave.push(minion);
 		// var minion_selector = `#m${minion._id}`;
@@ -389,7 +418,7 @@ $(document).ready(function() {
 	function shoot_bullet(minion, tower){
 		// var minion = $('#m1');
 		var $tower = $(`#${tower.row}${tower.col}`);
-		$tower.append(`<img src="/imgs/car1.jpg" class="bullet" id="b${tower.id}">`);
+		$tower.append(`<img src="/imgs/car1.png" class="bullet" id="b${tower.id}">`);
 	
 		var minion_selector = $(`#m${minion._id}`);
 		var hp_selector = $(`#hp${minion._id}`);
