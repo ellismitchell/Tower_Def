@@ -36,10 +36,15 @@ main{
 	clear: both;
 }
 .column{
-	border: dashed black 1px;
+	/*border: dashed black 1px;*/
 	height: 100px;
 	width: 100px;
 	position: relative;
+	background-image : url("/imgs/green_field.png");
+}
+.path {
+	background-color: gray;
+	background-image: url("/imgs/path.png");
 }
 .btn{
 	font-family: sans-serif;
@@ -63,14 +68,20 @@ img{
 	height: 100px;
 }
 
-.board{
 
+.board{
+ margin-left : 20px;
 }
 
 .card{
 	width: 80%;
 	height: 250px;
 }
+
+.column:hover{
+	background-color: #90f4c2;
+}
+
 
 .minion{
 	width: 50px;
@@ -135,9 +146,6 @@ img{
 	left: -100px;
 }
 
-.path {
-	background-color: gray;
-}
 
 .hidden {
 	display: none;
