@@ -91,6 +91,7 @@ form>input,button{
 	width: auto;
 }
 
+
 .tower_panel{
 	height: auto;
 	margin: 20px 0 20px 0 ;
@@ -138,7 +139,9 @@ button>.btn{
 	max-height: 300px;
 }
 .card-img-top{
+	padding-top: 30px;
 	max-height: 300px;
+	text-align: center;
 }
 
 .card-title{

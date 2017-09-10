@@ -577,7 +577,7 @@ function renderProfile(user){
 	$('.show_profile').html(
 		 `	
 		<div class="card" >
-			  <img class="card-img-top" src=${user.profileImage} alt="Card image cap">
+			  <img class="card-img-top" src=${user.profileImage} alt="Broken Img Link =(">
 			  <div class="card-body">
 			    <h4 class="card-title">${user.name}</h4>
 			  </div>	
