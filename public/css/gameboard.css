@@ -5,31 +5,58 @@ body{
 	/*font-family: 'Londrina Shadow', cursive;*/
 	font-size: 2rem;
 	margin: 50px;
+	font-family: 'Indie Flower', cursive;
+	margin: 0;
+	/*font-family: 'KenPixel Blocks'*/
 }
 
 header{
 	float: right;
-	position: fixed;
-	top: 0;
-	left: 75%;
-	width: 350px;
+	position: absolute;
+	top: 74px;
+	right: 0;
+	width: 400px;
 	height: 100%;
 	padding: 0;
-	margin-top: 50px;
+	margin: 0 55px 0 0;
 }
 
 header>div{
 	display: block;
 	padding: 10px;
-	margin: auto
+	margin: auto;
 }
 
 header>.btn,button{
-	width:80%;
-	margin-bottom: 10px;
+	width:auto;
+	margin: 0 0 10px 0;
+}
+span{
+	margin: 5px;
 }
 
-form{
+.nav-item{
+	height: 50px;
+	margin: 0 5px 0 5px;
+
+}
+
+
+.top_nav{
+	top:0;
+	left:50;
+	/*padding-left: 50px;*/
+	position: absolute;
+	display: inline-block;
+	z-index: 0;
+	height:50px;
+	width: 100%;
+	/*background-color: brown;*/
+
+}
+.top_nav>div{
+	display: inline-block;
+
 }
 
 main{
@@ -47,10 +74,14 @@ main{
 	background-image: url("/imgs/path.png");
 }
 .btn{
-	font-family: sans-serif;
+	font-size: 2rem;
 }
-
-input{
+form{
+	width: 700px;
+	height: 50px;
+}
+form>input,button{
+	display:inline-block;
 	width: 200px;
 }
 
@@ -61,29 +92,36 @@ div>.tower_one, .tower_two, .tower_three{
 	display: inline-block;
 }
 
-img{
-	position: relative;
+.tower_ref{
 	display: inline-block;
-	width: 100px;
-	height: 100px;
 }
 
 .modal-body>input{
 	width: 100%;
 }
+#nav_bar{
+	background-color: black!important; 
+}
 
 .modal-footer>.btn{
 	width: 100%;
 }
-
+button>.btn{
+	width: 100%;
+}
 
 .board{
+	position: absolute;
  margin-left : 20px;
 }
 
 .card{
-	width: 80%;
-	height: 250px;
+	width: 100%;
+	max-height: 300px;
+}
+
+.card-title{
+	text-align: center;
 }
 
 .column:hover{

@@ -9,7 +9,6 @@ $(document).ready(function() {
 
 	$('.user-submit').click(function(){
 		let name = $('[name=username]').val();
-		console.log(name);
 		$.ajax({
 			method: "GET",
 			url: `/users/find/${name}`,
@@ -19,14 +18,17 @@ $(document).ready(function() {
 	function handleUser(data){
 		var same_name = $('[name=username]').val();
 		if (data === null) {
-			console.log("WE ARE IN");
 			// $('input').toggle();
-			$('.modal-title').html(`<h2>Enter your image link</h2>`);
+			$('.modal-title').html(`<h3>Do you have a profile image link?</h3>`);
 			$('.modal-body').html('<input type="url" name="image-link" >');
-			$('.modal-footer').html(`<button type="button" class="image-submit btn btn-primary">Save changes</button>`);
+			$('.modal-footer').html(`<button type="button" class="image-submit btn btn-dark">Play!</button>`);
 			$('.image-submit').click(function(){
-				var img_link = $('[name=image-link]').val();
-
+				// var img_link = $('[name=image-link]').val();
+				
+				if($('[name=image-link]').val() == null || $('[name=image-link]').val() == undefined || $('[name=image-link]').val() =="") {
+					var img_link = "https://visualpharm.com/assets/227/User-595b40b65ba036ed117d4624.svg";
+				}
+				console.log(img_link);
 				$.ajax({
 					method: 'POST',
 					url: '/users',
@@ -36,7 +38,6 @@ $(document).ready(function() {
 			});
 		}
 		else {
-			console.log(data);
 			renderProfile(data);
 		}
 	}
@@ -151,7 +152,6 @@ $(document).ready(function() {
 		$tower_one.css("background-color", "rgba(255,255,0,0.5)");
 		$tower_two.css("background-color", "transparent");
 		$tower_three.css("background-color", "transparent");
-		console.log("tower_one");
 		tower = {
 					image: "/imgs/green_tower.png",
 					range: 150,
@@ -163,7 +163,6 @@ $(document).ready(function() {
 		$tower_one.css("background-color", "transparent");
 		$tower_two.css("background-color", "rgba(255,255,0,0.5)");
 		$tower_three.css("background-color", "transparent");
-		console.log("tower_two");
 		tower = {
 					image: "/imgs/red_tower.png",
 					range: 250,
@@ -175,7 +174,6 @@ $(document).ready(function() {
 		$tower_one.css("background-color", "transparent");
 		$tower_two.css("background-color", "transparent");
 		$tower_three.css("background-color", "rgba(255,255,0,0.5)");
-		console.log("tower_three");
 		tower = {
 					image: "/imgs/rocket_tower.png",
 					range: 150,
@@ -404,7 +402,6 @@ $(document).ready(function() {
 	function submitScore(){
 		
 		var name = $('.card-title').text();
-		console.log("name is " + name);
 		var time = new Date();
 		$.ajax({
 			method: "POST",
@@ -455,30 +452,6 @@ $(document).ready(function() {
 		});
 	}
 
-
-	// function minion_move(minion) {
-	// 	// var minion = $('#m1');
-	// 	console.log(minion);
-	// 	console.log(minion.offset());
-	// 	var column = $('#36');
-	// 	// checking the minion x > column's x+width 
-		// if(minion.offset().left >= column.offset().left+cW/2){
-		// 	console.log(minion.offset().left);
-		// 	console.log(column.offset().left);
-		// 	window.clearInterval(minionIntervalID);
-		// }
-		
-	// 	minion.animate({
-	// 		"margin-left": `+=${minion.speed}px`
-	// 	}, interval);
-	// }
-
-
-	// Create bullet incrementally
-	// var $tower = $('#43');
-	// $tower.append(`<img src="/imgs/car1.jpg" class="bullet" id="b1">`);
-	
-	// shoot_bullet();
 
 	// minion is the minion obj, tower obj
 	function shoot_bullet(minion, tower){
@@ -532,7 +505,6 @@ $(document).ready(function() {
 				}
 				
 				minion_selector.remove();
-				console.log(minion_selector.length);
 				if (minion.alive){
 					minions_killed++;
 					$('.minions_killed').text(minions_killed);
@@ -552,7 +524,6 @@ function profileBtnOnSubmit(event){
 	let name = $('.card-title').text();
 	let newName = $('[name=profile_name]').val();
 	let newLink = $('[name=profile_link]').val();
-	console.log(d);
 		$.ajax({
 			method: "PUT",
 			url: "/users/"+ name,
@@ -569,7 +540,6 @@ function profileBtnOnSubmit(event){
 
 // Take in input name and input images and render on the gamepage
 function renderProfile(user){
-	console.log(user);
 	// var form = $('.profile_form');
 	// form.hide();
 	$('#myModal').modal('hide');
@@ -603,7 +573,7 @@ function updateProfile(event) {
 function templateRow(x,y){
 	return`
 		<div class="column" id="${x}${y}">
-		
+		${x}${y}
 		</div>
 	`;
 }

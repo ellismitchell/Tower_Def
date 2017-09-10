@@ -23,59 +23,100 @@
 	<!--  -->
 </head>
 <body>
-	<header>
+	<div class="wrapper">
+		<nav id="nav_bar" style="background-color: black" class="navbar navbar-expand-lg navbar-light bg-light">
 
-		<a href="/" class="main_page btn btn-dark">Main Page</a>
-		<button class="start_wave btn btn-dark">Start Wave </button>
-		<a href="/scores.html" class="btn btn-dark">View Scores</a>
-		<div class="show_profile"></div>
-		<form class="profile_form" method="" action="">
-			<button type="submit" class="edit-btn btn btn-dark toggle">Edit Profile</button>
-			<button type="submit" class="edit-btn btn btn-dark hidden toggle">Save</button>
-			<br><input type="url" name="profile_link" class= "toggle hidden" placeholder="Image Link" required>
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		    <ul class="navbar-nav mr-auto">
+		      <li class="nav-item active">
+		        <a href="/" class="main_page btn btn-dark">Home Page</a>
+		      </li>
+		      <li class="nav-item">
+		        <a href="/scores.html" class="btn btn-dark">View Scores</a>
+		      </li>
+		       <li class="nav-item">
+		      	<button class="start_wave btn btn-dark">Start Wave </button>
+		      </li>
+		      <li class="nav-item">
+		       
+		      	<form class="profile_form" method="" action="">
+		      		<button type="submit" class="edit-btn btn btn-dark toggle">Edit Profile</button>
+		      		<button type="submit" class="edit-btn btn btn-dark hidden toggle">Save</button>
+		      		<input type="url" name="profile_link" class= "toggle hidden" placeholder="Image Link" required>
 
-			<br><input type="text" name="profile_name" class= "toggle hidden" placeholder="Name" required>
-		</form>
+		      		<input type="text" name="profile_name" class= "toggle hidden" placeholder="Name" required>
+		      	</form>
 
-		
-		<div> Health: <span class="player_health"></span></div>
-		<div> Minions Slain: <span class="minions_killed"> 0 </span></div>
-		<div>Gold: <span class="player_gold"></span></div>
-		<div class="tower_panel">
-			<div class="tower_one"><img src="/imgs/green_tower.png">75</div>
-			<div class="tower_two"><img src="/imgs/red_tower.png">100</div>
-			<div class="tower_three"><img src="/imgs/rocket_tower.png">125</div>
-		</div>
-	</header>
-	<main class="clearfix">
-		
-			<div class="board">
 
+		      </li>
+		    </ul>
+<!-- 		    <div class="form-inline my-2 my-lg-0">
+		    		<div class="dropdown">
+		    		  <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		    		    Menu
+		    		  </button>
+		    		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+		    		    <a href="/" class="main_page btn btn-dark">Home Page</a>
+		    		    <a href="/scores.html" class="btn btn-dark">View Scores</a>
+		    		    <a class="dropdown-item" href="#">Something else here</a>
+		    		  </div>
+		    		</div>
+		    </div> -->
+		  </div>
+		</nav>
+
+
+
+
+		<header>
+
+			<div class="show_profile"></div>
+			<div >
+				<span> <img src="/imgs/Heart-icon.png">:<span class="player_health"></span></span>
+				<span> <img src="/imgs/crossbone.png">:<span class="minions_killed"> 0 </span></span>
+				<span><img src="/imgs/gold.png">: <span class="player_gold"></span></span>
+				
 			</div>
-		
-	<main>
+			
+			<div class="tower_panel">
+				<div class="tower_ref tower_one"><img src="/imgs/green_tower.png">75</div>
+				<div class="tower_two tower_ref"><img src="/imgs/red_tower.png">100</div>
+				<div class="tower_three tower_ref"><img src="/imgs/rocket_tower.png">125</div>
+			</div>
+		</header>
+		<main class="clearfix">
+			
+				<div class="board">
 
-<!-- Modal -->
-<form method="" action="">
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title toggle" id="exampleModalLabel">Enter your Username</h5>
-	        <!-- <h5 class="modal-title toggle hidden">Enter your Image Link</h5> -->
-	 
-	      </div>
-	      <div class="modal-body">
-	        <input type="text" class="toggle" name="username" required>
-	        <!-- <input type="url" class="toggle hidden" name="image-link" > -->
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="user-submit btn btn-primary">Save changes</button>
-	      </div>
-	    </div>
-	  </div>
+				</div>
+			
+		<main>
+
+
+
+
+		<!-- Modal -->
+		<form method="" action="">
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h3 class="modal-title toggle" id="exampleModalLabel">Please enter your name to continue.</h3>
+			        <!-- <h5 class="modal-title toggle hidden">Enter your Image Link</h5> -->
+			 
+			      </div>
+			      <div class="modal-body">
+			        <input type="text" class="toggle" name="username" required>
+			        <!-- <input type="url" class="toggle hidden" name="image-link" > -->
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="user-submit btn btn-dark">Submit </button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</form>
 	</div>
-</form>
 
 </body>
 </html>
