@@ -45,7 +45,8 @@ function create(req, res) {
 }
 
 function destroy(req, res) {
-	db.User.findByIdAndRemove(req.params.id, function(err, user){
+	db.User.findOneAndRemove({name: req.params.name}, function(err, user){
+		res.json(user);
 	});
 }
 

@@ -59,6 +59,7 @@ $(document).ready(function() {
 	// $('#12,#22,#32,#42,#43,#44,#45,#46,#36,#26,#16,#17,#18,#19,#110,#210,#310,#410,#510,#610,#710, #79,#78,#77,#76, #75,#74 ,#73 ,#72,#71, #81, #91, #101,#102,#103,#104,#105,#106,#107,#108,#109,#1010').addClass("path");
 	$('#12,#22,#32,#42,#43,#44,#45,#46,#36,#26,#16,#17,#18,#19,#19,#29,#39,#49,#59,#69, #79,#78,#77,#76, #75,#74 ,#73 ,#72,#71, #81, #91, #91,#92,#93,#94,#95,#96,#97,#98,#99,#910').addClass("path");
 	$('.edit-btn').on("click", displayForm);
+	$('.delete-btn').on("click", deleteProfile);
 	// hardcoding css images...
 	//left side is path for these divs..
 	$('#13,#23,#37,#47').css("background-image", "url('/imgs/left_brown.png'");
@@ -582,6 +583,17 @@ function displayErr(err){
 
 function displayForm(event){
 	$('.toggle').toggle();
+}
+
+function deleteProfile(){
+	console.log("trying to delete");
+	$.ajax({
+		method: "DELETE",
+		url: `/users/${$('.card-title').text()}`
+	})
+	.then(function(){
+		location.reload();
+	});
 }
 
 function updateProfile(event) {
