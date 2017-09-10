@@ -83,12 +83,12 @@ main{
 	font-size: 2rem;
 }
 form{
-	width: 700px;
+	width: -webkit-fill-available;
 	height: 50px;
 }
 form>input,button{
 	display:inline-block;
-	width: 200px;
+	width: auto;
 }
 
 .tower_panel{

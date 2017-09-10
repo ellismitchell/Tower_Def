@@ -26,18 +26,24 @@ $(document).ready(function() {
 				// var img_link = $('[name=image-link]').val();
 				
 				if($('[name=image-link]').val() == null || $('[name=image-link]').val() == undefined || $('[name=image-link]').val() =="") {
-					var img_link = "http://novocolegio.com.br/assets/img/administracao/user.jpg";
+					var img_link = "https://maxcdn.icons8.com/Share/icon/ultraviolet/Users//guest1600.png";
+				}else {
+					var img_link = $('[name=image-link]').val();
 				}
 				console.log(img_link);
 				$.ajax({
 					method: 'POST',
 					url: '/users',
 					data: {profile_name: same_name, profile_link: img_link},
-					success: renderProfile
-				});
+					
+				}).then(function(user){
+					$('#myModal').modal('hide');
+					renderProfile(user);
+				})
 			});
 		}
 		else {
+			$('#myModal').modal('hide');
 			renderProfile(data);
 		}
 	}
@@ -532,24 +538,22 @@ $(document).ready(function() {
 	}
 });
 
+// when edit btn is submited
 function profileBtnOnSubmit(event){
 	event.preventDefault();
-	console.log($(this));
 	var d = $(this).serialize();
 	let name = $('.card-title').text();
 	let link = $('.card-img-top').attr('src');
+	let currLink = $('[name=profile_link]').val();
+
 	// prefill old link if user doesnt left the field blank
-	if(link == "" || link == undefined){
+	if(currLink == "" || currLink == undefined || currLink == null){
+		link = "https://maxcdn.icons8.com/Share/icon/ultraviolet/Users//guest1600.png";
 		$('[name=profile_link]').val(link);
 	}
 	let newName = $('[name=profile_name]').val();
 	let newLink = $('[name=profile_link]').val();
-	if(newName == "" || newName == undefined) {
-		alert('Please enter a valid name');
-		return;
-	}
-
-	console.log(newName + newLink);
+	// clear out input fields after submit
 	$('.toggle').toggle();
 		$.ajax({
 			method: "PUT",
@@ -560,8 +564,8 @@ function profileBtnOnSubmit(event){
 			},
 			
 		}).then(function(user){
+			console.log("returned user is ", user);
 			renderProfile(user);
-			$('.toggle').toggle();
 		});
 }
 
@@ -569,7 +573,7 @@ function profileBtnOnSubmit(event){
 function renderProfile(user){
 	// var form = $('.profile_form');
 	// form.hide();
-	$('#myModal').modal('hide');
+
 	$('.show_profile').html(
 		 `	
 		<div class="card" >
@@ -589,9 +593,9 @@ function displayErr(err){
 }
 
 function displayForm(event){
-	$('.toggle').toggle();
 	let name = $('.card-title').text();
 	let link = $('.card-img-top').attr('src');
+	$('.toggle').toggle();
 	$('[name=profile_name]').val(name);
 	$('[name=profile_link]').val(link);
 }
