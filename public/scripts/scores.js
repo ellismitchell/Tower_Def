@@ -4,7 +4,7 @@ console.log("score js is loaded");
 
 $(document).ready(function() {
 
-	// Render all scores when page is loaded
+	// Render all scores when page is loaded or when its called
 	renderAllScores();
 
 	var $table = $('.table');
@@ -15,7 +15,6 @@ $(document).ready(function() {
 			method: "GET",
 			url: "/users/showAll",
 		}).then(function(users){
-			console.log(users);
 			$table.append(`
 				<thead class="thead-inverse">
 					<tr>
@@ -26,16 +25,28 @@ $(document).ready(function() {
 					</tr>
 				</thead>
 				<tbody>
-
 				</tbody>
 				`)
 			$tbody = $('.table>tbody');
+			
+			//for each user, sort their score array from high to low
+			users.forEach(function(user){
+				user.scores = user.scores.sort(function(s1,s2){
+					return s2.score - s1.score;
+				});
+			});
+			// Of all users, sort their rank base on their high score
+			users.sort(function(p1,p2){
+				return p2.scores[0].score - p1.scores[0].score;
+			});
+			// Finally append sorted entry into table from each's best high score to low
 			users.forEach(function(user){
 				$tbody.append(templateScores(user));
 			});
 		});
 	}
 
+	// Perform search and render appropriate result.
 	$('.search-user').on("submit", function(e){
 		e.preventDefault();
 		var name = $('[name=user]').val();
@@ -57,6 +68,7 @@ $(document).ready(function() {
 		});
 	});
 
+	// The back button
 	$('main').on("click", ".show_scores", function(){
 		$('.err_msg').remove();
 		renderAllScores();
@@ -65,16 +77,10 @@ $(document).ready(function() {
 
 });
 
-// collapse and table
+// table entry
 function templateScores(user){
-
-	user.scores.sort(function(a,b){
-		return b.score - a.score;
-	})
-	console.log(user);
 	var highScore = user.scores[0].score;
 	var date = user.scores[0].date;
-
 	return `
 	    <tr>
 	      <th scope="row"><img src="${user.profileImage}" alt="Profile Pic"></th>
