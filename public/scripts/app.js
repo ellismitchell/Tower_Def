@@ -26,7 +26,7 @@ $(document).ready(function() {
 				// var img_link = $('[name=image-link]').val();
 				
 				if($('[name=image-link]').val() == null || $('[name=image-link]').val() == undefined || $('[name=image-link]').val() =="") {
-					var img_link = "https://visualpharm.com/assets/227/User-595b40b65ba036ed117d4624.svg";
+					var img_link = "http://novocolegio.com.br/assets/img/administracao/user.jpg";
 				}
 				console.log(img_link);
 				$.ajax({
@@ -534,11 +534,16 @@ $(document).ready(function() {
 
 function profileBtnOnSubmit(event){
 	event.preventDefault();
-	
+	console.log($(this));
 	var d = $(this).serialize();
 	let name = $('.card-title').text();
 	let newName = $('[name=profile_name]').val();
 	let newLink = $('[name=profile_link]').val();
+	if(newName == "" || newName == undefined) {
+		alert('Please enter a valid name');
+		return;
+	}
+	console.log(newName + newLink);
 	$('.toggle').toggle();
 		$.ajax({
 			method: "PUT",
