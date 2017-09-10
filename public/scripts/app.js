@@ -71,6 +71,7 @@ $(document).ready(function() {
 	$('#14,#24,#51,#57').css("background-size", "cover");
 	$('#12,#22,#32,#42,#43,#44,#45,#46,#36,#26,#16,#17,#18,#19,#19,#29,#39,#49,#59,#69, #79,#78,#77,#76, #75,#74 ,#73 ,#72,#71, #81, #91, #91,#92,#93,#94,#95,#96,#97,#98,#99,#910').addClass("path");
 	$('.edit-btn').on("click", displayForm);
+	$('.delete-btn').on("click", deleteProfile);
 	// hardcoding css images...
 	//left side is path for these divs..
 	// $('#13,#23,#37,#47').css("background-image", "url('/imgs/left_brown2.png'");
@@ -619,6 +620,17 @@ function displayForm(event){
 	$('.toggle').toggle();
 	$('[name=profile_name]').val(name);
 	$('[name=profile_link]').val(link);
+}
+
+function deleteProfile(){
+	console.log("trying to delete");
+	$.ajax({
+		method: "DELETE",
+		url: `/users/${$('.card-title').text()}`
+	})
+	.then(function(){
+		location.reload();
+	});
 }
 
 function updateProfile(event) {
