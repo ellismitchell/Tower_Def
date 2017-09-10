@@ -2,10 +2,13 @@
 console.log("app js is loaded");
 
 $(document).ready(function() {
-	$('#myModal').modal();
+	$('#myModal').modal({
+		backdrop: 'static',
+		keyboard: false,
+	});
+
 	$('.user-submit').click(function(){
 		let name = $('[name=username]').val();
-		console.log(name);
 		$.ajax({
 			method: "GET",
 			url: `/users/find/${name}`,
@@ -15,25 +18,32 @@ $(document).ready(function() {
 	function handleUser(data){
 		var same_name = $('[name=username]').val();
 		if (data === null) {
-			console.log("WE ARE IN");
 			// $('input').toggle();
-			$('.modal-title').text('Enter your image link');
+			$('.modal-title').html(`<h3>Do you have a profile image link?</h3>`);
 			$('.modal-body').html('<input type="url" name="image-link" >');
-			$('.modal-footer').html(` <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="image-submit btn btn-primary">Save changes</button>`);
+			$('.modal-footer').html(`<button type="button" class="image-submit btn btn-dark">Play!</button>`);
 			$('.image-submit').click(function(){
-				var img_link = $('[name=image-link]').val();
-
+				// var img_link = $('[name=image-link]').val();
+				
+				if($('[name=image-link]').val() == null || $('[name=image-link]').val() == undefined || $('[name=image-link]').val() =="") {
+					var img_link = "https://maxcdn.icons8.com/Share/icon/ultraviolet/Users//guest1600.png";
+				}else {
+					var img_link = $('[name=image-link]').val();
+				}
+				console.log(img_link);
 				$.ajax({
 					method: 'POST',
 					url: '/users',
 					data: {profile_name: same_name, profile_link: img_link},
-					success: renderProfile
-				});
+					
+				}).then(function(user){
+					$('#myModal').modal('hide');
+					renderProfile(user);
+				})
 			});
 		}
 		else {
-			console.log(data);
+			$('#myModal').modal('hide');
 			renderProfile(data);
 		}
 	}
@@ -57,32 +67,55 @@ $(document).ready(function() {
 	$board.append(row);
 	// hardcoding color for terrain, for better visual..
 	// $('#12,#22,#32,#42,#43,#44,#45,#46,#36,#26,#16,#17,#18,#19,#110,#210,#310,#410,#510,#610,#710, #79,#78,#77,#76, #75,#74 ,#73 ,#72,#71, #81, #91, #101,#102,#103,#104,#105,#106,#107,#108,#109,#1010').addClass("path");
+	$('#14,#24,#51,#57').css("background-image", "url('/imgs/green_field.png'");
+	$('#14,#24,#51,#57').css("background-size", "cover");
 	$('#12,#22,#32,#42,#43,#44,#45,#46,#36,#26,#16,#17,#18,#19,#19,#29,#39,#49,#59,#69, #79,#78,#77,#76, #75,#74 ,#73 ,#72,#71, #81, #91, #91,#92,#93,#94,#95,#96,#97,#98,#99,#910').addClass("path");
 	$('.edit-btn').on("click", displayForm);
 	$('.delete-btn').on("click", deleteProfile);
 	// hardcoding css images...
 	//left side is path for these divs..
-	$('#13,#23,#37,#47').css("background-image", "url('/imgs/left_brown.png'");
-	$('#13,#23,#37,#47').css("background-size", "cover");
-	//right side is path for these divs..
-	$(' #11,#21,#31,#41,#15,#25,#38,#48,#58').css("background-image", "url('/imgs/right_brown.png'");
-	$(' #11,#21,#31,#41,#15,#25,#38,#48,#58').css("background-size", "cover");
-	//top brown ...
-	$('#52,#53,#54,#55,#56').css("background-image", "url('/imgs/top_brown.png'");
-	$('#52,#53,#54,#55,#56').css("background-size", "cover");
-	// bottom brown...
-	$('#34,#61,#62,#63,#64,#65,#66,#67').css("background-image", "url('/imgs/bottom_brown.png'");
-	$('#34,#61,#62,#63,#64,#65,#66,#67').css("background-size", "cover");
-	// top bot brown...
-	$('#83,#84,#85,#86,#87,#88,#89').css("background-image", "url('/imgs/top_bot_brown2.png'");
-	$('#83,#84,#85,#86,#87,#88,#89').css("background-size", "cover");
-	// corners..... brown
-	$('#33').css("background-image", "url('/imgs/left_bot_round2.png'");
-	$('#33').css("background-size", "cover");
-	// roundbrown...
-	$('#82').css("background-image", "url('/imgs/round_brown_2.png'");
-	$('#82').css("background-size", "cover");
+	// $('#13,#23,#37,#47').css("background-image", "url('/imgs/left_brown2.png'");
+	// $('#13,#23,#37,#47').css("background-size", "cover");
+	// //right side is path for these divs..
+	// $(' #11,#21,#31,#41,#15,#25,#38,#48,#58').css("background-image", "url('/imgs/right_brown2.png'");
+	// $(' #11,#21,#31,#41,#15,#25,#38,#48,#58').css("background-size", "cover");
+	// //top brown ...
+	// $('#52,#53,#54,#55,#56').css("background-image", "url('/imgs/top_brown2.png'");
+	// $('#52,#53,#54,#55,#56').css("background-size", "cover");
+	// // bottom brown...
+	// $('#34,#61,#62,#63,#64,#65,#66,#67').css("background-image", "url('/imgs/bottom_brown2.png'");
+	// $('#34,#61,#62,#63,#64,#65,#66,#67').css("background-size", "cover");
+	// // top bot brown...
+	// $('#83,#84,#85,#86,#87,#88,#89').css("background-image", "url('/imgs/top_bot_brown2.png'");
+	// $('#83,#84,#85,#86,#87,#88,#89').css("background-size", "cover");
+	// // corners..... brown
+	// $('#33').css("background-image", "url('/imgs/left_bot_round2.png'");
+	// $('#33').css("background-size", "cover");
+	// // roundbrown...
+	// $('#82').css("background-image", "url('/imgs/round_brown_2.png'");
+	// $('#82').css("background-size", "cover");
+	// $('#35,#68').css("background-image", "url('/imgs/right_bot_round2.png'");
+	// $('#35,#68').css("background-size", "cover");
+	// $('#28').css("background-image", "url('/imgs/right_top_round2.png'");
+	// $('#28').css("background-size", "cover");
+	// $('#27').css("background-image", "url('/imgs/left_top_round2.png'");
+	// $('#27').css("background-size", "cover");
 
+	// column
+	$('#12,#22,#32,#26,#36,#29,#39,#49,#59,#69,#81').css("background-image", "url('/imgs/col.png'");
+	$('#12,#22,#32,#26,#36,#29,#39,#49,#59,#69,#81').css("background-size", "cover")
+	//row
+	$('#43,#44,#45,#17,#18,#72,#73,#74,#75,#76,#77,#78,#92,#93,#94,#95,#96,#97,#98,#99').css("background-image", "url('/imgs/row.png'");
+	$('#43,#44,#45,#17,#18,#72,#73,#74,#75,#76,#77,#78,#92,#93,#94,#95,#96,#97,#98,#99').css("background-size", "cover");
+	// left corners
+	$('#42,#91').css("background-image", "url('/imgs/bot_left_round.png'");
+	$('#42,#91').css("background-size", "cover");
+	$('#16,#71').css("background-image", "url('/imgs/top_left_round.png'");
+	$('#16,#71').css("background-size", "cover");
+	$('#46,#79').css("background-image", "url('/imgs/bot_right_round.png'");
+	$('#46,#79').css("background-size", "cover");
+	$('#19').css("background-image", "url('/imgs/top_right_round.png'");
+	$('#19').css("background-size", "cover");
 	var paths = [
 		{direction: 'down', endpoint: $('#32')},
 		{direction: 'right', endpoint: $('#35')},
@@ -141,7 +174,6 @@ $(document).ready(function() {
 		$tower_one.css("background-color", "rgba(255,255,0,0.5)");
 		$tower_two.css("background-color", "transparent");
 		$tower_three.css("background-color", "transparent");
-		console.log("tower_one");
 		tower = {
 					image: "/imgs/green_tower.png",
 					range: 150,
@@ -153,7 +185,6 @@ $(document).ready(function() {
 		$tower_one.css("background-color", "transparent");
 		$tower_two.css("background-color", "rgba(255,255,0,0.5)");
 		$tower_three.css("background-color", "transparent");
-		console.log("tower_two");
 		tower = {
 					image: "/imgs/red_tower.png",
 					range: 250,
@@ -165,7 +196,6 @@ $(document).ready(function() {
 		$tower_one.css("background-color", "transparent");
 		$tower_two.css("background-color", "transparent");
 		$tower_three.css("background-color", "rgba(255,255,0,0.5)");
-		console.log("tower_three");
 		tower = {
 					image: "/imgs/rocket_tower.png",
 					range: 150,
@@ -199,7 +229,7 @@ $(document).ready(function() {
 	var interval = 100;
 	// var minionIntervalID = setInterval(minion_move, interval);
 	var cW = 100;
-	var player_hp = 5;
+	var player_hp = 10;
 	var minions_killed = 0;
 	var minionSpeed = 10;
 	var bulletTime = 400;
@@ -213,7 +243,7 @@ $(document).ready(function() {
 
 	// Start minion wave with btn click
 	$('.start_wave').on("click", function() {
-		$('.start_wave').hide();
+		$('.start_wave').css("visibility", "hidden");
 		$.ajax({
 			method: "GET",
 			url: "waves/"+waveCounter
@@ -246,14 +276,14 @@ $(document).ready(function() {
 
 		// Another set for play test
 		{distance : 300, time : 3000, direction: "down"},
-		{distance : 300, time : 3000, direction: "right"},
+		{distance : 400, time : 4000, direction: "right"},
 		{distance : 300, time : 3000, direction: "up"},
 		{distance : 300, time : 3000, direction: "right"},
 		// Going down from 18 to 68
-		{distance : 500, time : 5000, direction: "down"},
-		{distance : 700, time : 7000, direction: "left"},
+		{distance : 600, time : 6000, direction: "down"},
+		{distance : 800, time : 8000, direction: "left"},
 		{distance : 200, time : 2000, direction: "down"},
-		{distance : 800, time : 8000, direction: "right"}
+		{distance : 900, time : 9000, direction: "right"}
 
 		// {distance : 300, time : 300, direction: "down"},
 		// {distance : 300, time : 300, direction: "right"},
@@ -297,7 +327,10 @@ $(document).ready(function() {
 			// "margin-top": `+=${minionSpeed}px`
 			"top" : `+=${minion_displacement[0].distance}px`,
 
-			}, Number(`${minion_displacement[0].time/minion.speed*10}`), 'linear', function(){minion.pathIndex++;});
+			}, Number(`${minion_displacement[0].time/minion.speed*10}`), 'linear', function(){
+				minion.pathIndex++;
+				minion_selector.css("-webkit-transform", "rotate(270deg)");
+			});
 		hp_selector.animate({
 			"top": `+=${minion_displacement[0].distance}px`,
 		}, Number(`${minion_displacement[0].time/minion.speed*10}`), 'linear');
@@ -306,7 +339,10 @@ $(document).ready(function() {
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"left" : `+=${minion_displacement[1].distance}px`,
-			}, Number(`${minion_displacement[1].time/minion.speed*10}`), 'linear', function(){minion.pathIndex++;});
+			}, Number(`${minion_displacement[1].time/minion.speed*10}`), 'linear', function(){
+				minion.pathIndex++;
+				minion_selector.css("-webkit-transform", "rotate(180deg)");
+			});
 		hp_selector.animate({
 			"left": `+=${minion_displacement[1].distance}px`,
 		}, Number(`${minion_displacement[1].time/minion.speed*10}`), 'linear');
@@ -315,7 +351,10 @@ $(document).ready(function() {
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"top" : `-=${minion_displacement[2].distance}px`,
-			}, Number(`${minion_displacement[2].time/minion.speed*10}`), 'linear', function(){minion.pathIndex++;});
+			}, Number(`${minion_displacement[2].time/minion.speed*10}`), 'linear', function(){
+				minion.pathIndex++;
+				minion_selector.css("-webkit-transform", "rotate(270deg)");
+			});
 		hp_selector.animate({
 			"top": `-=${minion_displacement[2].distance}px`,
 		}, Number(`${minion_displacement[2].time/minion.speed*10}`), 'linear');
@@ -324,7 +363,10 @@ $(document).ready(function() {
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"left" : `+=${minion_displacement[3].distance}px`,
-			}, Number(`${minion_displacement[3].time/minion.speed*10}`), 'linear', function(){minion.pathIndex++;});
+			}, Number(`${minion_displacement[3].time/minion.speed*10}`), 'linear', function(){
+				minion.pathIndex++;
+				minion_selector.css("-webkit-transform", "rotate(360deg)");
+			});
 		hp_selector.animate({
 			"left": `+=${minion_displacement[3].distance}px`,
 		}, Number(`${minion_displacement[3].time/minion.speed*10}`), 'linear');
@@ -333,7 +375,10 @@ $(document).ready(function() {
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"top" : `+=${minion_displacement[4].distance}px`,
-			}, Number(`${minion_displacement[4].time/minion.speed*10}`), 'linear', function(){minion.pathIndex++;});
+			}, Number(`${minion_displacement[4].time/minion.speed*10}`), 'linear', function(){
+				minion.pathIndex++;
+				minion_selector.css("-webkit-transform", "rotate(90deg)");
+			});
 		hp_selector.animate({
 			"top": `+=${minion_displacement[4].distance}px`,
 		}, Number(`${minion_displacement[4].time/minion.speed*10}`), 'linear');
@@ -342,7 +387,10 @@ $(document).ready(function() {
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"left" : `-=${minion_displacement[5].distance}px`,
-			}, Number(`${minion_displacement[5].time/minion.speed*10}`), 'linear', function(){minion.pathIndex++;});
+			}, Number(`${minion_displacement[5].time/minion.speed*10}`), 'linear', function(){
+				minion.pathIndex++;
+				minion_selector.css("-webkit-transform", "rotate(360deg)");
+			});
 		hp_selector.animate({
 			"left": `-=${minion_displacement[5].distance}px`,
 		}, Number(`${minion_displacement[5].time/minion.speed*10}`), 'linear');
@@ -351,7 +399,10 @@ $(document).ready(function() {
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"top" : `+=${minion_displacement[6].distance}px`,
-			}, Number(`${minion_displacement[6].time/minion.speed*10}`), 'linear', function(){minion.pathIndex++;});
+			}, Number(`${minion_displacement[6].time/minion.speed*10}`), 'linear', function(){
+				minion.pathIndex++;
+				minion_selector.css("-webkit-transform", "rotate(270deg)");
+			});
 		hp_selector.animate({
 			"top": `+=${minion_displacement[6].distance}px`,
 		}, Number(`${minion_displacement[6].time/minion.speed*10}`), 'linear');
@@ -370,7 +421,7 @@ $(document).ready(function() {
 				return element._id != minion._id;
 			});
 			if (minion_wave.length === 0 && spawned_wave.length === 0) {
-				$('.start_wave').show();
+				$('.start_wave').css("visibility", "visible");
 			}
 			updateGameState();
 		});
@@ -394,7 +445,6 @@ $(document).ready(function() {
 	function submitScore(){
 		
 		var name = $('.card-title').text();
-		console.log("name is " + name);
 		var time = new Date();
 		$.ajax({
 			method: "POST",
@@ -446,30 +496,6 @@ $(document).ready(function() {
 	}
 
 
-	// function minion_move(minion) {
-	// 	// var minion = $('#m1');
-	// 	console.log(minion);
-	// 	console.log(minion.offset());
-	// 	var column = $('#36');
-	// 	// checking the minion x > column's x+width 
-		// if(minion.offset().left >= column.offset().left+cW/2){
-		// 	console.log(minion.offset().left);
-		// 	console.log(column.offset().left);
-		// 	window.clearInterval(minionIntervalID);
-		// }
-		
-	// 	minion.animate({
-	// 		"margin-left": `+=${minion.speed}px`
-	// 	}, interval);
-	// }
-
-
-	// Create bullet incrementally
-	// var $tower = $('#43');
-	// $tower.append(`<img src="/imgs/car1.jpg" class="bullet" id="b1">`);
-	
-	// shoot_bullet();
-
 	// minion is the minion obj, tower obj
 	function shoot_bullet(minion, tower){
 		// var minion = $('#m1');
@@ -518,11 +544,10 @@ $(document).ready(function() {
 				});
 
 				if (minion_wave.length === 0 && spawned_wave.length === 0) {
-					$('.start_wave').show();
+					$('.start_wave').css("visibility", "visible");
 				}
 				
 				minion_selector.remove();
-				console.log(minion_selector.length);
 				if (minion.alive){
 					minions_killed++;
 					$('.minions_killed').text(minions_killed);
@@ -535,14 +560,23 @@ $(document).ready(function() {
 	}
 });
 
+// when edit btn is submited
 function profileBtnOnSubmit(event){
 	event.preventDefault();
-	$('.toggle').toggle();
 	var d = $(this).serialize();
 	let name = $('.card-title').text();
+	let link = $('.card-img-top').attr('src');
+	let currLink = $('[name=profile_link]').val();
+
+	// prefill old link if user doesnt left the field blank
+	if(currLink == "" || currLink == undefined || currLink == null){
+		link = "https://maxcdn.icons8.com/Share/icon/ultraviolet/Users//guest1600.png";
+		$('[name=profile_link]').val(link);
+	}
 	let newName = $('[name=profile_name]').val();
 	let newLink = $('[name=profile_link]').val();
-	console.log(d);
+	// clear out input fields after submit
+	$('.toggle').toggle();
 		$.ajax({
 			method: "PUT",
 			url: "/users/"+ name,
@@ -552,21 +586,20 @@ function profileBtnOnSubmit(event){
 			},
 			
 		}).then(function(user){
+			console.log("returned user is ", user);
 			renderProfile(user);
-			$('.toggle').toggle();
 		});
 }
 
 // Take in input name and input images and render on the gamepage
 function renderProfile(user){
-	console.log(user);
 	// var form = $('.profile_form');
 	// form.hide();
-	$('#myModal').modal('hide');
+
 	$('.show_profile').html(
 		 `	
 		<div class="card" >
-			  <img class="card-img-top" src=${user.profileImage} alt="Card image cap">
+			  <img class="card-img-top" src=${user.profileImage} alt="Broken Img Link =(">
 			  <div class="card-body">
 			    <h4 class="card-title">${user.name}</h4>
 			  </div>	
@@ -582,7 +615,11 @@ function displayErr(err){
 }
 
 function displayForm(event){
+	let name = $('.card-title').text();
+	let link = $('.card-img-top').attr('src');
 	$('.toggle').toggle();
+	$('[name=profile_name]').val(name);
+	$('[name=profile_link]').val(link);
 }
 
 function deleteProfile(){
@@ -604,7 +641,7 @@ function updateProfile(event) {
 function templateRow(x,y){
 	return`
 		<div class="column" id="${x}${y}">
-			${x}${y}
+		${x}${y}
 		</div>
 	`;
 }

@@ -51,6 +51,7 @@ function destroy(req, res) {
 }
 
 function update(req, res) {
+
 	db.User.findOne({name: req.params.name}, function(err, user){
 		user.name = req.body.name;
 		user.profileImage = req.body.link;
