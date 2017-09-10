@@ -43,7 +43,7 @@ $(document).ready(function() {
 
 	// Create a gameboard dynamically with array
 	var $board = $('.board');
-	var board_size = 8;
+	var board_size = 9;
 	var row = "";
 	// Hardcoded the gameboard grids
 	for(var i = 1; i <= board_size; i ++){
@@ -56,8 +56,31 @@ $(document).ready(function() {
 	}
 	$board.append(row);
 	// hardcoding color for terrain, for better visual..
-	$('#12,#22,#32,#42,#43,#44,#45,#35,#25,#15,#16,#17,#18,#28,#38,#48,#58,#68,#67,#66,#65,#64,#63,#62,#61,#71,#81,#82,#83,#84,#85,#86,#87,#88').addClass("path");
+	// $('#12,#22,#32,#42,#43,#44,#45,#46,#36,#26,#16,#17,#18,#19,#110,#210,#310,#410,#510,#610,#710, #79,#78,#77,#76, #75,#74 ,#73 ,#72,#71, #81, #91, #101,#102,#103,#104,#105,#106,#107,#108,#109,#1010').addClass("path");
+	$('#12,#22,#32,#42,#43,#44,#45,#46,#36,#26,#16,#17,#18,#19,#19,#29,#39,#49,#59,#69, #79,#78,#77,#76, #75,#74 ,#73 ,#72,#71, #81, #91, #91,#92,#93,#94,#95,#96,#97,#98,#99,#910').addClass("path");
 	$('.edit-btn').on("click", displayForm);
+	// hardcoding css images...
+	//left side is path for these divs..
+	$('#13,#23,#37,#47').css("background-image", "url('/imgs/left_brown.png'");
+	$('#13,#23,#37,#47').css("background-size", "cover");
+	//right side is path for these divs..
+	$(' #11,#21,#31,#41,#15,#25,#38,#48,#58').css("background-image", "url('/imgs/right_brown.png'");
+	$(' #11,#21,#31,#41,#15,#25,#38,#48,#58').css("background-size", "cover");
+	//top brown ...
+	$('#52,#53,#54,#55,#56').css("background-image", "url('/imgs/top_brown.png'");
+	$('#52,#53,#54,#55,#56').css("background-size", "cover");
+	// bottom brown...
+	$('#34,#61,#62,#63,#64,#65,#66,#67').css("background-image", "url('/imgs/bottom_brown.png'");
+	$('#34,#61,#62,#63,#64,#65,#66,#67').css("background-size", "cover");
+	// top bot brown...
+	$('#83,#84,#85,#86,#87,#88,#89').css("background-image", "url('/imgs/top_bot_brown2.png'");
+	$('#83,#84,#85,#86,#87,#88,#89').css("background-size", "cover");
+	// corners..... brown
+	$('#33').css("background-image", "url('/imgs/left_bot_round2.png'");
+	$('#33').css("background-size", "cover");
+	// roundbrown...
+	$('#82').css("background-image", "url('/imgs/round_brown_2.png'");
+	$('#82').css("background-size", "cover");
 
 	var paths = [
 		{direction: 'down', endpoint: $('#32')},
@@ -109,7 +132,14 @@ $(document).ready(function() {
 			dmg: 20,
 			cost: 75,
 	};
+	var $tower_one = $('.tower_one');
+	var $tower_two = $('.tower_two');
+	var $tower_three = $('.tower_three');
+	$tower_one.css("background-color", "rgba(255,255,0,0.5)");
 	$('.tower_one').on("click",function(){
+		$tower_one.css("background-color", "rgba(255,255,0,0.5)");
+		$tower_two.css("background-color", "transparent");
+		$tower_three.css("background-color", "transparent");
 		console.log("tower_one");
 		tower = {
 					image: "/imgs/green_tower.png",
@@ -119,6 +149,9 @@ $(document).ready(function() {
 		};
 	});
 	$('.tower_two').on("click", function(){
+		$tower_one.css("background-color", "transparent");
+		$tower_two.css("background-color", "rgba(255,255,0,0.5)");
+		$tower_three.css("background-color", "transparent");
 		console.log("tower_two");
 		tower = {
 					image: "/imgs/red_tower.png",
@@ -128,6 +161,9 @@ $(document).ready(function() {
 		};
 	});
 	$('.tower_three').on("click",function(){
+		$tower_one.css("background-color", "transparent");
+		$tower_two.css("background-color", "transparent");
+		$tower_three.css("background-color", "rgba(255,255,0,0.5)");
 		console.log("tower_three");
 		tower = {
 					image: "/imgs/rocket_tower.png",
@@ -326,7 +362,17 @@ $(document).ready(function() {
 			}, Number(`${minion_displacement[7].time/minion.speed*10}`), 'linear');
 		hp_selector.animate({
 			"left": `+=${minion_displacement[7].distance}px`,
-		}, Number(`${minion_displacement[7].time/minion.speed*10}`), 'linear', updateGameState);
+		}, Number(`${minion_displacement[7].time/minion.speed*10}`), 'linear', function(){
+			minion_selector.remove();
+			hp_selector.remove();
+			spawned_wave =spawned_wave.filter(function(element) {
+				return element._id != minion._id;
+			});
+			if (minion_wave.length === 0 && spawned_wave.length === 0) {
+				$('.start_wave').show();
+			}
+			updateGameState();
+		});
 	}
 
 	function updateGameState() {
