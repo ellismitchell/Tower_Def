@@ -35,9 +35,9 @@
 		        <a href="/scores.html" class="btn btn-dark">View Scores</a>
 		      </li>
 		       <li class="nav-item">
-		      	<button class="start_wave btn btn-dark">Start Wave </button>
+		      	
 		      </li>
-		      <li class="nav-item">
+		      
 		       
 		      	<form class="profile_form" method="" action="">
 		      		<button type="submit" class="edit-btn btn btn-dark toggle">Edit Profile</button>
@@ -48,7 +48,7 @@
 		      	</form>
 
 
-		      </li>
+		      
 		    </ul>
 <!-- 		    <div class="form-inline my-2 my-lg-0">
 		    		<div class="dropdown">
@@ -69,20 +69,19 @@
 
 
 		<header>
-
-			<div class="show_profile"></div>
-			<div >
-				<span> <img src="/imgs/Heart-icon.png">:<span class="player_health"></span></span>
-				<span> <img src="/imgs/crossbone.png">:<span class="minions_killed"> 0 </span></span>
-				<span><img src="/imgs/gold.png">: <span class="player_gold"></span></span>
-				
+			<div class="player_stats">
+				<span> <img src="/imgs/Heart-icon.png"><span class="player_health"></span></span>
+				<span> <img src="/imgs/crossbone.png"><span class="minions_killed"> 0 </span></span>
+				<span><img src="/imgs/gold.png"> <span class="player_gold"></span></span>
 			</div>
 			
 			<div class="tower_panel">
-				<div class="tower_ref tower_one"><img src="/imgs/green_tower.png">75</div>
-				<div class="tower_two tower_ref"><img src="/imgs/red_tower.png">100</div>
-				<div class="tower_three tower_ref"><img src="/imgs/rocket_tower.png">125</div>
+				<div class=" tower_one"><img class="tower_ref" src="/imgs/green_tower.png">75<img src="/imgs/gold.png"></div>
+				<div class="tower_two tower_ref"><img class="tower_ref" src="/imgs/red_tower.png">100<img src="/imgs/gold.png"></div>
+				<div class="tower_three tower_ref"><img class="tower_ref" src="/imgs/rocket_tower.png">125<img src="/imgs/gold.png"></div>
 			</div>
+			<button class="start_wave btn btn-lg btn-danger">Start!</button>
+			<div class="show_profile"></div>
 		</header>
 		<main class="clearfix">
 			
@@ -101,7 +100,7 @@
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
 			      <div class="modal-header">
-			        <h3 class="modal-title toggle" id="exampleModalLabel">Please enter your name to continue.</h3>
+			        <h3 class="modal-title toggle" id="exampleModalLabel">Please enter your name to continue. (Click)</h3>
 			        <!-- <h5 class="modal-title toggle hidden">Enter your Image Link</h5> -->
 			 
 			      </div>

@@ -9,6 +9,9 @@ body{
 	margin: 0;
 	/*font-family: 'KenPixel Blocks'*/
 }
+.modal-title{
+	font-size: 1.6rem;
+}
 
 header{
 	float: right;
@@ -20,6 +23,9 @@ header{
 	padding: 0;
 	margin: 0 55px 0 0;
 }
+.player_stats{
+	margin: 10px 0 10px 0 ;
+}
 
 header>div{
 	display: block;
@@ -27,12 +33,12 @@ header>div{
 	margin: auto;
 }
 
-header>.btn,button{
-	width:auto;
-	margin: 0 0 10px 0;
-}
+
 span{
-	margin: 5px;
+	
+	margin-left: 15px;
+	padding-left: 0px;
+
 }
 
 .nav-item{
@@ -87,13 +93,20 @@ form>input,button{
 
 .tower_panel{
 	height: auto;
+	margin: 20px 0 20px 0 ;
 }
 div>.tower_one, .tower_two, .tower_three{
 	display: inline-block;
 }
 
+.tower_panel>div{
+	text-align: center;
+	display: table-cell;
+	width: 190px;
+	height: 100px;
+}
 .tower_ref{
-	display: inline-block;
+	width: 100px;
 }
 
 .modal-body>input{
@@ -108,6 +121,11 @@ div>.tower_one, .tower_two, .tower_three{
 }
 button>.btn{
 	width: 100%;
+}
+.start_wave{
+	width: 380px;
+	height: 100px;
+	margin: 10px;
 }
 
 .board{

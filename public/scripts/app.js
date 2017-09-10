@@ -221,7 +221,7 @@ $(document).ready(function() {
 
 	// Start minion wave with btn click
 	$('.start_wave').on("click", function() {
-		$('.start_wave').hide();
+		$('.start_wave').css("visibility", "hidden");
 		$.ajax({
 			method: "GET",
 			url: "waves/"+waveCounter
@@ -378,7 +378,7 @@ $(document).ready(function() {
 				return element._id != minion._id;
 			});
 			if (minion_wave.length === 0 && spawned_wave.length === 0) {
-				$('.start_wave').show();
+				$('.start_wave').css("visibility", "visible");
 			}
 			updateGameState();
 		});
@@ -501,7 +501,7 @@ $(document).ready(function() {
 				});
 
 				if (minion_wave.length === 0 && spawned_wave.length === 0) {
-					$('.start_wave').show();
+					$('.start_wave').css("visibility", "visible");
 				}
 				
 				minion_selector.remove();
