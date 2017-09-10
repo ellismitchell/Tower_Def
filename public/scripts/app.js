@@ -326,7 +326,10 @@ $(document).ready(function() {
 			// "margin-top": `+=${minionSpeed}px`
 			"top" : `+=${minion_displacement[0].distance}px`,
 
-			}, Number(`${minion_displacement[0].time/minion.speed*10}`), 'linear', function(){minion.pathIndex++;});
+			}, Number(`${minion_displacement[0].time/minion.speed*10}`), 'linear', function(){
+				minion.pathIndex++;
+				minion_selector.css("-webkit-transform", "rotate(270deg)");
+			});
 		hp_selector.animate({
 			"top": `+=${minion_displacement[0].distance}px`,
 		}, Number(`${minion_displacement[0].time/minion.speed*10}`), 'linear');
@@ -335,7 +338,10 @@ $(document).ready(function() {
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"left" : `+=${minion_displacement[1].distance}px`,
-			}, Number(`${minion_displacement[1].time/minion.speed*10}`), 'linear', function(){minion.pathIndex++;});
+			}, Number(`${minion_displacement[1].time/minion.speed*10}`), 'linear', function(){
+				minion.pathIndex++;
+				minion_selector.css("-webkit-transform", "rotate(180deg)");
+			});
 		hp_selector.animate({
 			"left": `+=${minion_displacement[1].distance}px`,
 		}, Number(`${minion_displacement[1].time/minion.speed*10}`), 'linear');
@@ -344,7 +350,10 @@ $(document).ready(function() {
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"top" : `-=${minion_displacement[2].distance}px`,
-			}, Number(`${minion_displacement[2].time/minion.speed*10}`), 'linear', function(){minion.pathIndex++;});
+			}, Number(`${minion_displacement[2].time/minion.speed*10}`), 'linear', function(){
+				minion.pathIndex++;
+				minion_selector.css("-webkit-transform", "rotate(270deg)");
+			});
 		hp_selector.animate({
 			"top": `-=${minion_displacement[2].distance}px`,
 		}, Number(`${minion_displacement[2].time/minion.speed*10}`), 'linear');
@@ -353,7 +362,10 @@ $(document).ready(function() {
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"left" : `+=${minion_displacement[3].distance}px`,
-			}, Number(`${minion_displacement[3].time/minion.speed*10}`), 'linear', function(){minion.pathIndex++;});
+			}, Number(`${minion_displacement[3].time/minion.speed*10}`), 'linear', function(){
+				minion.pathIndex++;
+				minion_selector.css("-webkit-transform", "rotate(360deg)");
+			});
 		hp_selector.animate({
 			"left": `+=${minion_displacement[3].distance}px`,
 		}, Number(`${minion_displacement[3].time/minion.speed*10}`), 'linear');
@@ -362,7 +374,10 @@ $(document).ready(function() {
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"top" : `+=${minion_displacement[4].distance}px`,
-			}, Number(`${minion_displacement[4].time/minion.speed*10}`), 'linear', function(){minion.pathIndex++;});
+			}, Number(`${minion_displacement[4].time/minion.speed*10}`), 'linear', function(){
+				minion.pathIndex++;
+				minion_selector.css("-webkit-transform", "rotate(90deg)");
+			});
 		hp_selector.animate({
 			"top": `+=${minion_displacement[4].distance}px`,
 		}, Number(`${minion_displacement[4].time/minion.speed*10}`), 'linear');
@@ -371,7 +386,10 @@ $(document).ready(function() {
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"left" : `-=${minion_displacement[5].distance}px`,
-			}, Number(`${minion_displacement[5].time/minion.speed*10}`), 'linear', function(){minion.pathIndex++;});
+			}, Number(`${minion_displacement[5].time/minion.speed*10}`), 'linear', function(){
+				minion.pathIndex++;
+				minion_selector.css("-webkit-transform", "rotate(360deg)");
+			});
 		hp_selector.animate({
 			"left": `-=${minion_displacement[5].distance}px`,
 		}, Number(`${minion_displacement[5].time/minion.speed*10}`), 'linear');
@@ -380,7 +398,10 @@ $(document).ready(function() {
 		minion_selector.animate({
 			// "margin-top": `+=${minionSpeed}px`
 			"top" : `+=${minion_displacement[6].distance}px`,
-			}, Number(`${minion_displacement[6].time/minion.speed*10}`), 'linear', function(){minion.pathIndex++;});
+			}, Number(`${minion_displacement[6].time/minion.speed*10}`), 'linear', function(){
+				minion.pathIndex++;
+				minion_selector.css("-webkit-transform", "rotate(270deg)");
+			});
 		hp_selector.animate({
 			"top": `+=${minion_displacement[6].distance}px`,
 		}, Number(`${minion_displacement[6].time/minion.speed*10}`), 'linear');
