@@ -2,7 +2,11 @@
 console.log("app js is loaded");
 
 $(document).ready(function() {
-	$('#myModal').modal();
+	$('#myModal').modal({
+		backdrop: 'static',
+		keyboard: false,
+	});
+
 	$('.user-submit').click(function(){
 		let name = $('[name=username]').val();
 		console.log(name);
@@ -17,10 +21,9 @@ $(document).ready(function() {
 		if (data === null) {
 			console.log("WE ARE IN");
 			// $('input').toggle();
-			$('.modal-title').text('Enter your image link');
+			$('.modal-title').html(`<h2>Enter your image link</h2>`);
 			$('.modal-body').html('<input type="url" name="image-link" >');
-			$('.modal-footer').html(` <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="image-submit btn btn-primary">Save changes</button>`);
+			$('.modal-footer').html(`<button type="button" class="image-submit btn btn-primary">Save changes</button>`);
 			$('.image-submit').click(function(){
 				var img_link = $('[name=image-link]').val();
 
@@ -57,20 +60,22 @@ $(document).ready(function() {
 	$board.append(row);
 	// hardcoding color for terrain, for better visual..
 	// $('#12,#22,#32,#42,#43,#44,#45,#46,#36,#26,#16,#17,#18,#19,#110,#210,#310,#410,#510,#610,#710, #79,#78,#77,#76, #75,#74 ,#73 ,#72,#71, #81, #91, #101,#102,#103,#104,#105,#106,#107,#108,#109,#1010').addClass("path");
+	$('#14,#24,#51,#57').css("background-image", "url('/imgs/green_field.png'");
+	$('#14,#24,#51,#57').css("background-size", "cover");
 	$('#12,#22,#32,#42,#43,#44,#45,#46,#36,#26,#16,#17,#18,#19,#19,#29,#39,#49,#59,#69, #79,#78,#77,#76, #75,#74 ,#73 ,#72,#71, #81, #91, #91,#92,#93,#94,#95,#96,#97,#98,#99,#910').addClass("path");
 	$('.edit-btn').on("click", displayForm);
 	// hardcoding css images...
 	//left side is path for these divs..
-	$('#13,#23,#37,#47').css("background-image", "url('/imgs/left_brown.png'");
+	$('#13,#23,#37,#47').css("background-image", "url('/imgs/left_brown2.png'");
 	$('#13,#23,#37,#47').css("background-size", "cover");
 	//right side is path for these divs..
-	$(' #11,#21,#31,#41,#15,#25,#38,#48,#58').css("background-image", "url('/imgs/right_brown.png'");
+	$(' #11,#21,#31,#41,#15,#25,#38,#48,#58').css("background-image", "url('/imgs/right_brown2.png'");
 	$(' #11,#21,#31,#41,#15,#25,#38,#48,#58').css("background-size", "cover");
 	//top brown ...
-	$('#52,#53,#54,#55,#56').css("background-image", "url('/imgs/top_brown.png'");
+	$('#52,#53,#54,#55,#56').css("background-image", "url('/imgs/top_brown2.png'");
 	$('#52,#53,#54,#55,#56').css("background-size", "cover");
 	// bottom brown...
-	$('#34,#61,#62,#63,#64,#65,#66,#67').css("background-image", "url('/imgs/bottom_brown.png'");
+	$('#34,#61,#62,#63,#64,#65,#66,#67').css("background-image", "url('/imgs/bottom_brown2.png'");
 	$('#34,#61,#62,#63,#64,#65,#66,#67').css("background-size", "cover");
 	// top bot brown...
 	$('#83,#84,#85,#86,#87,#88,#89').css("background-image", "url('/imgs/top_bot_brown2.png'");
@@ -81,6 +86,12 @@ $(document).ready(function() {
 	// roundbrown...
 	$('#82').css("background-image", "url('/imgs/round_brown_2.png'");
 	$('#82').css("background-size", "cover");
+	$('#35,#68').css("background-image", "url('/imgs/right_bot_round2.png'");
+	$('#35,#68').css("background-size", "cover");
+	$('#28').css("background-image", "url('/imgs/right_top_round2.png'");
+	$('#28').css("background-size", "cover");
+	$('#27').css("background-image", "url('/imgs/left_top_round2.png'");
+	$('#27').css("background-size", "cover");
 
 	var paths = [
 		{direction: 'down', endpoint: $('#32')},
@@ -245,14 +256,14 @@ $(document).ready(function() {
 
 		// Another set for play test
 		{distance : 300, time : 3000, direction: "down"},
-		{distance : 300, time : 3000, direction: "right"},
+		{distance : 400, time : 4000, direction: "right"},
 		{distance : 300, time : 3000, direction: "up"},
 		{distance : 300, time : 3000, direction: "right"},
 		// Going down from 18 to 68
-		{distance : 500, time : 5000, direction: "down"},
-		{distance : 700, time : 7000, direction: "left"},
+		{distance : 600, time : 6000, direction: "down"},
+		{distance : 800, time : 8000, direction: "left"},
 		{distance : 200, time : 2000, direction: "down"},
-		{distance : 800, time : 8000, direction: "right"}
+		{distance : 900, time : 9000, direction: "right"}
 
 		// {distance : 300, time : 300, direction: "down"},
 		// {distance : 300, time : 300, direction: "right"},
@@ -592,7 +603,7 @@ function updateProfile(event) {
 function templateRow(x,y){
 	return`
 		<div class="column" id="${x}${y}">
-			${x}${y}
+		
 		</div>
 	`;
 }

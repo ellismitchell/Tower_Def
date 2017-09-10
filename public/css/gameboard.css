@@ -68,6 +68,14 @@ img{
 	height: 100px;
 }
 
+.modal-body>input{
+	width: 100%;
+}
+
+.modal-footer>.btn{
+	width: 100%;
+}
+
 
 .board{
  margin-left : 20px;
