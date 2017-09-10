@@ -537,12 +537,18 @@ function profileBtnOnSubmit(event){
 	console.log($(this));
 	var d = $(this).serialize();
 	let name = $('.card-title').text();
+	let link = $('.card-img-top').attr('src');
+	// prefill old link if user doesnt left the field blank
+	if(link == "" || link == undefined){
+		$('[name=profile_link]').val(link);
+	}
 	let newName = $('[name=profile_name]').val();
 	let newLink = $('[name=profile_link]').val();
 	if(newName == "" || newName == undefined) {
 		alert('Please enter a valid name');
 		return;
 	}
+
 	console.log(newName + newLink);
 	$('.toggle').toggle();
 		$.ajax({
@@ -584,6 +590,10 @@ function displayErr(err){
 
 function displayForm(event){
 	$('.toggle').toggle();
+	let name = $('.card-title').text();
+	let link = $('.card-img-top').attr('src');
+	$('[name=profile_name]').val(name);
+	$('[name=profile_link]').val(link);
 }
 
 function updateProfile(event) {

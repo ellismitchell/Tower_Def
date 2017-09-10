@@ -37,16 +37,11 @@
 		       <li class="nav-item">
 		      	<form class="profile_form" method=""  action="">
 		      		<button type="submit" class="edit-btn btn btn-dark toggle">Edit Profile</button>
-		      		<button type="submit" class="edit-btn btn btn-dark hidden toggle">Save</button>
+		      		<button type="submit" class="save-btn btn btn-dark hidden toggle">Save</button>
 		      		<input type="url" name="profile_link" class= "toggle hidden" placeholder="Image Link">
 
 		      		<input type="text" name="profile_name" class= "toggle hidden" placeholder="Name" required>
 		      	</form>
-		      	<div class="player_stats">
-		      		<span> <img src="/imgs/Heart-icon.png"><span class="player_health"></span></span>
-		      		<span> <img src="/imgs/crossbone.png"><span class="minions_killed"> 0 </span></span>
-		      		<span><img src="/imgs/gold.png"> <span class="player_gold"></span></span>
-		      	</div>
 		      </li>
 		      
 		       
@@ -73,7 +68,11 @@
 
 
 		<header>
-			
+			<div class="player_stats">
+				<span> <img src="/imgs/Heart-icon.png"><span class="player_health"></span></span>
+				<span> <img src="/imgs/crossbone.png"><span class="minions_killed"> 0 </span></span>
+				<span><img src="/imgs/gold.png"> <span class="player_gold"></span></span>
+			</div>
 			<div class="tower_panel">
 				<div class=" tower_one"><img class="tower_ref" src="/imgs/green_tower.png">75<img src="/imgs/gold.png"></div>
 				<div class="tower_two tower_ref"><img class="tower_ref" src="/imgs/red_tower.png">100<img src="/imgs/gold.png"></div>
