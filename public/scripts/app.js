@@ -67,33 +67,48 @@ $(document).ready(function() {
 	$('.edit-btn').on("click", displayForm);
 	// hardcoding css images...
 	//left side is path for these divs..
-	$('#13,#23,#37,#47').css("background-image", "url('/imgs/left_brown2.png'");
-	$('#13,#23,#37,#47').css("background-size", "cover");
-	//right side is path for these divs..
-	$(' #11,#21,#31,#41,#15,#25,#38,#48,#58').css("background-image", "url('/imgs/right_brown2.png'");
-	$(' #11,#21,#31,#41,#15,#25,#38,#48,#58').css("background-size", "cover");
-	//top brown ...
-	$('#52,#53,#54,#55,#56').css("background-image", "url('/imgs/top_brown2.png'");
-	$('#52,#53,#54,#55,#56').css("background-size", "cover");
-	// bottom brown...
-	$('#34,#61,#62,#63,#64,#65,#66,#67').css("background-image", "url('/imgs/bottom_brown2.png'");
-	$('#34,#61,#62,#63,#64,#65,#66,#67').css("background-size", "cover");
-	// top bot brown...
-	$('#83,#84,#85,#86,#87,#88,#89').css("background-image", "url('/imgs/top_bot_brown2.png'");
-	$('#83,#84,#85,#86,#87,#88,#89').css("background-size", "cover");
-	// corners..... brown
-	$('#33').css("background-image", "url('/imgs/left_bot_round2.png'");
-	$('#33').css("background-size", "cover");
-	// roundbrown...
-	$('#82').css("background-image", "url('/imgs/round_brown_2.png'");
-	$('#82').css("background-size", "cover");
-	$('#35,#68').css("background-image", "url('/imgs/right_bot_round2.png'");
-	$('#35,#68').css("background-size", "cover");
-	$('#28').css("background-image", "url('/imgs/right_top_round2.png'");
-	$('#28').css("background-size", "cover");
-	$('#27').css("background-image", "url('/imgs/left_top_round2.png'");
-	$('#27').css("background-size", "cover");
+	// $('#13,#23,#37,#47').css("background-image", "url('/imgs/left_brown2.png'");
+	// $('#13,#23,#37,#47').css("background-size", "cover");
+	// //right side is path for these divs..
+	// $(' #11,#21,#31,#41,#15,#25,#38,#48,#58').css("background-image", "url('/imgs/right_brown2.png'");
+	// $(' #11,#21,#31,#41,#15,#25,#38,#48,#58').css("background-size", "cover");
+	// //top brown ...
+	// $('#52,#53,#54,#55,#56').css("background-image", "url('/imgs/top_brown2.png'");
+	// $('#52,#53,#54,#55,#56').css("background-size", "cover");
+	// // bottom brown...
+	// $('#34,#61,#62,#63,#64,#65,#66,#67').css("background-image", "url('/imgs/bottom_brown2.png'");
+	// $('#34,#61,#62,#63,#64,#65,#66,#67').css("background-size", "cover");
+	// // top bot brown...
+	// $('#83,#84,#85,#86,#87,#88,#89').css("background-image", "url('/imgs/top_bot_brown2.png'");
+	// $('#83,#84,#85,#86,#87,#88,#89').css("background-size", "cover");
+	// // corners..... brown
+	// $('#33').css("background-image", "url('/imgs/left_bot_round2.png'");
+	// $('#33').css("background-size", "cover");
+	// // roundbrown...
+	// $('#82').css("background-image", "url('/imgs/round_brown_2.png'");
+	// $('#82').css("background-size", "cover");
+	// $('#35,#68').css("background-image", "url('/imgs/right_bot_round2.png'");
+	// $('#35,#68').css("background-size", "cover");
+	// $('#28').css("background-image", "url('/imgs/right_top_round2.png'");
+	// $('#28').css("background-size", "cover");
+	// $('#27').css("background-image", "url('/imgs/left_top_round2.png'");
+	// $('#27').css("background-size", "cover");
 
+	// column
+	$('#12,#22,#32,#26,#36,#29,#39,#49,#59,#69,#81').css("background-image", "url('/imgs/col.png'");
+	$('#12,#22,#32,#26,#36,#29,#39,#49,#59,#69,#81').css("background-size", "cover")
+	//row
+	$('#43,#44,#45,#17,#18,#72,#73,#74,#75,#76,#77,#78,#92,#93,#94,#95,#96,#97,#98,#99').css("background-image", "url('/imgs/row.png'");
+	$('#43,#44,#45,#17,#18,#72,#73,#74,#75,#76,#77,#78,#92,#93,#94,#95,#96,#97,#98,#99').css("background-size", "cover");
+	// left corners
+	$('#42,#91').css("background-image", "url('/imgs/bot_left_round.png'");
+	$('#42,#91').css("background-size", "cover");
+	$('#16,#71').css("background-image", "url('/imgs/top_left_round.png'");
+	$('#16,#71').css("background-size", "cover");
+	$('#46,#79').css("background-image", "url('/imgs/bot_right_round.png'");
+	$('#46,#79').css("background-size", "cover");
+	$('#19').css("background-image", "url('/imgs/top_right_round.png'");
+	$('#19').css("background-size", "cover");
 	var paths = [
 		{direction: 'down', endpoint: $('#32')},
 		{direction: 'right', endpoint: $('#35')},
@@ -207,7 +222,7 @@ $(document).ready(function() {
 	var interval = 100;
 	// var minionIntervalID = setInterval(minion_move, interval);
 	var cW = 100;
-	var player_hp = 5;
+	var player_hp = 10;
 	var minions_killed = 0;
 	var minionSpeed = 10;
 	var bulletTime = 400;
@@ -519,11 +534,12 @@ $(document).ready(function() {
 
 function profileBtnOnSubmit(event){
 	event.preventDefault();
-	$('.toggle').toggle();
+	
 	var d = $(this).serialize();
 	let name = $('.card-title').text();
 	let newName = $('[name=profile_name]').val();
 	let newLink = $('[name=profile_link]').val();
+	$('.toggle').toggle();
 		$.ajax({
 			method: "PUT",
 			url: "/users/"+ name,
