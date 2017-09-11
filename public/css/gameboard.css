@@ -1,10 +1,12 @@
 /*gameboard.css*/
 
 body{
-	background-color: #e8d7d7;
+	/*background-color: #e8d7d7;*/
+	background-color: black;
 	/*font-family: 'Londrina Shadow', cursive;*/
-	font-size: 2rem;
+	font-size: 3rem;
 	margin: 50px;
+	color: red;
 	font-family: 'Indie Flower', cursive;
 	margin: 0;
 	/*font-family: 'KenPixel Blocks'*/
@@ -73,11 +75,11 @@ main{
 	height: 100px;
 	width: 100px;
 	position: relative;
-	background-image : url("/imgs/green_field.png");
+	/*background-image : url("/imgs/green_field.png");*/
 }
 .path {
-	background-color: gray;
-	background-image: url("/imgs/path.png");
+	background-color: black;
+	/*background-image: url("/imgs/path.png");*/
 }
 .btn{
 	font-size: 2rem;
@@ -107,6 +109,7 @@ div>.tower_one, .tower_two, .tower_three{
 	height: 100px;
 }
 .tower_ref{
+	height: 100px;
 	width: 100px;
 }
 
@@ -197,7 +200,7 @@ button>.btn{
 	width: 20px;
 	height: 20px;
 	border-radius: 5px;
-	z-index: 50;
+	z-index: 100;
 	position: absolute;
 	/*
 	left: -50px;*/
