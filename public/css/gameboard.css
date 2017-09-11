@@ -16,6 +16,16 @@ body{
 .modal-title{
 	font-size: 1.6rem;
 }
+.navbar-nav{
+	position: absolute;
+	z-index: 300;
+}
+#nav-bar{
+	padding: 0;
+}
+.nav-item{
+	display: inline-block;
+}
 
 header{
 	float: right;
@@ -42,7 +52,7 @@ header>div{
 
 span{
 	
-	margin-left: 12px;
+	margin-left: 5px;
 	padding-left: 0px;
 
 }
@@ -93,15 +103,15 @@ main{
 .btn{
 	font-size: 2rem;
 	color: red;
+	padding: 2px;
 }
 form{
 	width: max-content;
-	height: 50px;
 }
 form>input,button{
 	display:inline-block;
 	width: auto;
-	height: 48px;
+
 }
 
 
