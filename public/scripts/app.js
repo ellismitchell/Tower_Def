@@ -6,10 +6,11 @@ $(document).ready(function() {
 	// 	backdrop: 'static',
 	// 	keyboard: false,
 	// });
-
-	$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
+	// openWin();
+	// function openWin(){
+	// 	myWindow = window.open("", "", "width=1000,height=605");
+	// 	myWindow.focus();
+	// }
 
   // Find username after he submit name from modal
 	$('.user-submit').click(function(){
@@ -193,6 +194,10 @@ $(document).ready(function() {
 		$('.player_gold').text(gold);
 		// $(this).append('<div class="towerRange"></div>');
 	}
+	// indicate tower stats on hover
+	$(function () {
+	  $('[data-toggle="tooltip"]').tooltip()
+	})
 	// Indicate placable grid when hover over:
 	$('.column').hover(
 		function() {

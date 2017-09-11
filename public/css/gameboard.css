@@ -2,6 +2,7 @@
 
 body{
 	/*background-color: #e8d7d7;*/
+	zoom: .6;
 	background-color: black;
 	/*font-family: 'Londrina Shadow', cursive;*/
 	font-size: 3rem;
@@ -19,8 +20,8 @@ body{
 header{
 	float: right;
 	position: absolute;
-	top: 74px;
-	right: 0;
+	top: 80px;
+	right: 150px;
 	width: 400px;
 	height: 100%;
 	padding: 0;
@@ -121,6 +122,10 @@ div>.tower_one, .tower_two, .tower_three{
 .tower_ref{
 	height: 100px;
 	width: 100px;
+}
+.toolip > .tooltip-inner{
+	background-color: white;
+	color: black;
 }
 
 .modal-body>input{
