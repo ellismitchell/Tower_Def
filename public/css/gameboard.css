@@ -38,7 +38,7 @@ header>div{
 
 span{
 	
-	margin-left: 15px;
+	margin-left: 12px;
 	padding-left: 0px;
 
 }
@@ -91,6 +91,7 @@ form{
 form>input,button{
 	display:inline-block;
 	width: auto;
+	height: 48px;
 }
 
 
