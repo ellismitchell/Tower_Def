@@ -114,7 +114,7 @@ $(document).ready(function() {
 	var tower_range = 150;
 	var gameEnd = false;
 	var minion_counts = 50;
-	var gold = 1000;
+	var gold = 300;
 	var waveCounter = 1;
 	$('.player_gold').text(gold);
 
