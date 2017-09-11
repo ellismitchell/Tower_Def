@@ -372,7 +372,7 @@ $(document).ready(function() {
 			spawned_wave =spawned_wave.filter(function(element) {
 				return element._id != minion._id;
 			});
-			if (minion_wave.length === 0 && spawned_wave.length === 0) {
+			if (minion_wave.length === 0 && spawned_wave.length === 0 && player_hp > 0) {
 				$('.start_wave').css("visibility", "visible");
 			}
 			updateGameState();
@@ -391,7 +391,7 @@ $(document).ready(function() {
 			clearInterval( minion_wave_intervalID);
 			clearInterval( move_minion_intervalID);
 			clearInterval( tower_intervalID);
-			alert("Game Over!");
+			alert(`Game Over! Your score is ${minions_killed}`);
 			jQuery.fx.off = true;
 			gameEnd = true;
 			submitScore();
