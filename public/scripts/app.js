@@ -88,19 +88,22 @@ $(document).ready(function() {
 	$('#33').css("background-image", "url('/imgs/bot_left_tile.png'");
 	$('#33').css("background-size", "cover");
 	// // roundblack...
-	$('#51').css("background-image", "url('/imgs/left_bot_round_tile.png'");
+	$('#51').css("background-image", "url('/imgs/left_bot_round_tile.png')");
 	$('#51').css("background-size", "cover");
-	$('#57').css("background-image", "url('/imgs/right_bot_round_tile.png'");
+	$('#57').css("background-image", "url('/imgs/right_bot_round_tile.png')");
 	$('#57').css("background-size", "cover");
-	$('#35,#68').css("background-image", "url('/imgs/bot_right_tile.png'");
+	$('#35,#68').css("background-image", "url('/imgs/bot_right_tile.png')");
 	$('#35,#68').css("background-size", "cover");
-	$('#28').css("background-image", "url('/imgs/top_right_tile.png'");
+	$('#28').css("background-image", "url('/imgs/top_right_tile.png')");
 	$('#28').css("background-size", "cover");
-	$('#27').css("background-image", "url('/imgs/top_left_tile.png'");
+	$('#27').css("background-image", "url('/imgs/top_left_tile.png')");
 	$('#27').css("background-size", "cover");
-	$('#12').css("background-image", "url('/imgs/door_tile.png'");
-	$('#12').css("background-size-", "cover");
+	$('#12').css("background-image", "url('/imgs/door_tile.png')");
+	$('#12').css("background-size", "cover");
 	$('.row').eq(8).css("border-right", "none");
+	// Princess!
+	$('#99').css("background-image", "url('/imgs/princess.png')");
+	$('#99').css("background-size", "cover");
 
 	// Binding handlers to btns and forms
 	$('.edit-btn').on("click", displayForm);
