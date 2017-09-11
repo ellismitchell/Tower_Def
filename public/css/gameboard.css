@@ -170,10 +170,20 @@ button>.btn{
 	text-align: center;
 }
 
-.column:hover{
+/*.column:hover{
 	background-color: #90f4c2;
-}
+}*/
 
+.can_build{
+	z-index: 25;
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 100px;
+	height: 100px;
+	background-color: yellow;
+	opacity: 0.55;
+}
 
 .minion{
 	width: 50px;
