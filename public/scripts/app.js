@@ -2,10 +2,10 @@
 console.log("app js is loaded");
 
 $(document).ready(function() {
-	$('#myModal').modal({
-		backdrop: 'static',
-		keyboard: false,
-	});
+	// $('#myModal').modal({
+	// 	backdrop: 'static',
+	// 	keyboard: false,
+	// });
 
 	$('.user-submit').click(function(){
 		let name = $('[name=username]').val();
@@ -67,55 +67,65 @@ $(document).ready(function() {
 	$board.append(row);
 	// hardcoding color for terrain, for better visual..
 	// $('#12,#22,#32,#42,#43,#44,#45,#46,#36,#26,#16,#17,#18,#19,#110,#210,#310,#410,#510,#610,#710, #79,#78,#77,#76, #75,#74 ,#73 ,#72,#71, #81, #91, #101,#102,#103,#104,#105,#106,#107,#108,#109,#1010').addClass("path");
-	$('#14,#24,#51,#57').css("background-image", "url('/imgs/green_field.png'");
-	$('#14,#24,#51,#57').css("background-size", "cover");
+	// $('#14,#24,#51,#57').css("background-image", "url('/imgs/green_field.png'");
+	// $('#14,#24,#51,#57').css("background-size", "cover");
 	$('#12,#22,#32,#42,#43,#44,#45,#46,#36,#26,#16,#17,#18,#19,#19,#29,#39,#49,#59,#69, #79,#78,#77,#76, #75,#74 ,#73 ,#72,#71, #81, #91, #91,#92,#93,#94,#95,#96,#97,#98,#99,#910').addClass("path");
 	$('.edit-btn').on("click", displayForm);
 	$('.delete-btn').on("click", deleteProfile);
+
 	// hardcoding css images...
 	//left side is path for these divs..
-	// $('#13,#23,#37,#47').css("background-image", "url('/imgs/left_brown2.png'");
-	// $('#13,#23,#37,#47').css("background-size", "cover");
+	$('#13,#23,#37,#47').css("background-image", "url('/imgs/right_tile.png'");
+	$('#13,#23,#37,#47').css("background-size", "cover");
 	// //right side is path for these divs..
-	// $(' #11,#21,#31,#41,#15,#25,#38,#48,#58').css("background-image", "url('/imgs/right_brown2.png'");
-	// $(' #11,#21,#31,#41,#15,#25,#38,#48,#58').css("background-size", "cover");
+	$(' #11,#21,#31,#41,#15,#25,#38,#48,#58').css("background-image", "url('/imgs/left_tile.png'");
+	$(' #11,#21,#31,#41,#15,#25,#38,#48,#58').css("background-size", "cover");
 	// //top brown ...
-	// $('#52,#53,#54,#55,#56').css("background-image", "url('/imgs/top_brown2.png'");
-	// $('#52,#53,#54,#55,#56').css("background-size", "cover");
+	$('#52,#53,#54,#55,#56').css("background-image", "url('/imgs/bot_tile.png'");
+	$('#52,#53,#54,#55,#56').css("background-size", "cover");
 	// // bottom brown...
-	// $('#34,#61,#62,#63,#64,#65,#66,#67').css("background-image", "url('/imgs/bottom_brown2.png'");
-	// $('#34,#61,#62,#63,#64,#65,#66,#67').css("background-size", "cover");
+	$('#34,#61,#62,#63,#64,#65,#66,#67').css("background-image", "url('/imgs/top_tile.png'");
+	$('#34,#61,#62,#63,#64,#65,#66,#67').css("background-size", "cover");
 	// // top bot brown...
-	// $('#83,#84,#85,#86,#87,#88,#89').css("background-image", "url('/imgs/top_bot_brown2.png'");
-	// $('#83,#84,#85,#86,#87,#88,#89').css("background-size", "cover");
+	$('#83,#84,#85,#86,#87,#88,#89,#82').css("background-image", "url('/imgs/main_tile.png'");
+	$('#83,#84,#85,#86,#87,#88,#89,#82').css("background-size", "cover");
 	// // corners..... brown
-	// $('#33').css("background-image", "url('/imgs/left_bot_round2.png'");
-	// $('#33').css("background-size", "cover");
+	$('#33').css("background-image", "url('/imgs/bot_left_tile.png'");
+	$('#33').css("background-size", "cover");
 	// // roundbrown...
-	// $('#82').css("background-image", "url('/imgs/round_brown_2.png'");
-	// $('#82').css("background-size", "cover");
-	// $('#35,#68').css("background-image", "url('/imgs/right_bot_round2.png'");
-	// $('#35,#68').css("background-size", "cover");
-	// $('#28').css("background-image", "url('/imgs/right_top_round2.png'");
-	// $('#28').css("background-size", "cover");
-	// $('#27').css("background-image", "url('/imgs/left_top_round2.png'");
-	// $('#27').css("background-size", "cover");
+	$('#51').css("background-image", "url('/imgs/left_bot_round_tile.png'");
+	$('#51').css("background-size", "cover");
+	$('#57').css("background-image", "url('/imgs/right_bot_round_tile.png'");
+	$('#57').css("background-size", "cover");
+	$('#35,#68').css("background-image", "url('/imgs/bot_right_tile.png'");
+	$('#35,#68').css("background-size", "cover");
+	$('#28').css("background-image", "url('/imgs/top_right_tile.png'");
+	$('#28').css("background-size", "cover");
+	$('#27').css("background-image", "url('/imgs/top_left_tile.png'");
+	$('#27').css("background-size", "cover");
+	$('#99').css("background-image", "url('/imgs/door_tile.png'");
+	$('#99').css("background-size-", "cover");
+	$('.row').eq(8).css("border-right", "none");
 
 	// column
-	$('#12,#22,#32,#26,#36,#29,#39,#49,#59,#69,#81').css("background-image", "url('/imgs/col.png'");
-	$('#12,#22,#32,#26,#36,#29,#39,#49,#59,#69,#81').css("background-size", "cover")
-	//row
-	$('#43,#44,#45,#17,#18,#72,#73,#74,#75,#76,#77,#78,#92,#93,#94,#95,#96,#97,#98,#99').css("background-image", "url('/imgs/row.png'");
-	$('#43,#44,#45,#17,#18,#72,#73,#74,#75,#76,#77,#78,#92,#93,#94,#95,#96,#97,#98,#99').css("background-size", "cover");
-	// left corners
-	$('#42,#91').css("background-image", "url('/imgs/bot_left_round.png'");
-	$('#42,#91').css("background-size", "cover");
-	$('#16,#71').css("background-image", "url('/imgs/top_left_round.png'");
-	$('#16,#71').css("background-size", "cover");
-	$('#46,#79').css("background-image", "url('/imgs/bot_right_round.png'");
-	$('#46,#79').css("background-size", "cover");
-	$('#19').css("background-image", "url('/imgs/top_right_round.png'");
-	$('#19').css("background-size", "cover");
+	// $('#12,#22,#32,#26,#36,#29,#39,#49,#59,#69,#81').css("background-image", "url('/imgs/col.png'");
+	// $('#12,#22,#32,#26,#36,#29,#39,#49,#59,#69,#81').css("background-size", "cover")
+	// //row
+	// $('#43,#44,#45,#17,#18,#72,#73,#74,#75,#76,#77,#78,#92,#93,#94,#95,#96,#97,#98,#99').css("background-image", "url('/imgs/row.png'");
+	// $('#43,#44,#45,#17,#18,#72,#73,#74,#75,#76,#77,#78,#92,#93,#94,#95,#96,#97,#98,#99').css("background-size", "cover");
+	// // left corners
+	// $('#42,#91').css("background-image", "url('/imgs/bot_left_round.png'");
+	// $('#42,#91').css("background-size", "cover");
+	// $('#16,#71').css("background-image", "url('/imgs/top_left_round.png'");
+	// $('#16,#71').css("background-size", "cover");
+	// $('#46,#79').css("background-image", "url('/imgs/bot_right_round.png'");
+	// $('#46,#79').css("background-size", "cover");
+	// $('#19').css("background-image", "url('/imgs/top_right_round.png'");
+	// $('#19').css("background-size", "cover");
+
+	// // all other box except paths
+	// $('#11,#21,#31,#41,#51,#61,#52,#53,#54,#55,#56,#57,#58,#62,#63,#64,#65,#66,#67,#68,#13,#14,#15,#23,#24,#25,#33,#34,#35,#27,#28,#37,#38,#47,#48,#82,#83,#84,#85,#86,#87,#88,#89').css("background-image", "url('/imgs/main_tile.png'");
+
 	var paths = [
 		{direction: 'down', endpoint: $('#32')},
 		{direction: 'right', endpoint: $('#35')},
@@ -161,7 +171,7 @@ $(document).ready(function() {
 			id : "",
 			col: "",
 			row: "",
-			image: "/imgs/green_tower.png",
+			image: "/imgs/tower_one.png",
 			range: 150,
 			dmg: 20,
 			cost: 75,
@@ -175,7 +185,7 @@ $(document).ready(function() {
 		$tower_two.css("background-color", "transparent");
 		$tower_three.css("background-color", "transparent");
 		tower = {
-					image: "/imgs/green_tower.png",
+					image: "/imgs/tower_one.png",
 					range: 150,
 					dmg: 20,
 					cost: 75,
@@ -186,7 +196,7 @@ $(document).ready(function() {
 		$tower_two.css("background-color", "rgba(255,255,0,0.5)");
 		$tower_three.css("background-color", "transparent");
 		tower = {
-					image: "/imgs/red_tower.png",
+					image: "/imgs/tower_two.png",
 					range: 250,
 					dmg: 10,
 					cost: 100,
@@ -197,7 +207,7 @@ $(document).ready(function() {
 		$tower_two.css("background-color", "transparent");
 		$tower_three.css("background-color", "rgba(255,255,0,0.5)");
 		tower = {
-					image: "/imgs/rocket_tower.png",
+					image: "/imgs/tower_three.png",
 					range: 150,
 					dmg: 30,
 					cost: 125,
@@ -641,7 +651,7 @@ function updateProfile(event) {
 function templateRow(x,y){
 	return`
 		<div class="column" id="${x}${y}">
-		${x}${y}
+	
 		</div>
 	`;
 }

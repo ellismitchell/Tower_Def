@@ -1,10 +1,12 @@
 /*gameboard.css*/
 
 body{
-	background-color: #e8d7d7;
+	/*background-color: #e8d7d7;*/
+	background-color: black;
 	/*font-family: 'Londrina Shadow', cursive;*/
-	font-size: 2rem;
+	font-size: 3rem;
 	margin: 50px;
+	color: red;
 	font-family: 'Indie Flower', cursive;
 	margin: 0;
 	/*font-family: 'KenPixel Blocks'*/
@@ -22,6 +24,8 @@ header{
 	height: 100%;
 	padding: 0;
 	margin: 0 40px 0 0;
+	border-top: dashed white 6px;
+
 }
 .player_stats{
 	margin: 10px 0 10px 0 ;
@@ -36,7 +40,7 @@ header>div{
 
 span{
 	
-	margin-left: 15px;
+	margin-left: 12px;
 	padding-left: 0px;
 
 }
@@ -73,22 +77,24 @@ main{
 	height: 100px;
 	width: 100px;
 	position: relative;
-	background-image : url("/imgs/green_field.png");
+	/*background-image : url("/imgs/green_field.png");*/
 }
 .path {
-	background-color: gray;
-	background-image: url("/imgs/path.png");
+	background-color: black;
+	/*background-image: url("/imgs/path.png");*/
 }
 .btn{
 	font-size: 2rem;
+	color: red;
 }
 form{
-	width: -webkit-fill-available;
+	width: max-content;
 	height: 50px;
 }
 form>input,button{
 	display:inline-block;
 	width: auto;
+	height: 48px;
 }
 
 
@@ -107,6 +113,7 @@ div>.tower_one, .tower_two, .tower_three{
 	height: 100px;
 }
 .tower_ref{
+	height: 100px;
 	width: 100px;
 }
 
@@ -120,18 +127,25 @@ div>.tower_one, .tower_two, .tower_three{
 .modal-footer>.btn{
 	width: 100%;
 }
+.row{
+	border-right: dashed white 6px;
+}
+
 button>.btn{
 	width: 100%;
+
 }
 .start_wave{
 	width: 380px;
 	height: 100px;
 	margin: 10px;
+	color: white;
 }
 
 .board{
 	position: absolute;
- margin-left : 20px;
+ 	margin-left : 20px;
+ 	border: white dashed 6px;
 }
 
 .card{
@@ -197,7 +211,7 @@ button>.btn{
 	width: 20px;
 	height: 20px;
 	border-radius: 5px;
-	z-index: 50;
+	z-index: 100;
 	position: absolute;
 	/*
 	left: -50px;*/
