@@ -252,3 +252,8 @@ button>.btn{
 .hidden {
 	display: none;
 }
+
+.tooltip > .tooltip-inner {
+	background-color: white;
+	color: black;
+}
