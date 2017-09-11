@@ -2,10 +2,10 @@
 console.log("app js is loaded");
 
 $(document).ready(function() {
-	// $('#myModal').modal({
-	// 	backdrop: 'static',
-	// 	keyboard: false,
-	// });
+	$('#myModal').modal({
+		backdrop: 'static',
+		keyboard: false,
+	});
 
   // Find username after he submit name from modal
 	$('.user-submit').click(function(){
@@ -114,7 +114,7 @@ $(document).ready(function() {
 	var tower_range = 150;
 	var gameEnd = false;
 	var minion_counts = 50;
-	var gold = 300;
+	var gold = 1000;
 	var waveCounter = 1;
 	$('.player_gold').text(gold);
 
@@ -230,8 +230,8 @@ $(document).ready(function() {
 			waveCounter++;
 		});
 		// Continuously spawn minion and tower check if minion are in range
-		minion_wave_intervalID = setInterval(spawnMinion, 1000);
-		tower_intervalID = setInterval(towerResponse, 50);
+		minion_wave_intervalID = setInterval(spawnMinion, 1500);
+		tower_intervalID = setInterval(towerResponse, 500);
 	});
 
 
