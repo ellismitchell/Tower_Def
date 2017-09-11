@@ -7,7 +7,11 @@ $(document).ready(function() {
 	// 	keyboard: false,
 	// });
 
-	// Find username after he submit name from modal
+	$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
+  // Find username after he submit name from modal
 	$('.user-submit').click(function(){
 		let name = $('[name=username]').val();
 		$.ajax({
