@@ -20,7 +20,7 @@ body{
 	position: absolute;
 	z-index: 300;
 }
-#nav-bar{
+#nav_bar{
 	padding: 0;
 }
 .nav-item{
@@ -30,7 +30,7 @@ body{
 header{
 	float: right;
 	position: absolute;
-	top: 80px;
+	top: 75px;
 	right: 150px;
 	width: 400px;
 	height: 100%;
