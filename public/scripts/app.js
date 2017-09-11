@@ -7,6 +7,10 @@ $(document).ready(function() {
 	// 	keyboard: false,
 	// });
 
+	$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
 	$('.user-submit').click(function(){
 		let name = $('[name=username]').val();
 		$.ajax({
