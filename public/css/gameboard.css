@@ -24,6 +24,8 @@ header{
 	height: 100%;
 	padding: 0;
 	margin: 0 40px 0 0;
+	border-top: dashed white 6px;
+
 }
 .player_stats{
 	margin: 10px 0 10px 0 ;
@@ -83,6 +85,7 @@ main{
 }
 .btn{
 	font-size: 2rem;
+	color: red;
 }
 form{
 	width: max-content;
@@ -124,18 +127,25 @@ div>.tower_one, .tower_two, .tower_three{
 .modal-footer>.btn{
 	width: 100%;
 }
+.row{
+	border-right: dashed white 6px;
+}
+
 button>.btn{
 	width: 100%;
+
 }
 .start_wave{
 	width: 380px;
 	height: 100px;
 	margin: 10px;
+	color: white;
 }
 
 .board{
 	position: absolute;
- margin-left : 20px;
+ 	margin-left : 20px;
+ 	border: white dashed 6px;
 }
 
 .card{

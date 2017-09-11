@@ -103,6 +103,9 @@ $(document).ready(function() {
 	$('#28').css("background-size", "cover");
 	$('#27').css("background-image", "url('/imgs/top_left_tile.png'");
 	$('#27').css("background-size", "cover");
+	$('#99').css("background-image", "url('/imgs/door_tile.png'");
+	$('#99').css("background-size-", "cover");
+	$('.row').eq(8).css("border-right", "none");
 
 	// column
 	// $('#12,#22,#32,#26,#36,#29,#39,#49,#59,#69,#81').css("background-image", "url('/imgs/col.png'");
