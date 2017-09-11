@@ -11,6 +11,7 @@ body{
 	margin: 0;
 	/*font-family: 'KenPixel Blocks'*/
 }
+
 .modal-title{
 	font-size: 1.6rem;
 }
@@ -77,9 +78,13 @@ main{
 	height: 100px;
 	width: 100px;
 	position: relative;
+	display: inline;
 	/*background-image : url("/imgs/green_field.png");*/
 }
 
+.row {
+	min-width: 906px;
+}
 .path {
 	background-color: black;
 	/*background-image: url("/imgs/path.png");*/
