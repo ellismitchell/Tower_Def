@@ -7,6 +7,7 @@ $(document).ready(function() {
 	// 	keyboard: false,
 	// });
 
+	// Find username after he submit name from modal
 	$('.user-submit').click(function(){
 		let name = $('[name=username]').val();
 		$.ajax({
@@ -15,6 +16,9 @@ $(document).ready(function() {
 			success: handleUser
 		});
 	});
+	// If their image link doesnt exist, prefill guest image and
+	// their name on site, else use image link already existed and 
+	// render on page.
 	function handleUser(data){
 		var same_name = $('[name=username]').val();
 		if (data === null) {
@@ -23,14 +27,13 @@ $(document).ready(function() {
 			$('.modal-body').html('<input type="url" name="image-link" >');
 			$('.modal-footer').html(`<button type="button" class="image-submit btn btn-dark">Play!</button>`);
 			$('.image-submit').click(function(){
-				// var img_link = $('[name=image-link]').val();
-				
+
 				if($('[name=image-link]').val() == null || $('[name=image-link]').val() == undefined || $('[name=image-link]').val() =="") {
 					var img_link = "https://maxcdn.icons8.com/Share/icon/ultraviolet/Users//guest1600.png";
 				}else {
 					var img_link = $('[name=image-link]').val();
 				}
-				console.log(img_link);
+
 				$.ajax({
 					method: 'POST',
 					url: '/users',
@@ -41,16 +44,11 @@ $(document).ready(function() {
 					renderProfile(user);
 				})
 			});
-		}
-		else {
+		}else {
 			$('#myModal').modal('hide');
 			renderProfile(data);
 		}
 	}
-
-	
-	// dynamically set minions, towers, tower range css
-
 	// Create a gameboard dynamically with array
 	var $board = $('.board');
 	var board_size = 9;
@@ -58,41 +56,38 @@ $(document).ready(function() {
 	// Hardcoded the gameboard grids
 	for(var i = 1; i <= board_size; i ++){
 		row+=`<div class="row row_${i}">`;
-
 		for(var j= 1; j<=board_size; j++){
 			row += templateRow(i,j);
 		}
 		row +=`</div>`;	
 	}
 	$board.append(row);
-	// hardcoding color for terrain, for better visual..
-	// $('#12,#22,#32,#42,#43,#44,#45,#46,#36,#26,#16,#17,#18,#19,#110,#210,#310,#410,#510,#610,#710, #79,#78,#77,#76, #75,#74 ,#73 ,#72,#71, #81, #91, #101,#102,#103,#104,#105,#106,#107,#108,#109,#1010').addClass("path");
-	// $('#14,#24,#51,#57').css("background-image", "url('/imgs/green_field.png'");
-	// $('#14,#24,#51,#57').css("background-size", "cover");
-	$('#12,#22,#32,#42,#43,#44,#45,#46,#36,#26,#16,#17,#18,#19,#19,#29,#39,#49,#59,#69, #79,#78,#77,#76, #75,#74 ,#73 ,#72,#71, #81, #91, #91,#92,#93,#94,#95,#96,#97,#98,#99,#910').addClass("path");
-	$('.edit-btn').on("click", displayForm);
-	$('.delete-btn').on("click", deleteProfile);
 
-	// hardcoding css images...
+	// Adding path class to these divs so they cant build towers on top
+	$('#12,#22,#32,#42,#43,#44,#45,#46,#36,#26,#16,#17,#18,#19,#19,#29,#39,#49,#59,#69, #79,#78,#77,#76, #75,#74 ,#73 ,#72,#71, #81, #91, #91,#92,#93,#94,#95,#96,#97,#98,#99,#910').addClass("path");
+	// Hardcoding css images...
+	// Top left gameboard middle blocks
+	$('#14, #24').css("background-image", "url('/imgs/main_tile.png");
+	$('#14, #24').css("background-size", "cover");
 	//left side is path for these divs..
 	$('#13,#23,#37,#47').css("background-image", "url('/imgs/right_tile.png'");
 	$('#13,#23,#37,#47').css("background-size", "cover");
 	// //right side is path for these divs..
 	$(' #11,#21,#31,#41,#15,#25,#38,#48,#58').css("background-image", "url('/imgs/left_tile.png'");
 	$(' #11,#21,#31,#41,#15,#25,#38,#48,#58').css("background-size", "cover");
-	// //top brown ...
+	// //top black ...
 	$('#52,#53,#54,#55,#56').css("background-image", "url('/imgs/bot_tile.png'");
 	$('#52,#53,#54,#55,#56').css("background-size", "cover");
-	// // bottom brown...
+	// // bottom black...
 	$('#34,#61,#62,#63,#64,#65,#66,#67').css("background-image", "url('/imgs/top_tile.png'");
 	$('#34,#61,#62,#63,#64,#65,#66,#67').css("background-size", "cover");
-	// // top bot brown...
+	// // top bot black...
 	$('#83,#84,#85,#86,#87,#88,#89,#82').css("background-image", "url('/imgs/main_tile.png'");
 	$('#83,#84,#85,#86,#87,#88,#89,#82').css("background-size", "cover");
-	// // corners..... brown
+	// // corners..... black
 	$('#33').css("background-image", "url('/imgs/bot_left_tile.png'");
 	$('#33').css("background-size", "cover");
-	// // roundbrown...
+	// // roundblack...
 	$('#51').css("background-image", "url('/imgs/left_bot_round_tile.png'");
 	$('#51').css("background-size", "cover");
 	$('#57').css("background-image", "url('/imgs/right_bot_round_tile.png'");
@@ -103,42 +98,14 @@ $(document).ready(function() {
 	$('#28').css("background-size", "cover");
 	$('#27').css("background-image", "url('/imgs/top_left_tile.png'");
 	$('#27').css("background-size", "cover");
-	$('#99').css("background-image", "url('/imgs/door_tile.png'");
-	$('#99').css("background-size-", "cover");
+	$('#12').css("background-image", "url('/imgs/door_tile.png'");
+	$('#12').css("background-size-", "cover");
 	$('.row').eq(8).css("border-right", "none");
 
-	// column
-	// $('#12,#22,#32,#26,#36,#29,#39,#49,#59,#69,#81').css("background-image", "url('/imgs/col.png'");
-	// $('#12,#22,#32,#26,#36,#29,#39,#49,#59,#69,#81').css("background-size", "cover")
-	// //row
-	// $('#43,#44,#45,#17,#18,#72,#73,#74,#75,#76,#77,#78,#92,#93,#94,#95,#96,#97,#98,#99').css("background-image", "url('/imgs/row.png'");
-	// $('#43,#44,#45,#17,#18,#72,#73,#74,#75,#76,#77,#78,#92,#93,#94,#95,#96,#97,#98,#99').css("background-size", "cover");
-	// // left corners
-	// $('#42,#91').css("background-image", "url('/imgs/bot_left_round.png'");
-	// $('#42,#91').css("background-size", "cover");
-	// $('#16,#71').css("background-image", "url('/imgs/top_left_round.png'");
-	// $('#16,#71').css("background-size", "cover");
-	// $('#46,#79').css("background-image", "url('/imgs/bot_right_round.png'");
-	// $('#46,#79').css("background-size", "cover");
-	// $('#19').css("background-image", "url('/imgs/top_right_round.png'");
-	// $('#19').css("background-size", "cover");
-
-	// // all other box except paths
-	// $('#11,#21,#31,#41,#51,#61,#52,#53,#54,#55,#56,#57,#58,#62,#63,#64,#65,#66,#67,#68,#13,#14,#15,#23,#24,#25,#33,#34,#35,#27,#28,#37,#38,#47,#48,#82,#83,#84,#85,#86,#87,#88,#89').css("background-image", "url('/imgs/main_tile.png'");
-
-	var paths = [
-		{direction: 'down', endpoint: $('#32')},
-		{direction: 'right', endpoint: $('#35')},
-		{direction: 'up', endpoint: $('#15')},
-		{direction: 'right', endpoint: $('#17')},
-		{direction: 'down', endpoint: $('#67')},
-		{direction: 'left', endpoint: $('#61')},
-		{direction: 'down', endpoint: $('#81')},
-		{direction: 'right', endpoint: $('#88')}
-	];
-
+	// Binding handlers to btns and forms
+	$('.edit-btn').on("click", displayForm);
+	$('.delete-btn').on("click", deleteProfile);
 	$('.profile_form').on("submit", profileBtnOnSubmit);
-
 
 	var minion_path = []
 	var minion_wave = [];
@@ -150,11 +117,6 @@ $(document).ready(function() {
 	var gold = 300;
 	var waveCounter = 1;
 	$('.player_gold').text(gold);
-	// for (var i = 1; i <= minion_counts; i++) {
-	// 	minion_wave.push({id: i, image: "/imgs/car1.jpg", speed: 20, hp: 100, pathIndex: 0, alive: true});
-	// }
-
-
 
 	// Place tower at mouse click
 	var tower = {
@@ -238,10 +200,7 @@ $(document).ready(function() {
 			}
 	);
 
-
-
 	var interval = 100;
-	// var minionIntervalID = setInterval(minion_move, interval);
 	var cW = 100;
 	var player_hp = 10;
 	var minions_killed = 0;
@@ -256,6 +215,7 @@ $(document).ready(function() {
 	$player_hp.text(player_hp);
 
 	// Start minion wave with btn click
+	// and upgrade level with each click
 	$('.start_wave').on("click", function() {
 		$('.start_wave').css("visibility", "hidden");
 		$.ajax({
@@ -265,12 +225,9 @@ $(document).ready(function() {
 			minion_wave = wave.minions;
 			waveCounter++;
 		});
-
-		minion_wave_intervalID = setInterval(spawnMinion, 2000);
-		// move_minion_intervalID = setInterval(moveMinions, interval);
-		// move_minion_intervalID = setInterval(move_minion, interval);
+		// Continuously spawn minion and tower check if minion are in range
+		minion_wave_intervalID = setInterval(spawnMinion, 1000);
 		tower_intervalID = setInterval(towerResponse, 50);
-
 	});
 
 
@@ -278,17 +235,9 @@ $(document).ready(function() {
 	// in our case, each box is 100px, or take 1sec to travel
 	// distance to time ratio is 1: 15
 	var minion_displacement =[
-		// {distance : 300, time : 4500},
-		// {distance : 300, time : 4500},
-		// {distance : 300, time : 4500},
-		// {distance : 300, time : 4500},
-		// // Going down from 18 to 68
-		// {distance : 500, time : 7500},
-		// {distance : 700, time : 10500},
-		// {distance : 200, time : 3000},
-		// {distance : 800, time : 14000}
-
-		// Another set for play test
+		// Fixed distance, time, direction for minions to travel
+		// Each minions will travel at diff time for same distance
+		// based on their speed
 		{distance : 300, time : 3000, direction: "down"},
 		{distance : 400, time : 4000, direction: "right"},
 		{distance : 300, time : 3000, direction: "up"},
@@ -298,50 +247,32 @@ $(document).ready(function() {
 		{distance : 800, time : 8000, direction: "left"},
 		{distance : 200, time : 2000, direction: "down"},
 		{distance : 900, time : 9000, direction: "right"}
-
-		// {distance : 300, time : 300, direction: "down"},
-		// {distance : 300, time : 300, direction: "right"},
-		// {distance : 300, time : 300, direction: "up"},
-		// {distance : 300, time : 300, direction: "right"},
-		// // Going down from 18 to 68
-		// {distance : 500, time : 500, direction: "down"},
-		// {distance : 700, time : 700, direction: "left"},
-		// {distance : 200, time : 200, direction: "down"},
-		// {distance : 800, time : 800, direction: "right"}
 	];
 
-	// create minion at #31 div at the moment
-	// Will adjust later when we want different spawning location
+	// Create minion element and append to spawned_wave array
 	function spawnMinion() {
 		if (minion_wave.length == 0) {
 			clearInterval(minion_wave_intervalID);
 			return;}
 		var minion = minion_wave.pop();
-
-		// NEED TO CHANGE HARDCODED #31 TOO
-		// ######################
 		$('#12').append(`<img src="${minion.image}" class="minion" id="m${minion._id}">`);
 		$('#12').append(`<p class="hp" id="hp${minion._id}">${minion.hp}</p>`);
 		spawned_wave.push(minion);
-		// var minion_selector = `#m${minion._id}`;
-		// minion_move($(minion_selector));
 		move_minion(minion);
 	};
 
-	// hardcoded path animate all the way to the end
+	// hardcoded distance that minion move
+	// Each minion travel time is proportional to their speed
 	function move_minion(minion) {
 		var minion_selector = $(`#m${minion._id}`);
 		var hp_selector = $(`#hp${minion._id}`);
 
-		// minion speed was 20
-		// interval was 200
-
 		// Move down 2 boxes
 		minion_selector.animate({
-			// "margin-top": `+=${minionSpeed}px`
 			"top" : `+=${minion_displacement[0].distance}px`,
-
 			}, Number(`${minion_displacement[0].time/minion.speed*10}`), 'linear', function(){
+				// pathIndex for tower determine shooting direction
+				// rotate to give better visual as minion change path
 				minion.pathIndex++;
 				minion_selector.css("-webkit-transform", "rotate(270deg)");
 			});
@@ -429,6 +360,9 @@ $(document).ready(function() {
 		hp_selector.animate({
 			"left": `+=${minion_displacement[7].distance}px`,
 		}, Number(`${minion_displacement[7].time/minion.speed*10}`), 'linear', function(){
+			// If minions ever reach the end, remove minion, lower player hp,
+			// remove from spawned array, show start_wave btn, and update
+			// the game state
 			minion_selector.remove();
 			hp_selector.remove();
 			spawned_wave =spawned_wave.filter(function(element) {
@@ -441,6 +375,10 @@ $(document).ready(function() {
 		});
 	}
 
+	// Update player stats and stop all timer
+	// display appropriate msg to player and save score to database
+	// Currently, only save score when user has lost, not after
+	// defending each wave.
 	function updateGameState() {
 		player_hp--;
 		$('.player_health').text(player_hp);
@@ -456,8 +394,8 @@ $(document).ready(function() {
 		}
 	}
 
+	// Update player score to database
 	function submitScore(){
-		
 		var name = $('.card-title').text();
 		var time = new Date();
 		$.ajax({
@@ -478,10 +416,12 @@ $(document).ready(function() {
 		towers.forEach(function(tower){
 			spawned_wave.forEach(function(minion){
 				let minion_selector = $(`#m${minion._id}`);
-				var minionX  = minion_selector.offset().left+25;//+25 is half the minion size
+				//+25 is half the minion size
+				var minionX  = minion_selector.offset().left+25;
 				var minionY = minion_selector.offset().top+25;
 				$tower = $(`#${tower.row}${tower.col}`);
-				var towerX = $tower.offset().left+50; //+40 is half the tower size
+				//+50 is half the tower size
+				var towerX = $tower.offset().left+50; 
 				var towerY = $tower.offset().top+50;
 				var minionDirection = minion_displacement[minion.pathIndex].direction;
 				if (minionDirection === "right"){
@@ -502,17 +442,16 @@ $(document).ready(function() {
 				}
 				var distance = Math.sqrt(xDistance*xDistance+yDistance*yDistance);
 				if (distance < tower.range){
-				// change to tower range
 					shoot_bullet(minion, tower);
 				}
 			});
 		});
 	}
 
-
 	// minion is the minion obj, tower obj
+	// shoot bullet based on distance between tower and minion and the direction
+	// of the minion will be traveling to
 	function shoot_bullet(minion, tower){
-		// var minion = $('#m1');
 		var $tower = $(`#${tower.row}${tower.col}`);
 		$tower.append(`<img src="/imgs/car1.png" class="bullet" id="b${tower.id}">`);
 	
@@ -521,7 +460,8 @@ $(document).ready(function() {
 		var tower_damage = tower.dmg;
 
 		var bullet = $(`#b${tower.id}`);
-		var minionX  = minion_selector.offset().left+15; //15=(minion size - bullet size)/2
+		//15 = (minion size - bullet size)/2
+		var minionX  = minion_selector.offset().left+15; 
 		var minionY = minion_selector.offset().top+15;
 		var bulletX = bullet.offset().left;
 		var bulletY = bullet.offset().top;
@@ -561,6 +501,7 @@ $(document).ready(function() {
 					$('.start_wave').css("visibility", "visible");
 				}
 				
+				// update player stats
 				minion_selector.remove();
 				if (minion.alive){
 					minions_killed++;
@@ -574,7 +515,9 @@ $(document).ready(function() {
 	}
 });
 
-// when edit btn is submited
+// When edit btn is submited,
+// if profile image is empty, it will be prefilled with the guest link
+// else change user name and link in the database based on user input.
 function profileBtnOnSubmit(event){
 	event.preventDefault();
 	var d = $(this).serialize();
@@ -598,7 +541,6 @@ function profileBtnOnSubmit(event){
 				name: newName,
 				link: newLink
 			},
-			
 		}).then(function(user){
 			console.log("returned user is ", user);
 			renderProfile(user);
@@ -607,27 +549,21 @@ function profileBtnOnSubmit(event){
 
 // Take in input name and input images and render on the gamepage
 function renderProfile(user){
-	// var form = $('.profile_form');
-	// form.hide();
-
-	$('.show_profile').html(
-		 `	
+	$('.show_profile').html( `	
 		<div class="card" >
 			  <img class="card-img-top" src=${user.profileImage} alt="Broken Img Link =(">
 			  <div class="card-body">
 			    <h4 class="card-title">${user.name}</h4>
 			  </div>	
-		</div>
-		`
+		</div>`
 		);
-
 }
-
 
 function displayErr(err){
 	console.log(err);
 }
 
+// Display edit form and prefill user data
 function displayForm(event){
 	let name = $('.card-title').text();
 	let link = $('.card-img-top').attr('src');
@@ -636,6 +572,7 @@ function displayForm(event){
 	$('[name=profile_link]').val(link);
 }
 
+// Delete user upon click
 function deleteProfile(){
 	console.log("trying to delete");
 	$.ajax({
@@ -647,15 +584,10 @@ function deleteProfile(){
 	});
 }
 
-function updateProfile(event) {
-
-}
-
-// Create the game board
+// Create grids on the gameboard
 function templateRow(x,y){
 	return`
 		<div class="column" id="${x}${y}">
-	
 		</div>
 	`;
 }

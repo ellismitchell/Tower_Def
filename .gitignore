@@ -1,7 +1,11 @@
 **/node_modules
 
+/.gitignore
 .gitignore
 
+/.DS_Store
 .DS_Store
 
 binarySearch.js
+
+backup_code
