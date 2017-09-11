@@ -83,7 +83,7 @@ main{
 	font-size: 2rem;
 }
 form{
-	width: -webkit-fill-available;
+	width: max-content;
 	height: 50px;
 }
 form>input,button{
