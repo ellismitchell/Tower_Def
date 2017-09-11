@@ -10,6 +10,8 @@
 * JQuery
 * Express
 * AJAX
+* JSON
+* MongoDB
 
 ## Existing Features
 * Fully functional, playable tower defense game
