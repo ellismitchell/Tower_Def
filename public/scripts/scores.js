@@ -56,6 +56,9 @@ $(document).ready(function() {
 		}).then(function(user){
 			// filter if not empty
 			if(user !== null ){
+				user.scores = user.scores.sort(function(s1,s2){
+					return s2.score - s1.score;
+				});
 				$tbody.html(templateScores(user));
 			}else if (user === null){
 				$table.empty();
@@ -79,8 +82,10 @@ $(document).ready(function() {
 
 // table entry
 function templateScores(user){
+
 	var highScore = user.scores[0].score;
 	var date = user.scores[0].date;
+
 	return `
 	    <tr>
 	      <th scope="row"><img src="${user.profileImage}" alt="Profile Pic"></th>
