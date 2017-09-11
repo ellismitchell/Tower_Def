@@ -6,11 +6,6 @@ $(document).ready(function() {
 	// 	backdrop: 'static',
 	// 	keyboard: false,
 	// });
-	// openWin();
-	// function openWin(){
-	// 	myWindow = window.open("", "", "width=1000,height=605");
-	// 	myWindow.focus();
-	// }
 
   // Find username after he submit name from modal
 	$('.user-submit').click(function(){
