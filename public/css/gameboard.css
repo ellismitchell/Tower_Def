@@ -198,11 +198,11 @@ button>.btn{
 	/*top: 0;*/
 }
 .hp{
-	color : blue;
+	color : rgba(12,255,0,1);
 	font-family: sans-serif;
 	z-index: 100;
 	position: absolute;
-	font-size: 1rem;
+	font-size: 2rem;
 	/*top: -20px;*/
 	
 }
@@ -227,7 +227,7 @@ button>.btn{
 	width: 20px;
 	height: 20px;
 	border-radius: 5px;
-	z-index: 100;
+	z-index: 25;
 	position: absolute;
 	/*
 	left: -50px;*/
