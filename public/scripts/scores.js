@@ -65,6 +65,7 @@ $(document).ready(function() {
 				$table.append(`<div class="err_msg"><p>There are no matched results =(</p> </div>`);
 			}
 			//append a go back button
+			$table.find("button:last").remove();
 			$table.append(`
 				<button type="button" class="err_msg show_scores btn btn-dark">Back</button>
 				`)
@@ -74,6 +75,7 @@ $(document).ready(function() {
 	// The back button
 	$('main').on("click", ".show_scores", function(){
 		$('.err_msg').remove();
+		
 		renderAllScores();
 	});
 
