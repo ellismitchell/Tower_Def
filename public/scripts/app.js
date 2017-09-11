@@ -156,17 +156,7 @@ $(document).ready(function() {
 
 
 
-	// Hardcoded towers
-	//  Need to change hardcoded row and col~
-	// for (var i = 1; i <= 2; i++) {
-	// 	towers.push({id: i, col: i+2, row: 4, image: "/imgs/tower.jpg", range: 150, dmg: 10});
-	// 	var $tower = $(`#4${i+2}`);
-	// 	$tower.append(`<img src="/imgs/tower.jpg" class="tower" id="t${i}">`);
-	// 	$tower.append('<div class="towerRange"></div>');
-	// }
-	
 	// Place tower at mouse click
-	// still need to check if the click is within path
 	var tower = {
 			id : "",
 			col: "",
@@ -179,6 +169,7 @@ $(document).ready(function() {
 	var $tower_one = $('.tower_one');
 	var $tower_two = $('.tower_two');
 	var $tower_three = $('.tower_three');
+	// Chnage tower type upon clicking icons on right
 	$tower_one.css("background-color", "rgba(255,255,0,0.5)");
 	$('.tower_one').on("click",function(){
 		$tower_one.css("background-color", "rgba(255,255,0,0.5)");
@@ -214,6 +205,7 @@ $(document).ready(function() {
 		};
 	});
 
+	// Drop tower on click
 	$('.column').on("click", placeTower);
 	function placeTower(event){
 		// Add tower if theres none already in place
@@ -235,6 +227,18 @@ $(document).ready(function() {
 		$('.player_gold').text(gold);
 		// $(this).append('<div class="towerRange"></div>');
 	}
+	// Indicate placable grid when hover over:
+	$('.column').hover(
+		function() {
+			if($(this).hasClass("path") == false) {
+				$(this).append(`<div class="can_build"></div>`);
+			}
+		}, function(){
+				$(this).find("div:last").remove();
+			}
+	);
+
+
 
 	var interval = 100;
 	// var minionIntervalID = setInterval(minion_move, interval);
